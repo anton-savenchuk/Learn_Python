@@ -157,7 +157,7 @@
 # 8901234567
 # 9012345678
 
-# print([f'{i}\n' for i in range(10) for j in range(10)])  # TODO
+[print(''.join([str((i+j) % 10) for i in range(10)])) for j in range(10)]
 
 
 # print()
