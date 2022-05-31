@@ -441,7 +441,10 @@ lst_in = ['Пушкин: Сказака о рыбаке и рыбке', 'Есе�
 d = {}
 for pair in lst_in:
     key, value = pair.split(': ')
-    d = d.get(key, set()) + {value}
+    if key in d:
+        d[key].add(value)
+    else:
+        d[key] = {value}
 
 print(d)
 
