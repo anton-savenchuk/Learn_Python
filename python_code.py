@@ -435,18 +435,11 @@
 
 # Sample Output:
 # True
-# TODO
-lst_in = ['Пушкин: Сказака о рыбаке и рыбке', 'Есенин: Письмо к женщине', 'Тургенев: Муму', 'Пушкин: Евгений Онегин', 'Есенин: Русь']
+# d = {}
+# for pair in lst_in:
+#     key, value = pair.split(': ')
+#     d.setdefault(key, set()).add(value)
 
-d = {}
-for pair in lst_in:
-    key, value = pair.split(': ')
-    if key in d:
-        d[key].add(value)
-    else:
-        d[key] = {value}
-
-print(d)
 
 
 # print()
