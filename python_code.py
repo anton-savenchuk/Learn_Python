@@ -871,7 +871,7 @@
 # Sample Output 2:
 # 1 5 8 10 13 15 17 19 20
 
-# TODO
+
 def merge(list1: list, list2: list) -> list:
     """Объединяет списки в один отсортированный список.
     """
@@ -889,11 +889,19 @@ def merge(list1: list, list2: list) -> list:
 
     return lst
 
-# lst = []
-# [lst.extend(map(int, input().split())) for _ in range(n)]
 
-total_lst = [merge(total_lst, list(map(int, input().split()))) for _ in range(int(input()))]
+def quick_merge(n: int) -> list:
+    """Передаёт на сортировку n-е кол-во списков.
+    Принимает по одному списку за итерацию.
+    """
+    total_lst = []
+    for _ in range(n):
+        total_lst = merge(total_lst, list(map(int, input().split())))
+    
+    return total_lst
 
+
+print(quick_merge(int(input())))
 
 # print()
 # print(time.perf_counter() - start)
