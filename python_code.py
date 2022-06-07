@@ -1757,23 +1757,37 @@
 # 1.0 2.5
 # -1.0 -1.0
 
-# объявление функции
-def solve(a: int, b: int, c: int) -> tuple:
-    """Returns the roots of quadratic equation.
+# # объявление функции
+# def solve(a: int, b: int, c: int) -> tuple:
+#     """Returns the roots of quadratic equation.
+#     """
+#     d = b**2 - 4 * a * c  # discriminant
+#     x1 = (-b + d ** .5) / (2 * a)
+#     x2 = (-b - d ** .5) / (2 * a)
+
+#     return min(x1, x2), max(x1, x2)
+
+# # считываем данные
+# a, b, c = int(input()), int(input()), int(input())
+
+# # вызываем функцию
+# x1, x2 = solve(a, b, c)
+# print(x1, x2)
+
+
+####################################
+# Напишите функцию count_args, которая принимает произвольное количество
+# аргументов. Данная функция должна возвращать количество переданных ей
+# на вход аргументов
+
+# Вам необходимо написать только определение функции
+
+def count_args(*args: None) -> int:
+    """Возвращать количество переданных на вход аргументов.
     """
-    d = b**2 - 4 * a * c  # discriminant
-    x1 = (-b + d ** .5) / (2 * a)
-    x2 = (-b - d ** .5) / (2 * a)
-
-    return min(x1, x2), max(x1, x2)
-
-# считываем данные
-a, b, c = int(input()), int(input()), int(input())
-
-# вызываем функцию
-x1, x2 = solve(a, b, c)
-print(x1, x2)
+    return len(args)
 
 
+print(count_args(5, 2, '13', True))
 # print()
 # print(time.perf_counter() - start)
