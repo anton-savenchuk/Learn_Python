@@ -1757,25 +1757,22 @@
 # 1.0 2.5
 # -1.0 -1.0
 
-def solve(a: float, b: float, c: float) -> tuple:  # TODO
-    pass
+# объявление функции
+def solve(a: int, b: int, c: int) -> tuple:
+    """Returns the roots of quadratic equation.
+    """
+    d = b**2 - 4 * a * c  # discriminant
+    x1 = (-b + d ** .5) / (2 * a)
+    x2 = (-b - d ** .5) / (2 * a)
 
+    return min(x1, x2), max(x1, x2)
 
-# DEL ################################################################
-# a, b, c = float(input()), float(input()), float(input())
+# считываем данные
+a, b, c = int(input()), int(input()), int(input())
 
-# d = b ** 2 - (a * 4 * c)
-
-# if d < 0:
-#     print('Нет корней')
-# elif d == 0:
-#     print(-b / (a * 2))
-# else:
-#     x1 = (-b - d ** .5) / (2 * a)
-#     x2 = (-b + d ** .5) / (2 * a)
-#     print(min(x1, x2))
-#     print(max(x1, x2))
-# DEL ################################################################
+# вызываем функцию
+x1, x2 = solve(a, b, c)
+print(x1, x2)
 
 
 # print()
