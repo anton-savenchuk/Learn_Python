@@ -2049,28 +2049,76 @@
     #         return f'{translate[1][0]}надцать'
 
 
-def number_to_words(num):
-    ones = ['один', 'два', 'три', 'четыре', 'пять', 'шесть', 'семь', 'восемь', 'девять']
-    tens = ['десять', 'двадцать', 'тридцать', 'сорок', 'пятьдесят', 'шестьдесят', 'семьдесят', 'восемьдесят', 'девяносто']
-    num_to_str = list(str(num))
+# def number_to_words(num):
+#     ones = ['один', 'два', 'три', 'четыре', 'пять', 'шесть', 'семь', 'восемь', 'девять']
+#     tens = ['десять', 'двадцать', 'тридцать', 'сорок', 'пятьдесят', 'шестьдесят', 'семьдесят', 'восемьдесят', 'девяносто']
+#     num_to_str = list(str(num))
     
-    if len(num_to_str) == 1:
-        return ones[num - 1]
-    elif 11 <= num <= 19:
-        if int(num_to_str[1]) == 1:
-            number = 'одиннадцать'
-        elif int(num_to_str[1]) == 2:
-            number = 'двенадцать'
-        elif int(num_to_str[1]) == 3:
-            number = 'тринадцать'
-        else:
-            number = ones[int(num_to_str[1]) - 1][:-1] + 'надцать'
-    elif int(num_to_str[1]) == 0:
-        number = tens[int(num_to_str[0]) - 1]
-    else:
-        number = tens[int(num_to_str[0]) - 1] + ' ' + ones[int(num_to_str[1]) - 1]
+#     if len(num_to_str) == 1:
+#         return ones[num - 1]
+#     elif 11 <= num <= 19:
+#         if int(num_to_str[1]) == 1:
+#             number = 'одиннадцать'
+#         elif int(num_to_str[1]) == 2:
+#             number = 'двенадцать'
+#         elif int(num_to_str[1]) == 3:
+#             number = 'тринадцать'
+#         else:
+#             number = ones[int(num_to_str[1]) - 1][:-1] + 'надцать'
+#     elif int(num_to_str[1]) == 0:
+#         number = tens[int(num_to_str[0]) - 1]
+#     else:
+#         number = tens[int(num_to_str[0]) - 1] + ' ' + ones[int(num_to_str[1]) - 1]
     
-    return number
+#     return number
+
+
+####################################
+# Искомый месяц
+
+# Напишите функцию get_month(language, number), которая принимает на
+# вход два аргумента language – язык ru или en и number – номер месяца
+# (от 1 до 12) и возвращает название месяца на русском или английском
+# языке.
+
+# Примечание. Следующий программный код:
+# print(get_month('ru', 1))
+# print(get_month('ru', 12))
+# print(get_month('en', 1))
+# print(get_month('en', 10))
+
+# должен выводить:
+# январь
+# декабрь
+# january
+# october
+
+def get_month(language: str, number: int) -> str:
+    """возвращает название месяца на русском или английском языке.
+    """
+    month = {
+        1: ('январь', 'january'),
+        2: ('февраль', 'february'),
+        3: ('март', 'march'),
+        4: ('апрель', 'april'),
+        5: ('май', 'may'),
+        6: ('июнь', 'june'),
+        7: ('июль', 'july'),
+        8: ('август', 'august'),
+        9: ('сентябрь', 'september'),
+        10: ('октябрь', 'october'),
+        11: ('ноябрь', 'november'),
+        12: ('декабрь', 'december'),
+    }
+
+    return month[number][0] if language == 'ru' else month[number][1]
+
+
+print(get_month('ru', 1))
+print(get_month('ru', 12))
+print(get_month('en', 1))
+print(get_month('en', 10))
+
 
 # print()
 # print(time.perf_counter() - start)
