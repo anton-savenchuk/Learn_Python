@@ -1816,15 +1816,29 @@
 # <h1>Работаем с функциями</h1>
 # <div>Работаем с функциями</div>
 
+# Функции из предыдущего подвига 5 добавьте еще один формальный параметр
+# up с начальным булевым значением True. Если параметр up равен True,
+# то тег (указанный в формальном параметре tag) следует записывать
+# заглавными буквами, а иначе - малыми.
 
-def  get_tag(string: str, tag: str='h1') -> str:
+
+def get_tag(string: str, tag: str='h1', up: bool=True) -> str:
     """Encloses string with specified tag.
     """
+    if up: tag = tag.upper()
     return f'<{tag}>{string}</{tag}>'
 
 
 string = input()
-print(get_tag(string), get_tag(string, tag='div'), sep='\n')
+print(get_tag(string), get_tag(string, tag='div', up=False), sep='\n')
+
+
+####################################
+# 
+
+
+
+
 
 # print()
 # print(time.perf_counter() - start)
