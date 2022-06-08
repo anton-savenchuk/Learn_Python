@@ -2093,31 +2093,61 @@
 # january
 # october
 
-def get_month(language: str, number: int) -> str:
-    """возвращает название месяца на русском или английском языке.
-    """
-    month = {
-        1: ('январь', 'january'),
-        2: ('февраль', 'february'),
-        3: ('март', 'march'),
-        4: ('апрель', 'april'),
-        5: ('май', 'may'),
-        6: ('июнь', 'june'),
-        7: ('июль', 'july'),
-        8: ('август', 'august'),
-        9: ('сентябрь', 'september'),
-        10: ('октябрь', 'october'),
-        11: ('ноябрь', 'november'),
-        12: ('декабрь', 'december'),
-    }
+# def get_month(language: str, number: int) -> str:
+#     """возвращает название месяца на русском или английском языке.
+#     """
+#     month = {
+#         1: ('январь', 'january'),
+#         2: ('февраль', 'february'),
+#         3: ('март', 'march'),
+#         4: ('апрель', 'april'),
+#         5: ('май', 'may'),
+#         6: ('июнь', 'june'),
+#         7: ('июль', 'july'),
+#         8: ('август', 'august'),
+#         9: ('сентябрь', 'september'),
+#         10: ('октябрь', 'october'),
+#         11: ('ноябрь', 'november'),
+#         12: ('декабрь', 'december'),
+#     }
 
-    return month[number][0] if language == 'ru' else month[number][1]
+#     return month[number][0] if language == 'ru' else month[number][1]
 
 
-print(get_month('ru', 1))
-print(get_month('ru', 12))
-print(get_month('en', 1))
-print(get_month('en', 10))
+# print(get_month('ru', 1))
+# print(get_month('ru', 12))
+# print(get_month('en', 1))
+# print(get_month('en', 10))
+
+
+####################################
+# Магические даты
+
+# Магическая дата – это дата, когда день, умноженный на месяц, равен
+# числу образованному последними двумя цифрами года.
+
+# Напишите функцию, is_magic(date) которая принимает в качестве
+# аргумента строковое представление корректой даты и возвращает
+# значение True если дата является магической и False в противном
+# случае.
+
+# Примечание. Следующий программный код:
+# print(is_magic('10.06.1960'))
+# print(is_magic('11.06.1960'))
+
+# должен выводить:
+# True
+# False
+
+
+def is_magic(date: str) -> bool:
+    day, month, year = date.split('.')
+
+    return int(day) * int(month) == int(year[-2:])
+
+print(is_magic('10.06.1960'))
+print(is_magic('11.06.1960'))
+
 
 
 # print()
