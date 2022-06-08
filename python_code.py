@@ -1822,21 +1822,43 @@
 # заглавными буквами, а иначе - малыми.
 
 
-def get_tag(string: str, tag: str='h1', up: bool=True) -> str:
-    """Encloses string with specified tag.
+# def get_tag(string: str, tag: str='h1', up: bool=True) -> str:
+#     """Encloses string with specified tag.
+#     """
+#     if up: tag = tag.upper()
+#     return f'<{tag}>{string}</{tag}>'
+
+
+# string = input()
+# print(get_tag(string), get_tag(string, tag='div', up=False), sep='\n')
+
+
+####################################
+# Объявите функцию с именем get_even, которая принимает произвольное
+# количество чисел в качестве аргументов и возвращает список,
+# составленный только из четных переданных значений.
+
+# Функцию выполнять не нужно, только определить.
+
+# Sample Input:
+# 45 4 8 11 12 0
+
+# Sample Output:
+# 4 8 12 0
+
+
+def get_even(*args: int) -> list[int]:
+    """Returns a list of only even values.
     """
-    if up: tag = tag.upper()
-    return f'<{tag}>{string}</{tag}>'
+    return [even for even in args if even % 2 == 0]
 
-
-string = input()
-print(get_tag(string), get_tag(string, tag='div', up=False), sep='\n')
+s = '45 4 8 11 12 0 12 2 6 8 9 7 24'
+res = get_even(*map(int, s.split()))
+print(*res)
 
 
 ####################################
 # 
-
-
 
 
 
