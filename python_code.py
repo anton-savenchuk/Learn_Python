@@ -1978,99 +1978,38 @@
 # семь
 # восемьдесят пять
 
-# def number_to_words(num: int) -> str:
-#     translate = {1: ('один', 'десять'),
-#                  2: ('два', 'две'),
-#                  3: ('три',),
-#                  4: ('четыре', 'четыр', 'сорок'),
-#                  5: ('пять',),
-#                  6: ('шесть',),
-#                  7: ('семь',),
-#                  8: ('восемь',),
-#                  9: ('девять', 'девяносто'),
-#                 }
-#     """
-#     один надцать
-#         две надцать
-#     три надцать
-#         четыр надцать
-#     пять надцать
-#     шесть надцать
-#     семь надцать
-#     восемь надцать
-#     девять надцать
+def number_to_words(num: int) -> str:
+    """Возвращает словесное описание натурального  число num
+    на русском языке.
+    """
+    units = ('один',  'два',  'три',    'четыре', 'пять',
+             'шесть', 'семь', 'восемь', 'девять')
 
-#     два дцать
-#     три дцать
-#         сорок
-#     пять десят
-#     шесть десят
-#     семь десят
-#     восемь десят
+    tens = ('десять',    'двадцать',   'тридцать',  'сорок',
+            'пятьдесят', 'шестьдесят', 'семьдесят', 'восемьдесят',
+            'девяносто')
 
+    nums = tuple(str(num))
+
+    if 1 <= num < 10:
+        return units[num - 1]
+    elif 11 <= num <= 19:
+        if int(nums[1]) == 1:
+            return 'одиннадцать'
+        elif int(nums[1]) == 2:
+            return 'двенадцать'
+        elif int(nums[1]) == 3:
+            return 'тринадцать'
+        else:
+            return f'{units[int(nums[1]) - 1][:-1]}надцать'
+    elif int(nums[1]) == 0:
+        return tens[int(nums[0]) - 1]
+    else:
+        return f'{tens[int(nums[0]) - 1]} {units[int(nums[1]) - 1]}'
 
 
-
-#     """
-#     if 1 <= num < 10:
-#         return str(translate[num][0])
-#     elif num == 10:
-#         return str(translate[1][1])
-#     elif 10 < num < 20:
-#         if num == 12:
-#             return f'{translate[2][1]}надцать'
-#         elif num == 14:
-#             return f'{translate[4][1]}надцать'
-#         else:
-#             return f'{translate[int(str(num)[1])][0]}надцать'
-#     elif 20 <= num < 100:
-#         if int(str(num)[1]) != 0:
-#             if int(str(num)[0]) == 4:
-#                 return f'{translate[4][2]}{translate[int(str(num)[1])][0]}'
-#             else:
-#                 if num == 20 or num == 30:
-#                     return f'{translate[int(str(num)[0])][0]}дцать{translate[int(str(num)[1])][0]}'
-#                 else:
-#                     return f'{translate[int(str(num)[0])][0]}десят{translate[int(str(num)[1])][0]}'
-#         if num == 40:
-#             return str(translate[4][2])
-#         elif num == 90:
-#             return str(translate[9][1])
-#         else:
-#             if num == 20 or num == 30:
-#                 return f'{translate[int(str(num)[0])][0]}дцать'
-#             else:
-#                 return f'{translate[int(str(num)[0])][0]}десят'
-
-    # elif len(str(num)) == 2:
-    #     if str(num)[0] == '1' and str(num)[1] == '0':
-    #         return str(translate[1][1])
-    #     elif str(num)[0] == '1' and str(num)[1] != '0':
-    #         return f'{translate[1][0]}надцать'
-
-
-# def number_to_words(num):
-#     ones = ['один', 'два', 'три', 'четыре', 'пять', 'шесть', 'семь', 'восемь', 'девять']
-#     tens = ['десять', 'двадцать', 'тридцать', 'сорок', 'пятьдесят', 'шестьдесят', 'семьдесят', 'восемьдесят', 'девяносто']
-#     num_to_str = list(str(num))
-    
-#     if len(num_to_str) == 1:
-#         return ones[num - 1]
-#     elif 11 <= num <= 19:
-#         if int(num_to_str[1]) == 1:
-#             number = 'одиннадцать'
-#         elif int(num_to_str[1]) == 2:
-#             number = 'двенадцать'
-#         elif int(num_to_str[1]) == 3:
-#             number = 'тринадцать'
-#         else:
-#             number = ones[int(num_to_str[1]) - 1][:-1] + 'надцать'
-#     elif int(num_to_str[1]) == 0:
-#         number = tens[int(num_to_str[0]) - 1]
-#     else:
-#         number = tens[int(num_to_str[0]) - 1] + ' ' + ones[int(num_to_str[1]) - 1]
-    
-#     return number
+print(number_to_words(7))
+print(number_to_words(85))
 
 
 ####################################
@@ -2174,12 +2113,12 @@
 # False
 
 
-def is_pangram(text: str) -> bool:
-    return len(set(''.join(text.lower().split()))) == 26
+# def is_pangram(text: str) -> bool:
+#     return len(set(''.join(text.lower().split()))) == 26
 
-print(is_pangram('Jackdaws love my big sphinx of quartz'))
-print(is_pangram('The jay pig fox zebra and my wolves quack'))
-print(is_pangram('The quick brown fox jumps over the lazy dog'))
+# print(is_pangram('Jackdaws love my big sphinx of quartz'))
+# print(is_pangram('The jay pig fox zebra and my wolves quack'))
+# print(is_pangram('The quick brown fox jumps over the lazy dog'))
 
 
 # print()
