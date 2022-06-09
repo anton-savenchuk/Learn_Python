@@ -2179,22 +2179,45 @@
 # """
 
 
-def print_goods(*args) -> str:
-    """Печатает список товаров.
-    Товаром считаются любые непустые строки.
-    """
-    cnt_product = 0
-    for product in args:
-        if isinstance(product, str) and product not in {'', ' '}:
-            cnt_product += 1
-            print(f'{cnt_product}. {product}')
+# def print_goods(*args) -> str:
+#     """Печатает список товаров.
+#     Товаром считаются любые непустые строки.
+#     """
+#     cnt_product = 0
+#     for product in args:
+#         if isinstance(product, str) and product not in {'', ' '}:
+#             cnt_product += 1
+#             print(f'{cnt_product}. {product}')
 
-    if cnt_product == 0:
-        print('Нет товаров')
+#     if cnt_product == 0:
+#         print('Нет товаров')
 
 
 ####################################
-# 
+# Напишите функцию info_kwargs, которая принимает произвольное
+# количество именованных аргументов.
+
+# Функция info_kwargs должна распечатать именованные аргументы в
+# каждой новой строке в виде пары <Ключ> = <Значения>, причем ключи
+# должны следовать в алфавитном порядке.
+# Пример работы смотрите ниже
+
+# info_kwargs(first_name="John", last_name="Doe", age=33) 
+# """ данный вызов печатает следующие строки
+# age = 33
+# first_name = John
+# last_name = Doe
+# """
+
+def info_kwargs(**kwargs):
+    """Печатает именованные аргументы в каждой новой строке
+    в виде пары <Ключ> = <Значения>
+    """
+    for key in sorted(kwargs):
+        print(f'{key} = {kwargs[key]}')
+
+
+info_kwargs(first_name="John", last_name="Doe", age=33) 
 
 
 # print()
