@@ -2141,18 +2141,61 @@
 # Воронеж
 
 
-def get_biggest_city(*cities) -> str:
-    """Возвращает название города наибольшей длины.
-    """
-    big_city = ''
-    for city in cities:
-        big_city = city if len(city) > len(big_city) else big_city
+# def get_biggest_city(*cities) -> str:
+#     """Возвращает название города наибольшей длины.
+#     """
+#     big_city = ''
+#     for city in cities:
+#         big_city = city if len(city) > len(big_city) else big_city
 
-    return big_city
+#     return big_city
+
+
+####################################
+# Давайте теперь создадим функцию print_goods, которая печатает список
+# покупок. На вход она будет принимать произвольное количество значений,
+# а товаром мы будем считать любые непустые строки. То есть числа,
+# списки, словари и другие нестроковые объекты вам нужно будет
+# проигнорировать. Функция print_goods должна печатать список товаров
+# в виде: <Порядковый номер товара>.
+# <Название товара> (см. пример ниже). В случае, если в переданных
+# значениях не встретится ни одного товара, необходимо распечатать
+# текст "Нет товаров"
+
+# print_goods('apple', 'banana', 'orange') 
+# """ данный вызов печатает следующие строки
+# 1. apple 
+# 2. banana
+# 3. orange
+# """
+# print_goods(1, True, 'Грушечка', '', 'Pineapple') 
+# """ Этот вызов распечатает следующее
+# 1. Грушечка
+# 2. Pineapple
+# """
+# print_goods([], {}, 1, 2) 
+# """ Этот вызов распечатает следующее
+# Нет товаров
+# """
+
+
+def print_goods(*args) -> str:
+    """Печатает список товаров.
+    Товаром считаются любые непустые строки.
+    """
+    cnt_product = 0
+    for product in args:
+        if isinstance(product, str) and product not in {'', ' '}:
+            cnt_product += 1
+            print(f'{cnt_product}. {product}')
+
+    if cnt_product == 0:
+        print('Нет товаров')
 
 
 ####################################
 # 
+
 
 # print()
 # print(time.perf_counter() - start)
