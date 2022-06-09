@@ -1978,38 +1978,38 @@
 # семь
 # восемьдесят пять
 
-def number_to_words(num: int) -> str:
-    """Возвращает словесное описание натурального  число num
-    на русском языке.
-    """
-    units = ('один',  'два',  'три',    'четыре', 'пять',
-             'шесть', 'семь', 'восемь', 'девять')
+# def number_to_words(num: int) -> str:
+#     """Возвращает словесное описание натурального  число num
+#     на русском языке.
+#     """
+#     units = ('один',  'два',  'три',    'четыре', 'пять',
+#              'шесть', 'семь', 'восемь', 'девять')
 
-    tens = ('десять',    'двадцать',   'тридцать',  'сорок',
-            'пятьдесят', 'шестьдесят', 'семьдесят', 'восемьдесят',
-            'девяносто')
+#     tens = ('десять',    'двадцать',   'тридцать',  'сорок',
+#             'пятьдесят', 'шестьдесят', 'семьдесят', 'восемьдесят',
+#             'девяносто')
 
-    nums = tuple(str(num))
+#     nums = tuple(str(num))
 
-    if 1 <= num < 10:
-        return units[num - 1]
-    elif 11 <= num <= 19:
-        if int(nums[1]) == 1:
-            return 'одиннадцать'
-        elif int(nums[1]) == 2:
-            return 'двенадцать'
-        elif int(nums[1]) == 3:
-            return 'тринадцать'
-        else:
-            return f'{units[int(nums[1]) - 1][:-1]}надцать'
-    elif int(nums[1]) == 0:
-        return tens[int(nums[0]) - 1]
-    else:
-        return f'{tens[int(nums[0]) - 1]} {units[int(nums[1]) - 1]}'
+#     if 1 <= num < 10:
+#         return units[num - 1]
+#     elif 11 <= num <= 19:
+#         if int(nums[1]) == 1:
+#             return 'одиннадцать'
+#         elif int(nums[1]) == 2:
+#             return 'двенадцать'
+#         elif int(nums[1]) == 3:
+#             return 'тринадцать'
+#         else:
+#             return f'{units[int(nums[1]) - 1][:-1]}надцать'
+#     elif int(nums[1]) == 0:
+#         return tens[int(nums[0]) - 1]
+#     else:
+#         return f'{tens[int(nums[0]) - 1]} {units[int(nums[1]) - 1]}'
 
 
-print(number_to_words(7))
-print(number_to_words(85))
+# print(number_to_words(7))
+# print(number_to_words(85))
 
 
 ####################################
@@ -2120,6 +2120,39 @@ print(number_to_words(85))
 # print(is_pangram('The jay pig fox zebra and my wolves quack'))
 # print(is_pangram('The quick brown fox jumps over the lazy dog'))
 
+
+# Закончил итоговую работу, "Функции". Контрольная.
+####################################
+
+
+####################################
+# Объявите функцию с именем get_biggest_city, которой можно передавать
+# произвольное количество названий городов через аргументы.
+# Данная функция должна возвращать название города наибольшей длины.
+# Если таких городов несколько, то первый найденный (из наибольших).
+# Программу реализовать без использования сортировки.
+
+# Функцию выполнять не нужно, только определить.
+
+# Sample Input:
+# Питер Москва Самара Воронеж
+
+# Sample Output:
+# Воронеж
+
+
+def get_biggest_city(*cities) -> str:
+    """Возвращает название города наибольшей длины.
+    """
+    big_city = ''
+    for city in cities:
+        big_city = city if len(city) > len(big_city) else big_city
+
+    return big_city
+
+
+####################################
+# 
 
 # print()
 # print(time.perf_counter() - start)
