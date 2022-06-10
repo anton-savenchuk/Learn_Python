@@ -2280,35 +2280,71 @@
 # Sample Output:
 # True
 
-import itertools
-from sys import stdin
+# import itertools
+# from sys import stdin
 
 
-matrix = stdin.readlines()
-lst_in = [list(map(int, s.strip().split())) for s in matrix]
+# matrix = stdin.readlines()
+# lst_in = [list(map(int, s.strip().split())) for s in matrix]
 
 
-def is_isolate(*args) -> bool:
-    """Производить перебор двумерного списка.
+# def is_isolate(*args) -> bool:
+#     """Производит перебор двумерного списка.
+#     """
+#     i, j = args
+#     return (lst_in[i][j] + lst_in[i][j+1] + lst_in[i+1][j] + lst_in[i+1][j+1]) > 1
+
+
+# def verify(lst: list) -> bool:
+#     """Принимает двумерный список чисел.
+#     Проверяет, являются ли единицы изолированными друг от друга,
+#     то есть, вокруг каждой единицы должны быть нули.
+#     """
+#     flag = True
+#     for i, j in itertools.product(range(len(lst_in)-1), range(len(lst_in)-1)):
+#         if is_isolate(i, j):
+#             flag = False
+#             return flag
+#     return flag
+
+
+# print(verify(lst_in))
+
+
+####################################
+# (Для закрепления предыдущего материала). Объявите функцию с именем
+# str_min, которая сравнивает две переданные строки и возвращает
+# минимальную из них (то есть, выполняется лексикографическое сравнение
+# строк). Затем, используя функциональный подход к программированию
+# (то есть, более сложные функции реализуются путем вызова более
+# простых), реализовать еще две аналогичные функции:
+
+# - с именем str_min3 для поиска минимальной строки из трех переданных
+# строк;
+# - с именем str_min4 для поиска минимальной строки из четырех
+# переданных строк.
+
+
+def str_min(*args: str) -> str:
+    """Сравнивает две переданные строки и возвращает
+    минимальную из них (выполняется лексикографическое сравнение строк).
     """
-    i, j = args
-    return (lst_in[i][j] + lst_in[i][j+1] + lst_in[i+1][j] + lst_in[i+1][j+1]) > 1
+    str_1, str_2 = args
+    return str_1 if str_1 < str_2 else str_2
 
 
-def verify(lst: list) -> bool:
-    """Принимает двумерный список чисел.
-    Проверяет, являются ли единицы изолированными друг от друга,
-    то есть, вокруг каждой единицы должны быть нули.
+def str_min3(*args: str) -> str:
+    """Ищет минимальную строку из трех переданных строк.
     """
-    flag = True
-    for i, j in itertools.product(range(len(lst_in)-1), range(len(lst_in)-1)):
-        if is_isolate(i, j):
-            flag = False
-            return flag
-    return flag
+    str_1, str_2, str_3 = args
+    return str_min(str_1, str_min(str_2, str_3))
 
 
-print(verify(lst_in))
+def str_min4(*args: str) -> str:
+    """Ищет минимальную строку из четырех переданных строк.
+    """
+    str_1, str_2, str_3, str_4 = args
+    return str_min(str_1, str_min3(str_2, str_3, str_4))
 
 
 # print()
