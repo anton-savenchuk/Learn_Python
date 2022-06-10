@@ -2417,17 +2417,71 @@
 # 8
 
 
-#здесь продолжайте программу
-def get_rec_N(n: int) -> int:
-    """Печатает на экране последовательность целых чисел от 1 до N.
-    """
-    if n != 1:
-        get_rec_N(n-1)
-    print(n)
+# #здесь продолжайте программу
+# def get_rec_N(n: int) -> int:
+#     """Печатает на экране последовательность целых чисел от 1 до N.
+#     """
+#     if n != 1:
+#         get_rec_N(n-1)
+#     print(n)
 
 
-print(get_rec_N(N))
+# print(get_rec_N(N))
 
+
+####################################
+# Дано натуральное число N и последовательность из N элементов.
+# Требуется вывести эту последовательность в обратном порядке.
+
+# Входные данные
+
+# Программа принимает на вход натуральное число N (N ≤ 103). Во второй
+# строке через пробел идут N целых чисел, по модулю не превосходящих
+# 103 - элементы последовательности.
+# Выходные данные
+
+# Ваша задача вывести заданную последовательность в обратном порядке.
+
+# Sample Input 1:
+# 3
+# 1 2 3
+
+# Sample Output 1:
+# 3 2 1
+
+# Sample Input 2:
+# 5
+# 5 9 3 2 7
+
+# Sample Output 2:
+# 7 2 3 9 5
+
+def reverse_chain(n: int) -> list: # TODO
+    chain = list(map(int, input().split()))
+    
+    if len(chain) == 1:
+        return chain
+    if chain[0] != chain[-1]:
+        chain[0], chain[-1] = chain[-1], chain[0]
+        reverse_chain(chain[1:-1])
+
+
+print(reverse_chain(5))
+
+
+
+# def palindrome(string: str) -> bool:
+#     temp_string = string.lower()
+#     if len(temp_string) <= 1:
+#         return True
+#     if temp_string[0] != temp_string[-1]:
+#         return False
+
+#     return palindrome(temp_string[1:-1])
+
+
+
+# print(palindrome(''))
 
 # print()
 # print(time.perf_counter() - start)
