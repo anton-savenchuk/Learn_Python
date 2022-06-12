@@ -2456,32 +2456,17 @@
 # Sample Output 2:
 # 7 2 3 9 5
 
-def reverse_chain(n: int) -> list: # TODO
-    chain = list(map(int, input().split()))
-    
-    if len(chain) == 1:
-        return chain
-    if chain[0] != chain[-1]:
-        chain[0], chain[-1] = chain[-1], chain[0]
-        reverse_chain(chain[1:-1])
+
+def reverse_chain(n: int) -> int:
+    if n > 0:
+        reverse_chain(n - 1)
+        print(chain[-n], end=' ')
 
 
-print(reverse_chain(5))
+n = int(input())
+chain = list(map(int, input().split()))
+reverse_chain(n)
 
-
-
-# def palindrome(string: str) -> bool:
-#     temp_string = string.lower()
-#     if len(temp_string) <= 1:
-#         return True
-#     if temp_string[0] != temp_string[-1]:
-#         return False
-
-#     return palindrome(temp_string[1:-1])
-
-
-
-# print(palindrome(''))
 
 # print()
 # print(time.perf_counter() - start)
