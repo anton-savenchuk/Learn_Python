@@ -2457,16 +2457,50 @@
 # 7 2 3 9 5
 
 
-def reverse_chain(n: int) -> int:
-    if n > 0:
-        reverse_chain(n - 1)
-        print(chain[-n], end=' ')
+# def reverse_chain(n: int) -> int:
+#     if n > 0:
+#         reverse_chain(n - 1)
+#         print(chain[-n], end=' ')
 
 
-n = int(input())
-chain = list(map(int, input().split()))
-reverse_chain(n)
+# n = int(input())
+# chain = list(map(int, input().split()))
+# reverse_chain(n)
 
+
+####################################
+# Вводится список целых чисел в одну строчку через пробел. Необходимо
+# вычислить сумму этих введенных значений, используя рекурсивную функцию
+# (для перебора элементов списка) с именем get_rec_sum. Функция должна
+# возвращать значение суммы. (Выводить на экран она ничего не должна).
+
+# Вызовите эту функцию и выведите вычисленное значение суммы на экран.
+
+# Sample Input:
+# 8 11 -5 4 3
+
+# Sample Output:
+# 21
+
+
+# def get_rec_sum(num_list: list, sum_list=[]) -> int:
+#     """Вычисляет сумму введенных значений.
+#     """
+#     if not num_list:
+#         return
+#     sum_list.append(num_list[0])
+#     get_rec_sum(num_list[1:])
+#     return sum(sum_list)
+
+
+def get_rec_sum(digit_list: list) -> int:
+    """Вычисляет сумму введенных значений.
+    """
+    return digit_list[0] + get_rec_sum(digit_list[1:]) if digit_list else 0
+
+
+digits = list(map(int, input().split()))
+print(get_rec_sum(digits))
 
 # print()
 # print(time.perf_counter() - start)
