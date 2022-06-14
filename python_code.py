@@ -2587,19 +2587,43 @@
 # где d - исходный список; a - новый формируемый.
 
 
-def get_line_list(d: list, a: list=[]) -> list:
-    """Возвращает одномерный список из списка d.
+# def get_line_list(d: list, a: list=[]) -> list:
+#     """Возвращает одномерный список из списка d.
+#     """
+#     for lst in d:
+#         if isinstance(lst, list):
+#             get_line_list(lst)
+#         else:
+#             a.append(lst)
+#     return a
+
+
+# d = [1, 2, [True, False], ["Москва", "Уфа", [100, 101], ['True', [-2, -1]]], 7.89]
+# print(get_line_list(d))
+
+
+####################################
+# Напишите функцию list_sum_recursive, которая принимает на вход список
+# из целых чисел и возвращает сумму элементов переданного списка.
+# Не забывайте, что реализовать это нужно при помощи рекурсии. 
+
+# Ваша задача только написать определение функции list_sum_recursive
+
+# Sample Input:
+# 1 2 3
+
+# Sample Output:
+# 6
+
+
+def list_sum_recursive(nums: list) -> int:
+    """Вычисляет сумму введенных значений.
     """
-    for lst in d:
-        if isinstance(lst, list):
-            get_line_list(lst)
-        else:
-            a.append(lst)
-    return a
+    return nums[0] + list_sum_recursive(nums[1:]) if nums else 0
 
 
-d = [1, 2, [True, False], ["Москва", "Уфа", [100, 101], ['True', [-2, -1]]], 7.89]
-print(get_line_list(d))
+digits = list(map(int, input().split()))
+print(list_sum_recursive(digits))
 
 # print()
 # print(time.perf_counter() - start)
