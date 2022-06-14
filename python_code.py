@@ -2523,17 +2523,29 @@
 # 1 1 2 3 5 8 13
 
 
-def fib_rec(n: int, fib: list=[]) -> list:
-    """Высисляет список чисел Фибоначчи до n.
+# def fib_rec(n: int, fib: list=[]) -> list:
+#     """Высисляет список чисел Фибоначчи до n.
+#     """
+#     if len(fib) < n:
+#         fib.append(1 if len(fib) < 2 else fib[-2] + fib[-1])
+#         fib_rec(n)
+#         return fib
+
+
+# print(*fib_rec(7))
+
+
+####################################
+# Требуется найти N-е число Фибоначчи
+
+
+def fib(n: int) -> int:
+    """Высисляет N-е число Фибоначчи.
     """
-    if len(fib) < n:
-        fib.append(1 if len(fib) < 2 else fib[-2] + fib[-1])
-        fib_rec(n)
-        return fib
+    return n if n < 2 else fib(n - 1) + fib(n - 2)
 
 
-print(*fib_rec(7))
-
+print(fib(int(input())))
 
 # print()
 # print(time.perf_counter() - start)
