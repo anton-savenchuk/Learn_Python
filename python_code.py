@@ -2523,23 +2523,17 @@
 # 1 1 2 3 5 8 13
 
 
-# def fib_rec(n: int, fib: list=[]) -> list:
-def fib_rec(n, fib=[]):
+def fib_rec(n: int, fib: list=[]) -> list:
     """Высисляет список чисел Фибоначчи до n.
     """
-    # return 1 if n in {0, 1} else fib.append(fib_rec(n-1) + fib_rec(n-2))
-    if n == 1:
-        return 0
-    if n == 2:
-        return 1
-    s = fib_rec(n-1) + fib_rec(n-2)
-    fib.append(s)
-    return fib
+    if len(fib) < n:
+        fib.append(1 if len(fib) < 2 else fib[-2] + fib[-1])
+        fib_rec(n)
+        return fib
 
 
-print(fib_rec(5))
-# print(fib_rec(6))
-# print(fib_rec(7))
+print(*fib_rec(7))
+
 
 # print()
 # print(time.perf_counter() - start)
