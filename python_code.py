@@ -2493,14 +2493,53 @@
 #     return sum(sum_list)
 
 
-def get_rec_sum(digit_list: list) -> int:
-    """Вычисляет сумму введенных значений.
+# def get_rec_sum(digit_list: list) -> int:
+#     """Вычисляет сумму введенных значений.
+#     """
+#     return digit_list[0] + get_rec_sum(digit_list[1:]) if digit_list else 0
+
+
+# digits = list(map(int, input().split()))
+# print(get_rec_sum(digits))
+
+
+####################################
+# Вводится натуральное число N. Необходимо с помощью рекурсивной функции
+# fib_rec(N, f=[]) (здесь N - общее количество чисел Фибоначчи;
+# f - начальный список этих чисел) сформировать последовательность чисел
+# Фибоначчи по правилу: первые два числа равны 1 и 1, а каждое следующе
+# значение равно сумме двух предыдущих. Пример такой последовательности
+# для первых 7 чисел: 1, 1, 2, 3, 5, 8, 13, ...
+
+# Функция должна возвращать список сформированной последовательности
+# длиной N.
+
+# Вызывать функцию не нужно, только объявить.
+
+# Sample Input:
+# 7
+
+# Sample Output:
+# 1 1 2 3 5 8 13
+
+
+# def fib_rec(n: int, fib: list=[]) -> list:
+def fib_rec(n, fib=[]):
+    """Высисляет список чисел Фибоначчи до n.
     """
-    return digit_list[0] + get_rec_sum(digit_list[1:]) if digit_list else 0
+    # return 1 if n in {0, 1} else fib.append(fib_rec(n-1) + fib_rec(n-2))
+    if n == 1:
+        return 0
+    if n == 2:
+        return 1
+    s = fib_rec(n-1) + fib_rec(n-2)
+    fib.append(s)
+    return fib
 
 
-digits = list(map(int, input().split()))
-print(get_rec_sum(digits))
+print(fib_rec(5))
+# print(fib_rec(6))
+# print(fib_rec(7))
 
 # print()
 # print(time.perf_counter() - start)
