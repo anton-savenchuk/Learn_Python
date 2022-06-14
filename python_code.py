@@ -2522,7 +2522,7 @@
 # Sample Output:
 # 1 1 2 3 5 8 13
 
-
+# TODO Попробовать решить с локальным списком другим вариантом.
 # def fib_rec(n: int, fib: list=[]) -> list:
 #     """Вычисляет список чисел Фибоначчи до n.
 #     """
@@ -2633,23 +2633,30 @@
 # линейный список при помощи функции flatten
 
 
-def flatten(row_lst: list, lst: list = None) -> list:
-    """Принимает список целых чисел неограниченной вложенности.
-    Возвращает одномерный список из списка row_lst.
-    """
-    if lst is None:
-        lst = []
-    for i in row_lst:
-        if isinstance(i, list):
-            flatten(i, lst)
-        else:
-            lst.append(i)
-    return lst
+# def flatten(row_lst: list, lst: list = None) -> list:
+#     """Принимает список целых чисел неограниченной вложенности.
+#     Возвращает одномерный список из списка row_lst.
+#     """
+#     if lst is None:
+#         lst = []
+#     for i in row_lst:
+#         if isinstance(i, list):
+#             flatten(i, lst)
+#         else:
+#             lst.append(i)
+#     return lst
 
 
-print(flatten([1, [2, 3, [4]], 5])) # вернет [1,2,3,4,5]
-print(flatten([1, [2,3], [[2], 5], 6])) # вернет [1,2,3,2,5,6]
-print(flatten([[[[9]]], [1,2], [[8]]])) # вернет [9,1,2,8]
+# print(flatten([1, [2, 3, [4]], 5])) # вернет [1,2,3,4,5]
+# print(flatten([1, [2,3], [[2], 5], 6])) # вернет [1,2,3,2,5,6]
+# print(flatten([[[[9]]], [1,2], [[8]]])) # вернет [9,1,2,8]
+
+
+####################################
+# 
+
+
+
 
 # print()
 # print(time.perf_counter() - start)
