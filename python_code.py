@@ -2616,14 +2616,40 @@
 # 6
 
 
-def list_sum_recursive(nums: list) -> int:
-    """Вычисляет сумму введенных значений.
+# def list_sum_recursive(nums: list) -> int:
+#     """Вычисляет сумму введенных значений.
+#     """
+#     return nums[0] + list_sum_recursive(nums[1:]) if nums else 0
+
+
+# digits = list(map(int, input().split()))
+# print(list_sum_recursive(digits))
+
+
+####################################
+# Представьте, что у нас есть список целых чисел неограниченной
+# вложенности. То есть наш список может состоять из списков, внутри
+# которых также могут быть списки. Ваша задача превратить все это в
+# линейный список при помощи функции flatten
+
+
+def flatten(row_lst: list, lst: list = None) -> list:
+    """Принимает список целых чисел неограниченной вложенности.
+    Возвращает одномерный список из списка row_lst.
     """
-    return nums[0] + list_sum_recursive(nums[1:]) if nums else 0
+    if lst is None:
+        lst = []
+    for i in row_lst:
+        if isinstance(i, list):
+            flatten(i, lst)
+        else:
+            lst.append(i)
+    return lst
 
 
-digits = list(map(int, input().split()))
-print(list_sum_recursive(digits))
+print(flatten([1, [2, 3, [4]], 5])) # вернет [1,2,3,4,5]
+print(flatten([1, [2,3], [[2], 5], 6])) # вернет [1,2,3,2,5,6]
+print(flatten([[[[9]]], [1,2], [[8]]])) # вернет [9,1,2,8]
 
 # print()
 # print(time.perf_counter() - start)
