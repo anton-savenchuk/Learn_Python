@@ -2522,16 +2522,20 @@
 # Sample Output:
 # 1 1 2 3 5 8 13
 
-# TODO Попробовать решить с локальным списком другим вариантом.
-# def fib_rec(n: int, fib: list=[]) -> list:
+
+# def fib_rec(n: int, fib: list = None) -> list:
 #     """Вычисляет список чисел Фибоначчи до n.
 #     """
+#     if fib is None:
+#         fib = []
 #     if len(fib) < n:
 #         fib.append(1 if len(fib) < 2 else fib[-2] + fib[-1])
-#         fib_rec(n)
-#         return fib
+#         fib_rec(n, fib)
+#     return fib
 
 
+# print(*fib_rec(3))
+# print(*fib_rec(5))
 # print(*fib_rec(7))
 
 
