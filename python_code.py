@@ -2691,21 +2691,103 @@
 # 21
 
 
-def get_path(n:int, steps:int=None) -> int:
-    """Определяет количество вариантов маршрутов, которыми лягушка может
-    достичь риски под номером N.
-    Принимает на вход натуральное число N.
+# def get_path(n:int, steps:int=None) -> int:
+#     """Определяет количество вариантов маршрутов, которыми лягушка может
+#     достичь риски под номером N.
+#     Принимает на вход натуральное число N.
+#     """
+#     if steps is None:
+#         steps = 0
+
+#     if n <= 0 or n == 1:
+#         return steps + 1
+
+#     return steps + get_path(n - 2, steps) + get_path(n - 1, steps)
+
+
+# print(get_path(7))
+
+
+####################################
+# Вводится список из целых чисел в одну строчку через пробел.
+# Необходимо выполнить его сортировку по возрастанию с помощью алгоритма
+# сортировки слиянием. Функция должна возвращать новый отсортированный
+# список.
+# Вызовите результирующую функцию сортировки для введенного списка и
+# отобразите результат на экран в виде последовательности чисел,
+# записанных через пробел.
+
+# Подсказка. Для разбиения списка и его последующей сборки используйте
+# рекурсивные функции.
+
+# P. S. Теория сортировки в видео предыдущего шага.
+
+# Sample Input:
+# 8 11 -6 3 0 1 1
+
+# Sample Output:
+# -6 0 1 1 3 8 11
+
+
+def list_separator(lst:list) -> tuple:
+    """Splits the list into 2 parts.
     """
-    if steps is None:
-        steps = 0
+    middle = len(lst) // 2
+    left_side = lst[ : middle]
+    right_side = lst[middle : ]
 
-    if n <= 0 or n == 1:
-        return steps + 1
-    
-    return steps + get_path(n - 2, steps) + get_path(n - 1, steps)
+    return left_side, right_side
 
 
-print(get_path(7))
+def merge(lst_1:list, lst_2:list) -> list:
+    """Merges two lists into one in ascending order.
+    """
+    result_list = [0] * (len(lst_1) + len(lst_2))
+    i = j = k = 0  # list indexes
+    while i < len(lst_1) and j < len(lst_2):
+        if lst_1[i] <= lst_2[j]:
+            result_list[k] = lst_1[i]
+            i += 1
+        else:
+            result_list[k] = lst_2[j]
+            j += 1
+        k += 1
+
+    while i < len(lst_1):
+        result_list[k] = lst_1[i]
+        i += 1
+        k += 1
+
+    while j < len(lst_2):
+        result_list[k] = lst_2[j]
+        j += 1
+        k += 1
+
+    return result_list
+
+
+def merge_sort(lst:list) -> list:
+    """Sorts the list in ascending order.
+    Uses list_separator and merge functions.
+    """
+    if len(lst) <= 1:
+        return
+    left_side, right_side = list_separator(lst)
+    merge_sort(left_side)
+    merge_sort(right_side)
+
+    result_list = merge(left_side, right_side)
+
+    for i in range(len(result_list)):
+        lst[i] = result_list[i]
+
+    return lst
+
+
+lst_in = list(map(int, input().split()))
+
+print(*merge_sort(lst_in))
+
 
 # print()
 # print(time.perf_counter() - start)
