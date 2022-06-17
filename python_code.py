@@ -2813,34 +2813,76 @@
 
 # Sample Output 2:
 # 2 12 15 15 16 19 20 20
-from random import choice
+# from random import choice
 
 
-def quick_sort(lst:list) -> list:
-    """Sorts the list Quicksort method in ascending order.
-    """
-    if len(lst) <= 1:
-        return lst
+# def quick_sort(lst:list) -> list:
+#     """Sorts the list Quicksort method in ascending order.
+#     """
+#     if len(lst) <= 1:
+#         return lst
 
-    middle, left_side, right_side = [], [], []
-    pivot = choice(lst)
+#     middle, left_side, right_side = [], [], []
+#     pivot = choice(lst)
 
-    for i in lst:
-        if i < pivot:
-            left_side.append(i)
-        elif i == pivot:
-            middle.append(i)
+#     for i in lst:
+#         if i < pivot:
+#             left_side.append(i)
+#         elif i == pivot:
+#             middle.append(i)
+#         else:
+#             right_side.append(i)
+
+#     return quick_sort(left_side) + middle + quick_sort(right_side)
+
+
+# lst_in = [19, 4, 5, 17, 1]
+# print(*quick_sort(lst_in))
+
+
+####################################
+# Угадайка чисел
+
+# Описание проекта: программа генерирует случайное число в диапазоне от
+# 1 до 100 и просит пользователя угадать это число. Если догадка
+# пользователя больше случайного числа, то программа должна вывести
+# сообщение 'Слишком много, попробуйте еще раз'. Если догадка меньше
+# случайного числа, то программа должна вывести сообщение 'Слишком мало,
+# попробуйте еще раз'. Если пользователь угадывает число, то программа
+# должна поздравить его и вывести сообщение 'Вы угадали, поздравляем!'.
+
+# Составляющие проекта:
+#     Целые числа (тип int);
+#     Переменные;
+#     Ввод / вывод данных (функции input() и print());
+#     Условный оператор (if/elif/else);
+#     Цикл while;
+#     Бесконечный цикл;
+#     Операторы break, continue;
+#     Работа с модулем random для генерации случайных чисел.
+
+from random import randrange
+
+
+def guess_number():
+    random_number = randrange(101)
+    user_number = int(input('Число от 1 до 100 загадано, введите ваш вариант:\n'))
+
+    cnt = 0
+    while user_number != random_number:
+        if user_number > random_number and user_number % random_number > 5:
+            print('Слишком много, попробуйте еще раз:')
+        elif user_number > random_number or random_number % user_number <= 5:
+            print('Тепло, попробуйте еще раз:')
         else:
-            right_side.append(i)
+            print('Слишком мало, попробуйте еще раз:')
+        user_number = int(input(''))
+        cnt += 1
 
-    return quick_sort(left_side) + middle + quick_sort(right_side)
-
-
-lst_in = [19, 4, 5, 17, 1]
-print(*quick_sort(lst_in))
+    return f'Вы угадали число за {cnt} попыток, поздравляем!'
 
 
-
+print(guess_number())
 
 
 # print()
