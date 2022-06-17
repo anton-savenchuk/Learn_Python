@@ -2729,64 +2729,118 @@
 # -6 0 1 1 3 8 11
 
 
-def list_separator(lst:list) -> tuple:
-    """Splits the list into 2 parts.
-    """
-    middle = len(lst) // 2
-    left_side = lst[ : middle]
-    right_side = lst[middle : ]
+# def list_separator(lst:list) -> tuple:
+#     """Splits the list into 2 parts.
+#     """
+#     middle = len(lst) // 2
+#     left_side = lst[ : middle]
+#     right_side = lst[middle : ]
 
-    return left_side, right_side
-
-
-def merge(lst_1:list, lst_2:list) -> list:
-    """Merges two lists into one in ascending order.
-    """
-    result_list = [0] * (len(lst_1) + len(lst_2))
-    i = j = k = 0  # list indexes
-    while i < len(lst_1) and j < len(lst_2):
-        if lst_1[i] <= lst_2[j]:
-            result_list[k] = lst_1[i]
-            i += 1
-        else:
-            result_list[k] = lst_2[j]
-            j += 1
-        k += 1
-
-    while i < len(lst_1):
-        result_list[k] = lst_1[i]
-        i += 1
-        k += 1
-
-    while j < len(lst_2):
-        result_list[k] = lst_2[j]
-        j += 1
-        k += 1
-
-    return result_list
+#     return left_side, right_side
 
 
-def merge_sort(lst:list) -> list:
-    """Sorts the list in ascending order.
-    Uses list_separator and merge functions.
+# def merge(lst_1:list, lst_2:list) -> list:
+#     """Merges two lists into one in ascending order.
+#     """
+#     result_list = [0] * (len(lst_1) + len(lst_2))
+#     i = j = k = 0  # list indexes
+#     while i < len(lst_1) and j < len(lst_2):
+#         if lst_1[i] <= lst_2[j]:
+#             result_list[k] = lst_1[i]
+#             i += 1
+#         else:
+#             result_list[k] = lst_2[j]
+#             j += 1
+#         k += 1
+
+#     while i < len(lst_1):
+#         result_list[k] = lst_1[i]
+#         i += 1
+#         k += 1
+
+#     while j < len(lst_2):
+#         result_list[k] = lst_2[j]
+#         j += 1
+#         k += 1
+
+#     return result_list
+
+
+# def merge_sort(lst:list) -> list:
+#     """Sorts the list in ascending order.
+#     Uses list_separator and merge functions.
+#     """
+#     if len(lst) <= 1:
+#         return
+#     left_side, right_side = list_separator(lst)
+#     merge_sort(left_side)
+#     merge_sort(right_side)
+
+#     result_list = merge(left_side, right_side)
+
+#     for i in range(len(result_list)):
+#         lst[i] = result_list[i]
+
+#     return lst
+
+
+# lst_in = list(map(int, input().split()))
+
+# print(*merge_sort(lst_in))
+
+
+####################################
+# Быстрая сортировка - еще один вид сортировки, который использует
+# рекурсию.
+
+# Ваша задача реализовать этот алгоритм. Для этого нужно будет создать
+# функцию quick_sort, которая будет принимать исходный список и
+# возвращать новый отсортированный в порядке неубывания список.
+
+# Необходимо написать только определение функций quick_sort, при этом
+# нельзя пользоваться встроенными сортировками в Python
+
+# Sample Input 1:
+# 5
+# 19 4 5 17 1
+
+# Sample Output 1:
+# 1 4 5 17 19
+
+# Sample Input 2:
+# 8
+# 16 19 2 12 20 15 20 15
+
+# Sample Output 2:
+# 2 12 15 15 16 19 20 20
+from random import choice
+
+
+def quick_sort(lst:list) -> list:
+    """Sorts the list Quicksort method in ascending order.
     """
     if len(lst) <= 1:
-        return
-    left_side, right_side = list_separator(lst)
-    merge_sort(left_side)
-    merge_sort(right_side)
+        return lst
 
-    result_list = merge(left_side, right_side)
+    middle, left_side, right_side = [], [], []
+    pivot = choice(lst)
 
-    for i in range(len(result_list)):
-        lst[i] = result_list[i]
+    for i in lst:
+        if i < pivot:
+            left_side.append(i)
+        elif i == pivot:
+            middle.append(i)
+        else:
+            right_side.append(i)
 
-    return lst
+    return quick_sort(left_side) + middle + quick_sort(right_side)
 
 
-lst_in = list(map(int, input().split()))
+lst_in = [19, 4, 5, 17, 1]
+print(*quick_sort(lst_in))
 
-print(*merge_sort(lst_in))
+
+
 
 
 # print()
