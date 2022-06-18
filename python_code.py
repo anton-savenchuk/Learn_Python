@@ -2861,32 +2861,88 @@
 #     Операторы break, continue;
 #     Работа с модулем random для генерации случайных чисел.
 
-from random import randrange
+# from random import randrange
 
 
-def guess_number():
-    random_number = randrange(1, 101)
-    user_number = int(input('Число от 1 до 100 загадано, введите ваш вариант:\n'))
+# def guess_number():
+#     random_number = randrange(1, 101)
+#     user_number = int(input('Число от 1 до 100 загадано, введите ваш вариант:\n'))
 
+#     cnt = 1
+#     while user_number != random_number:
+
+#         if user_number > random_number and user_number - random_number > 5:
+#             print('Слишком много, попробуйте еще раз:')
+#         elif user_number > random_number or random_number - user_number <= 5:
+#             if random_number - user_number <= 2 or user_number - random_number <= 2:
+#                 print('Горячо, попробуйте еще раз:')
+#             else:
+#                 print('Тепло, попробуйте еще раз:')
+#         else:
+#             print('Слишком мало, попробуйте еще раз:')
+#         user_number = int(input(''))
+#         cnt += 1
+
+#     return f'Вы угадали число за {cnt} попыток, поздравляем!'
+
+
+# print(guess_number())
+
+
+####################################
+# Тимур и его числа
+
+# Тимур загадал число от 1 до n. За какое наименьшее количество вопросов
+# (на которые Тимур отвечает "больше" или "меньше") Руслан может
+# гарантированно угадать число Тимура?
+
+# Формат входных данных
+# На вход программе подается натуральное число n.
+
+# Формат выходных данных
+# Программа должна вывести наименьшее количество вопросов, которых
+# гарантированно хватит Руслану, чтобы угадать число Тимура.
+
+# Sample Input 1:
+# 8
+
+# Sample Output 1:
+# 3
+
+# Sample Input 2:
+# 20
+
+# Sample Output 2:
+# 5
+
+# Sample Input 3:
+# 100
+
+# Sample Output 3:
+# 7
+
+
+def guess_number(n:int) -> int:
+    """Вычисляет наименьшее количество вопросов за которое гарантированно
+    можно угадать загаданное число n.
+    """
+    left = 1
+    right = n-1
+    middle = (left + right) // 2
     cnt = 1
-    while user_number != random_number:
-
-        if user_number > random_number and user_number - random_number > 5:
-            print('Слишком много, попробуйте еще раз:')
-        elif user_number > random_number or random_number - user_number <= 5:
-            if random_number - user_number <= 2 or user_number - random_number <= 2:
-                print('Горячо, попробуйте еще раз:')
-            else:
-                print('Тепло, попробуйте еще раз:')
+    while middle != n-1:
+        if middle > n-1:
+            right = middle - 1
         else:
-            print('Слишком мало, попробуйте еще раз:')
-        user_number = int(input(''))
+            left = middle + 1
+        middle = (left + right) // 2
         cnt += 1
 
-    return f'Вы угадали число за {cnt} попыток, поздравляем!'
+    return cnt
 
 
-print(guess_number())
+print(guess_number(int(input())))
+
 
 
 # print()
