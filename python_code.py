@@ -2865,15 +2865,19 @@ from random import randrange
 
 
 def guess_number():
-    random_number = randrange(101)
+    random_number = randrange(1, 101)
     user_number = int(input('Число от 1 до 100 загадано, введите ваш вариант:\n'))
 
-    cnt = 0
+    cnt = 1
     while user_number != random_number:
-        if user_number > random_number and user_number % random_number > 5:
+
+        if user_number > random_number and user_number - random_number > 5:
             print('Слишком много, попробуйте еще раз:')
-        elif user_number > random_number or random_number % user_number <= 5:
-            print('Тепло, попробуйте еще раз:')
+        elif user_number > random_number or random_number - user_number <= 5:
+            if random_number - user_number <= 2 or user_number - random_number <= 2:
+                print('Горячо, попробуйте еще раз:')
+            else:
+                print('Тепло, попробуйте еще раз:')
         else:
             print('Слишком мало, попробуйте еще раз:')
         user_number = int(input(''))
