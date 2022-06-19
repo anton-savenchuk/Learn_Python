@@ -2861,32 +2861,76 @@
 #     Операторы break, continue;
 #     Работа с модулем random для генерации случайных чисел.
 
-# from random import randrange
+from random import randrange
 
 
-# def guess_number():
-#     random_number = randrange(1, 101)
-#     user_number = int(input('Число от 1 до 100 загадано, введите ваш вариант:\n'))
-
-#     cnt = 1
-#     while user_number != random_number:
-
-#         if user_number > random_number and user_number - random_number > 5:
-#             print('Слишком много, попробуйте еще раз:')
-#         elif user_number > random_number or random_number - user_number <= 5:
-#             if random_number - user_number <= 2 or user_number - random_number <= 2:
-#                 print('Горячо, попробуйте еще раз:')
-#             else:
-#                 print('Тепло, попробуйте еще раз:')
-#         else:
-#             print('Слишком мало, попробуйте еще раз:')
-#         user_number = int(input(''))
-#         cnt += 1
-
-#     return f'Вы угадали число за {cnt} попыток, поздравляем!'
+def is_valid(num:str, right_side=100) -> bool:
+    """
+    Проверяет корректность введённого целого числа от 1 до right_side
+    включительно.
+    """
+    return num.isdigit() and int(num) in range(1, int(right_side) + 1)
 
 
-# print(guess_number())
+def check_num(num:int, rand_num:int) -> tuple:
+    """Проверяет совпадение загаданного числа и числа игрока.
+    """
+    if num == rand_num:
+        return True, None
+    elif num - rand_num > 5:
+        return False, 0,
+    elif rand_num - num > 5:
+        return False, 1,
+    elif abs(num - rand_num) <= 2:
+        return False, 3,
+    else:
+        return False, 2,
+
+
+def guess_num():
+    r_side = input('Какое максимальное число могу загадать?\n')
+    while is_valid(r_side, right_side=int(r_side)) is False:
+        r_side = input('Нужно загадать целое число!\n')
+
+    mesg = {
+        'lets_go': f'Число от 1 до {r_side}(включительно) загадано.',
+        'num_error': f'Нужно целое число от 1 до {r_side} (включительно).',
+        'help': ('Слишком много', 'Слишком мало', 'Тепло', 'Горячо'),
+        'try_again': 'попробуйте еще раз.',
+        'case': ('ки', 'ок'),
+    }
+
+    rand_num = randrange(1, int(r_side) + 1)
+    print(f"\n{mesg['lets_go']}")
+
+    cnt = 1
+    while True:
+        usr_num = input('Введите ваш вариант:\n')
+        if is_valid(usr_num, right_side=int(r_side)) is False:
+            print(f"{mesg['num_error']}, {mesg['try_again']}")
+            continue
+        else:
+            usr_num = int(usr_num)
+            ans, val = check_num(usr_num, rand_num)
+            if ans is True:
+                _try = f"попыт{mesg['case'][0]}" if str(cnt)[-1] == '1'\
+                    and cnt != 11 else f"попыт{mesg['case'][1]}"
+                return f'Вы угадали число с {cnt} {_try}, поздравляю!'
+            else:
+                print(f"\n{mesg['help'][val]}, {mesg['try_again']}")
+
+        cnt += 1
+
+
+print(guess_num())
+
+while True:
+    ans = input('Сыграем еще раз? (Да/Нет):\n')
+    if ans.lower() in {'да', 'д', 'yes', 'y'}:
+        print(guess_num())
+    elif ans.lower() in {'нет', 'н', 'no', 'n'}:
+        print('Спасибо, что играли в числовую угадайку. Ещё увидимся...')
+        break
 
 
 ####################################
@@ -2922,26 +2966,30 @@
 # 7
 
 
-def guess_number(n:int) -> int:
-    """Вычисляет наименьшее количество вопросов за которое гарантированно
-    можно угадать загаданное число n.
-    """
-    left = 1
-    right = n-1
-    middle = (left + right) // 2
-    cnt = 1
-    while middle != n-1:
-        if middle > n-1:
-            right = middle - 1
-        else:
-            left = middle + 1
-        middle = (left + right) // 2
-        cnt += 1
+# def guess_number(n:int) -> int:
+#     """Вычисляет наименьшее количество вопросов за которое гарантированно
+#     можно угадать загаданное число n.
+#     """
+#     left = 1
+#     right = n-1
+#     middle = (left + right) // 2
+#     cnt = 1
+#     while middle != n-1:
+#         if middle > n-1:
+#             right = middle - 1
+#         else:
+#             left = middle + 1
+#         middle = (left + right) // 2
+#         cnt += 1
 
-    return cnt
+#     return cnt
 
 
-print(guess_number(int(input())))
+# print(guess_number(int(input())))
+
+
+####################################
+# 
 
 
 
