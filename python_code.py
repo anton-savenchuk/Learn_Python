@@ -897,7 +897,7 @@
 #     total_lst = []
 #     for _ in range(n):
 #         total_lst = merge(total_lst, list(map(int, input().split())))
-    
+
 #     return total_lst
 
 
@@ -925,7 +925,7 @@
 #     """Проверяет, можно ли из переданных
 #     аргументов составить треугольник.
 #     """
-    
+
 #     return a + b > c and a + c > b and b + c > a
 
 
@@ -1372,7 +1372,7 @@
 # Вводится слово в переменную tp. Если это слово RECT, то следует
 # объявить функцию с именем get_sq с двумя параметрами, вычисляющую
 # площадь прямоугольника и возвращающую вычисленное значение.
-# (На экран она ничего не должна выводить, только возвращать значение). 
+# (На экран она ничего не должна выводить, только возвращать значение).
 
 # Если же введенное слово не RECT (любое другое), то объявляется функция
 # с тем же именем get_sq, с одним параметром для вычисления площади
@@ -2162,18 +2162,18 @@
 # значениях не встретится ни одного товара, необходимо распечатать
 # текст "Нет товаров"
 
-# print_goods('apple', 'banana', 'orange') 
+# print_goods('apple', 'banana', 'orange')
 # """ данный вызов печатает следующие строки
-# 1. apple 
+# 1. apple
 # 2. banana
 # 3. orange
 # """
-# print_goods(1, True, 'Грушечка', '', 'Pineapple') 
+# print_goods(1, True, 'Грушечка', '', 'Pineapple')
 # """ Этот вызов распечатает следующее
 # 1. Грушечка
 # 2. Pineapple
 # """
-# print_goods([], {}, 1, 2) 
+# print_goods([], {}, 1, 2)
 # """ Этот вызов распечатает следующее
 # Нет товаров
 # """
@@ -2202,7 +2202,7 @@
 # должны следовать в алфавитном порядке.
 # Пример работы смотрите ниже
 
-# info_kwargs(first_name="John", last_name="Doe", age=33) 
+# info_kwargs(first_name="John", last_name="Doe", age=33)
 # """ данный вызов печатает следующие строки
 # age = 33
 # first_name = John
@@ -2268,7 +2268,7 @@
 
 # P. S. При реализации функции is_isolate не следует прописывать восемь
 # операторов if. Подумайте, как это можно сделать красивее (с точки
-# зрения реализации алгоритма). 
+# зрения реализации алгоритма).
 
 # Sample Input:
 # 1 0 0 0 0
@@ -2393,7 +2393,7 @@
 # Вводится целое положительное число N. Необходимо написать рекурсивную
 # функцию с именем get_rec_N, которая отображает на экране
 # последовательность целых чисел от 1 до N (включительно).
-# Каждое число выводится с новой строки. 
+# Каждое число выводится с новой строки.
 
 # В качестве параметра функция get_rec_N должна принимать одно числовое
 # значение. То есть, иметь только один параметр. Начальный вызов
@@ -2666,7 +2666,7 @@
 # get_path. Алгоритм решения будет следующий. Рассмотрим, например,
 # риску под номером 4. Очевидно, в нее лягушка может скакнуть либо с
 # риски номер 2, либо с риски номер 3. Значит, общее число вариантов
-# перемещений лягушки можно определить как: 
+# перемещений лягушки можно определить как:
 
 # get_path(4) = get_path(3) + get_path(2)
 
@@ -2861,76 +2861,75 @@
 #     Операторы break, continue;
 #     Работа с модулем random для генерации случайных чисел.
 
-from random import randrange
+# from random import randrange
 
 
-def is_valid(num:str, right_side=100) -> bool:
-    """
-    Проверяет корректность введённого целого числа от 1 до right_side
-    включительно.
-    """
-    return num.isdigit() and int(num) in range(1, int(right_side) + 1)
+# def is_valid(num: str, right_side=100) -> bool:
+#     """
+#     Проверяет корректность введённого целого числа от 1 до right_side
+#     включительно.
+#     """
+#     return num.isdigit() and int(num) in range(1, int(right_side) + 1)
 
 
-def check_num(num:int, rand_num:int) -> tuple:
-    """Проверяет совпадение загаданного числа и числа игрока.
-    """
-    if num == rand_num:
-        return True, None
-    elif num - rand_num > 5:
-        return False, 0,
-    elif rand_num - num > 5:
-        return False, 1,
-    elif abs(num - rand_num) <= 2:
-        return False, 3,
-    else:
-        return False, 2,
+# def check_num(num: int, rand_num: int) -> tuple:
+#     """Проверяет совпадение загаданного числа и числа игрока.
+#     """
+#     if num == rand_num:
+#         return True, None
+#     elif num - rand_num > 5:
+#         return False, 0
+#     elif rand_num - num > 5:
+#         return False, 1
+#     elif abs(num - rand_num) <= 2:
+#         return False, 3
+#     else:
+#         return False, 2
 
 
-def guess_num():
-    r_side = input('Какое максимальное число могу загадать?\n')
-    while is_valid(r_side, right_side=int(r_side)) is False:
-        r_side = input('Нужно загадать целое число!\n')
+# def guess_num():
+#     r_side = input('Какое максимальное число могу загадать?\n')
+#     while is_valid(r_side, right_side=int(r_side)) is False:
+#         r_side = input('Нужно загадать целое число!\n')
 
-    mesg = {
-        'lets_go': f'Число от 1 до {r_side}(включительно) загадано.',
-        'num_error': f'Нужно целое число от 1 до {r_side} (включительно).',
-        'help': ('Слишком много', 'Слишком мало', 'Тепло', 'Горячо'),
-        'try_again': 'попробуйте еще раз.',
-        'case': ('ки', 'ок'),
-    }
+#     mesg = {
+#         'lets_go': f'Число от 1 до {r_side}(включительно) загадано.',
+#         'num_error': f'Нужно целое число от 1 до {r_side} (включительно).',
+#         'help': ('Слишком много', 'Слишком мало', 'Тепло', 'Горячо'),
+#         'try_again': 'попробуйте еще раз.',
+#         'case': ('ки', 'ок'),
+#     }
 
-    rand_num = randrange(1, int(r_side) + 1)
-    print(f"\n{mesg['lets_go']}")
+#     rand_num = randrange(1, int(r_side) + 1)
+#     print(f"\n{mesg['lets_go']}")
 
-    cnt = 1
-    while True:
-        usr_num = input('Введите ваш вариант:\n')
-        if is_valid(usr_num, right_side=int(r_side)) is False:
-            print(f"{mesg['num_error']}, {mesg['try_again']}")
-            continue
-        else:
-            usr_num = int(usr_num)
-            ans, val = check_num(usr_num, rand_num)
-            if ans is True:
-                _try = f"попыт{mesg['case'][0]}" if str(cnt)[-1] == '1'\
-                    and cnt != 11 else f"попыт{mesg['case'][1]}"
-                return f'Вы угадали число с {cnt} {_try}, поздравляю!'
-            else:
-                print(f"\n{mesg['help'][val]}, {mesg['try_again']}")
+#     cnt = 1
+#     while True:
+#         usr_num = input('Введите ваш вариант:\n')
+#         if is_valid(usr_num, right_side=int(r_side)) is False:
+#             print(f"{mesg['num_error']}, {mesg['try_again']}")
+#             continue
+#         else:
+#             ans, val = check_num(int(usr_num), rand_num)
+#             if ans is True:
+#                 _try = f"попыт{mesg['case'][0]}" if str(cnt)[-1] == '1'\
+#                     and cnt != 11 else f"попыт{mesg['case'][1]}"
+#                 return f'\nВы угадали число с {cnt} {_try}, поздравляю!'
+#             else:
+#                 print(f"\n{mesg['help'][val]}, {mesg['try_again']}")
 
-        cnt += 1
+#         cnt += 1
 
 
-print(guess_num())
+# print(guess_num())
 
-while True:
-    ans = input('Сыграем еще раз? (Да/Нет):\n')
-    if ans.lower() in {'да', 'д', 'yes', 'y'}:
-        print(guess_num())
-    elif ans.lower() in {'нет', 'н', 'no', 'n'}:
-        print('Спасибо, что играли в числовую угадайку. Ещё увидимся...')
-        break
+# while True:
+#     ans = input('Сыграем еще раз? (Да/Нет):\n')
+#     if ans.lower() in {'да', 'д', 'yes', 'y'}:
+#         print(guess_num())
+#     elif ans.lower() in {'нет', 'н', 'no', 'n'}:
+#         print('Спасибо, что играли в числовую угадайку. Ещё увидимся...')
+#         break
 
 
 ####################################
@@ -2989,7 +2988,57 @@ while True:
 
 
 ####################################
-# 
+# В программе задана функция filter_lst (см. программу ниже), которая
+# отбирает элементы, переданного ей итерируемого объекта и возвращает
+# сформированный кортеж значений.
+
+# На вход программы поступает список целых чисел, записанных в одну
+# строчку через пробел. Вызовите функцию filter_lst для формирования:
+
+# - кортежа из всех значений входного списка (передается в параметр it);
+# - кортежа только из отрицательных чисел;
+# - кортежа только из неотрицательных чисел (то есть, включая и 0);
+# - кортежа из чисел в диапазоне [3; 5]
+
+# Каждый результат работы функции следует отображать с новой строки
+# командой:
+
+# print(*lst)
+
+# где lst - список на возвращенный функцией filter_lst. Для отбора
+# нужных значений формальному параметру key следует передавать
+# соответствующие определения анонимной функции.
+
+# Sample Input:
+# 5 4 -3 4 5 -24 -6 9 0
+
+# Sample Output:
+# 5 4 -3 4 5 -24 -6 9 0
+# -3 -24 -6
+# 5 4 4 5 9 0
+# 5 4 4 5
+
+
+def filter_lst(it, key=None): #TODO
+    if key is None:
+        return tuple(it)
+
+    res = ()
+    for x in it:
+        if key(x):
+            res += (x,)
+
+    return res
+
+# здесь продолжайте программу
+lst = [5, 4, -3, 4, 5, -24, -6, 9, 0]
+print(filter_lst(lst))
+
+
+# lst_in = [1, 2, 3, 4, 5, 6]
+
+# print([j for i in lst_in if (j := cube(i)) < 20])
+
 
 
 
