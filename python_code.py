@@ -2869,7 +2869,7 @@
 #     Проверяет корректность введённого целого числа от 1 до right_side
 #     включительно.
 #     """
-#     return num.isdigit() and int(num) in range(1, int(right_side) + 1)
+#     return num.isdigit() and int(num) in range(1, right_side + 1)
 
 
 # def check_num(num: int, rand_num: int) -> tuple:
@@ -3019,7 +3019,7 @@
 # 5 4 4 5
 
 
-def filter_lst(it, key=None): #TODO
+def filter_lst(it, key=None):
     if key is None:
         return tuple(it)
 
@@ -3030,15 +3030,22 @@ def filter_lst(it, key=None): #TODO
 
     return res
 
-# здесь продолжайте программу
-lst = [5, 4, -3, 4, 5, -24, -6, 9, 0]
-print(filter_lst(lst))
+
+# # здесь продолжайте программу
+# lst_in = list(map(int, input().split()))
+# lambda_key = [None, lambda x: x < 0, lambda x: x >= 0, lambda x: 3 <= x <= 5]
+
+# for value in lambda_key:
+#     print(*filter_lst(lst_in, value))
 
 
-# lst_in = [1, 2, 3, 4, 5, 6]
+# print([j for i in lst_in if (j := filter_lst(lst_in))])
+def cube(num):
+    return num ** 2
 
-# print([j for i in lst_in if (j := cube(i)) < 20])
 
+lst_in = [5, 4, -3, 4, 5, -24, -6, 9, 0]
+print([j for j in (j := cube(lst_in)) ])
 
 
 
