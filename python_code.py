@@ -3205,18 +3205,49 @@
 # 12
 
 
-def counter_add(value):
+# def counter_add(value):
 
-    def add(inpt_num):
-        return value + inpt_num
+#     def add(inpt_num):
+#         return value + inpt_num
 
-    return add
+#     return add
 
 
-cnt = counter_add(5)
-k = int(input())
+# cnt = counter_add(5)
+# k = int(input())
 
-print(cnt(k))
+# print(cnt(k))
+
+
+####################################
+# Используя замыкания функций, объявите внутреннюю функцию, которая
+# заключает в тег h1 строку s (s - строка, параметр внутренней функции).
+# Далее, на вход программы поступает строка и ее нужно поместить в тег
+# h1 с помощью реализованного замыкания. Результат выведите на экран.
+
+# P. S. Пример добавления тега h1 к строке "Python": <h1>Python</h1>
+
+# Sample Input:
+# Balakirev
+
+# Sample Output:
+# <h1>Balakirev</h1>
+
+
+def get_tag(tag: str = 'h1') -> callable:
+    """Wrap to closure."""
+
+    def set_tag(string: str) -> str:
+        """Enclose string with specified tag."""
+        return f'<{tag}>{string}</{tag}>'
+
+    return set_tag
+
+
+# string_tag_foo = get_tag()  # <h1></h1>
+# # string_tag_foo = get_tag(tag='div')  # <div></div>
+# print(string_tag_foo(input()))
+print(string_tag_foo := get_tag('h3')(input()))
 
 
 # print()
