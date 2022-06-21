@@ -3166,20 +3166,57 @@
 # print("Умножение 3 на 15 =", f_3(15)) #45
 
 
-def multiply(value):
+# def multiply(value):
 
-    def init(inpt_num):
-        return value * inpt_num
+#     def init(inpt_num):
+#         return value * inpt_num
 
-    return init
+#     return init
 
 
-f_2 = multiply(2)
-print("Умножение 2 на 5 =", f_2(5))
-print("Умножение 2 на 15 =", f_2(15))
-f_3 = multiply(3)
-print("Умножение 3 на 5 =", f_3(5))
-print("Умножение 3 на 15 =", f_3(15))
+# f_2 = multiply(2)
+# print("Умножение 2 на 5 =", f_2(5))
+# print("Умножение 2 на 15 =", f_2(15))
+# f_3 = multiply(3)
+# print("Умножение 3 на 5 =", f_3(5))
+# print("Умножение 3 на 15 =", f_3(15))
+
+
+####################################
+# Используя замыкания функций, определите вложенную функцию, которая бы
+# увеличивала значение переданного параметра на 5 и возвращала бы
+# вычисленный результат. При этом внешняя функция должна иметь следующую
+# сигнатуру:
+
+# def counter_add(): ...
+
+# Вызовите функцию counter_add и результат ее работы присвойте
+# переменной с именем cnt. Вызовите внутреннюю функцию через переменную
+# cnt со значением k, введенным с клавиатуры:
+
+# k = int(input())
+
+# Выведите результат на экран.
+
+# Sample Input:
+# 7
+
+# Sample Output:
+# 12
+
+
+def counter_add(value):
+
+    def add(inpt_num):
+        return value + inpt_num
+
+    return add
+
+
+cnt = counter_add(5)
+k = int(input())
+
+print(cnt(k))
 
 
 # print()
