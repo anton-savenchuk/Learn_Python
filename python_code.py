@@ -3199,88 +3199,88 @@
 
 # Используя цикл for, сгенерируйте необходимое количество паролей.
 
-from random import sample
+# from random import sample
 
 
-digits = '0123456789'
-lowercase_letters = 'abcdefghijklmnopqrstuvwxyz'
-uppercase_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-punctuation = '!#$%&*+-=?@^_.'
+# digits = '0123456789'
+# lowercase_letters = 'abcdefghijklmnopqrstuvwxyz'
+# uppercase_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+# punctuation = '!#$%&*+-=?@^_.'
 
 
-def is_valid_answer(string: str) -> bool:
-    """Check user answer."""
-    while True:
-        ans = input(string)
-        if ans.lower() in {'да', 'д', 'yes', 'y'}:
-            return True
-        elif ans.lower() in {'нет', 'н', 'no', 'n'}:
-            return False
-        else:
-            print('\nНе понял, попробуй еще раз.')
+# def is_valid_answer(string: str) -> bool:
+#     """Check user answer."""
+#     while True:
+#         ans = input(string)
+#         if ans.lower() in {'да', 'д', 'yes', 'y'}:
+#             return True
+#         elif ans.lower() in {'нет', 'н', 'no', 'n'}:
+#             return False
+#         else:
+#             print('\nНе понял, попробуй еще раз.')
 
 
-def is_digit(string: str) -> bool:
-    """Check it digit."""
-    while True:
-        ans = input(string)
-        if ans.isdigit() and ans != '0':
-            return int(ans)
-        else:
-            print('\nНе понял, попробуй еще раз.')
+# def is_digit(string: str) -> bool:
+#     """Check it digit."""
+#     while True:
+#         ans = input(string)
+#         if ans.isdigit() and ans != '0':
+#             return int(ans)
+#         else:
+#             print('\nНе понял, попробуй еще раз.')
 
 
-def is_replace(string: str) -> str:
-    """Replace ambiguous symbols."""
-    for symbol in 'il1Lo0O':
-        if symbol in string:
-            string = string.replace(symbol, '')
+# def is_replace(string: str) -> str:
+#     """Replace ambiguous symbols."""
+#     for symbol in 'il1Lo0O':
+#         if symbol in string:
+#             string = string.replace(symbol, '')
 
-    return string
-
-
-def generate_password(string: str, lenght: int) -> str:
-    """Generate user password."""
-    return ''.join(sample(string, lenght))
+#     return string
 
 
-def get_password():
-    """Generate the specified number of passwords.
-
-    Includes a smart setting for the length of the password, which
-    characters include in it, and which ones to exclude.
-    """
-    chars = ''
-
-    quantity_pass = is_digit('Количество паролей для генерации?:\n')
-    lenght_pass = is_digit('\nМинимальная длина одного пароля?:\n')
-
-    if is_valid_answer('\nИспользовать цифры 0123456789? (Да/Нет):\n') is True:
-        chars += digits
-
-    if is_valid_answer('\nИспользовать прописные буквы ABCD...YZ? (Да/Нет):\n') is True:
-        chars += uppercase_letters
-
-    if is_valid_answer('\nИспользовать строчные буквы abcd...yz? (Да/Нет):\n') is True:
-        chars += lowercase_letters
-
-    if is_valid_answer('\nИспользовать символы !#$%&*+-=?@^_? (Да/Нет):\n') is True:
-        chars += punctuation
-
-    if is_valid_answer('\nУбрать неоднозначные символы il1Lo0O? (Да/Нет):\n') is True:
-        chars = is_replace(chars)
-
-    if len(chars) == 0:
-        return '\nПустой пароль не самый надёжный!'
-
-    print()
-    for _ in range(quantity_pass):
-        print(generate_password(chars, lenght_pass))
-
-    return '\nВозвращайся, если нужны ещё пароли.'
+# def generate_password(string: str, lenght: int) -> str:
+#     """Generate user password."""
+#     return ''.join(sample(string, lenght))
 
 
-print(get_password())
+# def get_password():
+#     """Generate the specified number of passwords.
+
+#     Includes a smart setting for the length of the password, which
+#     characters include in it, and which ones to exclude.
+#     """
+#     chars = ''
+
+#     quantity_pass = is_digit('Количество паролей для генерации?:\n')
+#     lenght_pass = is_digit('\nМинимальная длина одного пароля?:\n')
+
+#     if is_valid_answer('\nИспользовать цифры 0123456789? (Да/Нет):\n') is True:
+#         chars += digits
+
+#     if is_valid_answer('\nИспользовать прописные буквы ABCD...YZ? (Да/Нет):\n') is True:
+#         chars += uppercase_letters
+
+#     if is_valid_answer('\nИспользовать строчные буквы abcd...yz? (Да/Нет):\n') is True:
+#         chars += lowercase_letters
+
+#     if is_valid_answer('\nИспользовать символы !#$%&*+-=?@^_? (Да/Нет):\n') is True:
+#         chars += punctuation
+
+#     if is_valid_answer('\nУбрать неоднозначные символы il1Lo0O? (Да/Нет):\n') is True:
+#         chars = is_replace(chars)
+
+#     if len(chars) == 0:
+#         return '\nПустой пароль не самый надёжный!'
+
+#     print()
+#     for _ in range(quantity_pass):
+#         print(generate_password(chars, lenght_pass))
+
+#     return '\nВозвращайся, если нужны ещё пароли.'
+
+
+# print(get_password())
 
 ####################################
 # Ваша задача создать функцию multiply, которая принимает один аргумент.
@@ -3418,6 +3418,34 @@ print(get_password())
 # string_type_foo = get_type(input())
 # lst = string_type_foo(input())
 # print(lst)
+
+
+####################################
+# Шифр Цезаря  #TODO
+
+# Шифр Цезаря (шифр сдвига) — один из самых простых и наиболее широко
+# известных методов шифрования. Шифр Цезаря — это вид шифра подстановки,
+# в котором каждый символ в открытом тексте заменяется символом,
+# находящимся на некотором постоянном числе позиций левее или правее
+# него в алфавите.
+
+# Шифр подстановки — метод шифрования с заменой элементов исходного
+# открытого текста другими, в соответствии с неким правилом.
+
+# Например, в шифре со сдвигом вправо на 3 позиции символ A заменяется
+# символом D, символ B — символом E, и так далее, до символа Z,
+# заменяемого символом C.
+
+# Шифр Цезаря легко взламывается и не имеет почти никакого практического
+# применения.
+# Математическая модель
+
+# Если сопоставить каждый символ алфавита с его порядковым номером
+# (нумеруя с 0), то шифрование и дешифрование можно выразить формулами
+# модульной арифметики:
+
+
+
 
 # print()
 # print(time.perf_counter() - start)
