@@ -3146,13 +3146,6 @@
 # print(magic_ball8())
 
 
-#######################################################################
-# Замыкания
-#
-# Замыкание (closure) в программировании - это функция, в теле которой
-# присутствуют ссылки на переменные, объявленные вне тела этой функции в
-# окружающем коде и не являющиеся ее параметрами.
-
 ####################################
 # Ваша задача создать функцию multiply, которая принимает один аргумент.
 # Функция должна запомнить это значение, и вернуть результат умножения
@@ -3234,21 +3227,61 @@
 # <h1>Balakirev</h1>
 
 
-def get_tag(tag: str = 'h1') -> callable:
+# def get_tag(tag: str = 'h1') -> callable:
+#     """Wrap to closure."""
+
+#     def set_tag(string: str) -> str:
+#         """Enclose string with specified tag."""
+#         return f'<{tag}>{string}</{tag}>'
+
+#     return set_tag
+
+
+# # string_tag_foo = get_tag()  # <h1></h1>
+# # # string_tag_foo = get_tag(tag='div')  # <div></div>
+# # print(string_tag_foo(input()))
+# print(string_tag_foo := get_tag('h3')(input()))
+
+
+####################################
+# Используя замыкания функций, объявите внутреннюю функцию, которая
+# преобразует строку из списка целых чисел, записанных через пробел,
+# либо в список, либо в кортеж. Тип коллекции определяется параметром tp
+# внешней функции. Если tp = 'list', то используется список, иначе
+# (при другом значении) - кортеж.
+
+# Далее, на вход программы поступают две строки: первая - это значение
+# для параметра tp; вторая - список целых чисел, записанных через
+# пробел. С помощью реализованного замыкания преобразовать эти данные в
+# соответствующую коллекцию. Результат вывести на экран командой
+# (lst - ссылка на коллекцию):
+
+# print(lst)
+
+# Sample Input:
+# list
+# -5 6 8 11 0 111 -456 3
+
+# Sample Output:
+# [-5, 6, 8, 11, 0, 111, -456, 3]
+
+
+def get_type(tp: str = 'list') -> callable:
     """Wrap to closure."""
 
-    def set_tag(string: str) -> str:
-        """Enclose string with specified tag."""
-        return f'<{tag}>{string}</{tag}>'
+    def set_type(string: str) -> list or tuple:
+        """Convert a string from a list of integers.
 
-    return set_tag
+        To a list or tuple, depending on the tp argument.
+        """
+        return (tuple, list)[tp == 'list'](map(int, string.split()))
+
+    return set_type
 
 
-# string_tag_foo = get_tag()  # <h1></h1>
-# # string_tag_foo = get_tag(tag='div')  # <div></div>
-# print(string_tag_foo(input()))
-print(string_tag_foo := get_tag('h3')(input()))
-
+string_type_foo = get_type(input())
+lst = string_type_foo(input())
+print(lst)
 
 # print()
 # print(time.perf_counter() - start)
