@@ -1,5 +1,5 @@
 ####################################
-# Шифр Цезаря  #TODO
+# Шифр Цезаря  # TODO
 
 # Шифр Цезаря (шифр сдвига) — один из самых простых и наиболее широко
 # известных методов шифрования. Шифр Цезаря — это вид шифра подстановки,
@@ -75,9 +75,108 @@
 #     Условный оператор (if/elif/else);
 #     Цикл for/while;
 #     Строковые методы.
+#
+####################################
 
-import random
+eng_alphabet = "abcdefghijklmnopqrstuvwxyz"
+rus_alphabet = "абвгдежзийклмнопрстуфхцчшщъыьэюя"
+
+
+def is_encryption(string: str) -> bool:
+    """Determine what needs to be done."""
+    while True:
+        ans = input(string)
+        if ans.lower() in {"шифрование", "ш", "encryption", "e"}:
+            return True
+        elif ans.lower() in {"дешифрование", "д", "decryption", "d"}:
+            return False
+        else:
+            print("\nНе понял, попробуй еще раз.")
+
+
+def is_language(string: str) -> str:
+    """Determine which alphabet to work with."""
+    while True:
+        ans = input(string)
+        if ans.lower() in {"английский", "анг", "а", "english", "eng", "e"}:
+            return eng_alphabet
+        elif ans.lower() in {"русский", "рус", "р", "russian", "rus", "r"}:
+            return rus_alphabet
+        else:
+            print("\nНе понял, попробуй еще раз.")
+
+
+def is_route(string: str) -> bool:
+    """Determine the direction of the alphabet."""
+    while True:
+        ans = input(string)
+        if ans.lower() in {"влево", "лево", "л", "left", "l"}:
+            return True
+        elif ans.lower() in {"вправо", "право", "п", "right", "r"}:
+            return False
+        else:
+            print("\nНе понял, попробуй еще раз.")
+
+
+def is_digit(string: str) -> bool:
+    """Check it digit."""
+    while True:
+        ans = input(string)
+        if ans.isdigit() and ans != "0":
+            return int(ans)
+        else:
+            print("\nНе понял, попробуй еще раз.")
+
+
+def get_encryption(row_string: str, key: int, alphabet: str) -> str:
+    """Encrypt or decrypt the string using the key."""
+    string_encryption = ""
+    for letr in range(len(row_string)):
+        if row_string[letr].isalpha():
+            temp_letr = alphabet[alphabet.find(row_string[letr].lower()) - key]
+            string_encryption += (
+                temp_letr if row_string[letr].islower() else temp_letr.upper()
+            )
+        else:
+            string_encryption += row_string[letr]
+
+    return string_encryption
+
+
+def caesars_cipher():
+    """Encrypt by substitution - replace the elements of a string with a shift.
+
+    A type of substitution cipher in which each character in the
+    plaintext is replaced by a character located some constant number of
+    positions to the left or right of it in the alphabet.
+    """
+    route = (
+        "encrypt"
+        if is_encryption("\nШифруем или дешифруем? (Ш/Д):\n")
+        else "decrypt"
+    )
+
+    alphabet = is_language("\nЯзык русский или английский? (Р/А):\n")
+
+    key = is_digit("\nШаг сдвига? (целое число):\n")
+
+    if route == "encrypt":  # redefine the direction of the alphabet
+        alphabet = (
+            alphabet
+            if is_route("\nСдвигаем вправо или влево? (П/Л):\n")
+            else alphabet[::-1]
+        )
+    else:
+        alphabet = (
+            alphabet[::-1]
+            if is_route("\nСдвигаем вправо или влево? (П/Л):\n")
+            else alphabet
+        )
+
+    row_string = input("\nВведите строку которую необходимо обработать:\n")
+    print("\nРезультат выполнения операции:")
+    return get_encryption(row_string, key, alphabet)
 
 
 if __name__ == "__main__":
-    pass
+    print(caesars_cipher())
