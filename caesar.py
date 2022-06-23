@@ -1,5 +1,5 @@
 ####################################
-# Шифр Цезаря  # TODO
+# Шифр Цезаря
 
 # Шифр Цезаря (шифр сдвига) — один из самых простых и наиболее широко
 # известных методов шифрования. Шифр Цезаря — это вид шифра подстановки,
@@ -82,14 +82,14 @@ eng_alphabet = "abcdefghijklmnopqrstuvwxyz"
 rus_alphabet = "абвгдежзийклмнопрстуфхцчшщъыьэюя"
 
 
-def is_encryption(string: str) -> bool:
+def is_encryption(string: str) -> str:
     """Determine what needs to be done."""
     while True:
         ans = input(string)
-        if ans.lower() in {"шифрование", "ш", "encryption", "e"}:
-            return True
-        elif ans.lower() in {"дешифрование", "д", "decryption", "d"}:
-            return False
+        if ans.lower() in {"шифрование", "ш", "encryption", "encrypt", "e"}:
+            return "encrypt"
+        elif ans.lower() in {"дешифрование", "д", "decryption", "decrypt", "d"}:
+            return "decrypt"
         else:
             print("\nНе понял, попробуй еще раз.")
 
@@ -106,19 +106,19 @@ def is_language(string: str) -> str:
             print("\nНе понял, попробуй еще раз.")
 
 
-def is_route(string: str) -> bool:
+def is_route(string: str) -> str:
     """Determine the direction of the alphabet."""
     while True:
         ans = input(string)
         if ans.lower() in {"влево", "лево", "л", "left", "l"}:
-            return True
+            return "left"
         elif ans.lower() in {"вправо", "право", "п", "right", "r"}:
-            return False
+            return "right"
         else:
             print("\nНе понял, попробуй еще раз.")
 
 
-def is_digit(string: str) -> bool:
+def is_digit(string: str) -> int:
     """Check it digit."""
     while True:
         ans = input(string)
@@ -126,6 +126,19 @@ def is_digit(string: str) -> bool:
             return int(ans)
         else:
             print("\nНе понял, попробуй еще раз.")
+
+
+def get_alphabet(alphabet: str, encryption: str, route: str) -> str:
+    """Determine the direction of the alphabet."""
+    if (
+        encryption == "encrypt"
+        and route == "left"
+        or encryption == "decrypt"
+        and route == "right"
+    ):
+        return alphabet
+    else:
+        return alphabet[::-1]
 
 
 def get_encryption(row_string: str, key: int, alphabet: str) -> str:
@@ -150,28 +163,16 @@ def caesars_cipher():
     plaintext is replaced by a character located some constant number of
     positions to the left or right of it in the alphabet.
     """
-    route = (
-        "encrypt"
-        if is_encryption("\nШифруем или дешифруем? (Ш/Д):\n")
-        else "decrypt"
-    )
+    encryption = is_encryption("\nШифруем или дешифруем? (Ш/Д):\n")
 
     alphabet = is_language("\nЯзык русский или английский? (Р/А):\n")
 
     key = is_digit("\nШаг сдвига? (целое число):\n")
 
-    if route == "encrypt":  # redefine the direction of the alphabet
-        alphabet = (
-            alphabet
-            if is_route("\nСдвигаем вправо или влево? (П/Л):\n")
-            else alphabet[::-1]
-        )
-    else:
-        alphabet = (
-            alphabet[::-1]
-            if is_route("\nСдвигаем вправо или влево? (П/Л):\n")
-            else alphabet
-        )
+    route = is_route("\nСдвигаем вправо или влево? (П/Л):\n")
+
+    # redefine the direction of the alphabet
+    alphabet = get_alphabet(alphabet, encryption, route)
 
     row_string = input("\nВведите строку которую необходимо обработать:\n")
     print("\nРезультат выполнения операции:")

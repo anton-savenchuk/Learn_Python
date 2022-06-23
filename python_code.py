@@ -3450,12 +3450,25 @@
 # Sample Output 2:
 # oa reqi ku Veznut!
 
-import caesars
+import caesar
+
+
+def ave_caesar(row_lst: list) -> str:
+    """Encrypt a list of words.
+
+    Each word is encrypted with a shift equal to the length of the word.
+    """
+    string_encryption = ""
+    alphabet = caesar.get_alphabet(caesar.eng_alphabet, "encrypt", "right")
+    for word in row_lst:
+        key = len(word.strip(':"!?,.').replace("'", ""))
+        string_encryption += f"{caesar.get_encryption(word, key, alphabet)} "
+
+    return string_encryption
+
 
 row_lst = input().split()
-
-print(row_lst)
-
+print(ave_caesar(row_lst))
 
 # print()
 # print(time.perf_counter() - start)
