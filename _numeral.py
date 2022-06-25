@@ -209,7 +209,7 @@ def get_from_decimal(num: int, represent: int) -> str:
     return number
 
 
-def get_decimal(num: str, base: int) -> str:
+def get_decimal(num: str, base: int) -> int:
     """Return representation to an integer."""
     eng = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     tmp_base = len(num) - 1
