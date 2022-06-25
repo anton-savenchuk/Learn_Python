@@ -3450,25 +3450,68 @@
 # Sample Output 2:
 # oa reqi ku Veznut!
 
-import caesar
+# import _caesar
 
 
-def ave_caesar(row_lst: list) -> str:
-    """Encrypt a list of words.
+# def ave_caesar(row_lst: list) -> str:
+#     """Encrypt a list of words.
 
-    Each word is encrypted with a shift equal to the length of the word.
-    """
-    string_encryption = ""
-    alphabet = caesar.get_alphabet(caesar.eng_alphabet, "encrypt", "right")
-    for word in row_lst:
-        key = len(word.strip(':"!?,.').replace("'", ""))
-        string_encryption += f"{caesar.get_encryption(word, key, alphabet)} "
+#     Each word is encrypted with a shift equal to the length of the word.
+#     """
+#     string_encryption = ""
+#     alphabet = caesar.get_alphabet(caesar.eng_alphabet, "encrypt", "right")
+#     for word in row_lst:
+#         key = len(word.strip(':"!?,.').replace("'", ""))
+#         string_encryption += f"{caesar.get_encryption(word, key, alphabet)} "
 
-    return string_encryption
+#     return string_encryption
 
 
-row_lst = input().split()
-print(ave_caesar(row_lst))
+# row_lst = input().split()
+# print(ave_caesar(row_lst))
+
+
+####################################
+# BOH
+
+# На вход программе подается натуральное число в десятичной системе
+# счисления. Напишите программу, которая переводит его в двоичную,
+# восьмеричную и шестнадцатеричную системы счисления.
+
+# Формат входных данных:
+# На вход программе подается натуральное число.
+
+# Формат выходных данных
+# Программа должна вывести текст в соответствии с условием задачи.
+
+# Примечание 1. Используйте встроенные функции bin(), oct(), hex().
+
+# Примечание 2. Для шестнадцатеричной системы счисления используйте
+# заглавные буквы A, B, C, D, E, F.
+
+# Примечание 3. BOH = Binary, Octal, Hex.
+
+# Sample Input 1:
+# 10
+
+# Sample Output 1:
+# 1010
+# 12
+# A
+
+# Sample Input 2:
+# 128
+
+# Sample Output 2:
+# 10000000
+# 200
+# 80
+
+num = int(input())
+
+for i in range(3):
+    print((bin, oct, hex)[i](num)[2:].upper())
+
 
 # print()
 # print(time.perf_counter() - start)
