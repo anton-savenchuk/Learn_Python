@@ -197,28 +197,28 @@ W=32, X=33, Y=34, Z=35
 """
 
 
-def get_from_decimal(num: int, to_base: int) -> str:
-    """Convert number ``from`` decimal number system by base."""
+def get_from_decimal(num: int, represent: int) -> str:
+    """Return representation from an integer."""
+    eng = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     number = ""
     while num > 0:
-        number = str(num % to_base) + number
-        num //= to_base
+        last = num % represent
+        number = eng[last - 10] + number if last >= 10 else str(last) + number
+        num //= represent
 
     return number
 
 
-def get_in_decimal(num: str, from_base: int) -> int:
-    """Convert number ``to`` decimal number system by base."""
-    num_base = len(num) - 1
+def get_decimal(num: str, base: int) -> str:
+    """Return representation to an integer."""
+    eng = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    tmp_base = len(num) - 1
     number = 0
     for i in num:
-        number += (int(i) * from_base)**num_base
-        num_base -= 1
+        if i.isalpha():
+            number += (eng.index(i) + 10) * base**tmp_base
+        else:
+            number += int(i) * base**tmp_base
+        tmp_base -= 1
+
     return int(number)
-
-
-num = "110101"
-print(get_in_decimal(num, from_base=2))
-
-num = 53
-print(get_from_decimal(num, to_base=2))
