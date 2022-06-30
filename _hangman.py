@@ -376,7 +376,8 @@ def get_play() -> tuple:
     _scrt_word, _closed_ltrs, _used_ltrs, _promt = get_word(_theme, _level)
     _tries = 3 if _level in {"low", "medium"} else 6  # total tries
 
-    print(f"\033[0;0;96m\nУ тебя {_tries} попыток, отгадай слово!\033[0;0m")
+    _case = "попыт" + ("ки", "ок")[_tries == 6]
+    print(f"\033[0;0;96m\nУ тебя {_tries} {_case}, отгадай слово!\033[0;0m")
 
     while True:
         _lives = get_lives(_tries, _level)
