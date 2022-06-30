@@ -125,6 +125,19 @@ word_list = {
     ),
 }
 
+themes = {
+    "Животные": "animal",
+    "Здания": "building",
+    "Города": "cities",
+    "Цвета": "color",
+    "Еда": "food",
+    "Дом": "home",
+    "Работа": "job",
+    "Природа": "nature",
+    "Спорт": "sport",
+    "Транспорт": "transport",
+}
+
 messages = {
     "need_ltr":     "\033[0;0;94m\nНужна буква русского алфавита.\033[0;0m",
     "used_ltr":     "\033[0;0;93mТакая буква уже была!\n\033[0;0m",
@@ -138,6 +151,7 @@ messages = {
     "user_win":     "\033[32;1;42m   Вы выиграли, поздравляю!   \033[0;0m",
     "user_lose":    "\033[31;1;41m   Вы проиграли!   \033[0;0m",
     "secret_word":  "\033[0;0;95mЗАГАДАННЫМ СЛОВОМ, БЫЛО:\033[0;0m",
+    "theme":        "\033[0;0;33mТЕМА:\033[0;0m",
     "promt":        "\033[0;0;96mПОДСКАЗКА:\033[0;0m",
     "try_again":    "\033[0;0;94mНе понял, попробуй еще раз.\033[0;0m",
     "select_theme": "\033[0;0;95m\nВыбери тему, я загадаю слово:\033[0;0m",
@@ -148,24 +162,11 @@ messages = {
 
 def get_theme(_question: str) -> str:
     """Define question theme."""
-    _themes = {
-        "Животные": "animal",
-        "Здания": "building",
-        "Города": "cities",
-        "Цвета": "color",
-        "Еда": "food",
-        "Дом": "home",
-        "Работа": "job",
-        "Природа": "nature",
-        "Спорт": "sport",
-        "Транспорт": "transport",
-    }
-
     while True:
-        _theme = input(f"{_question}\n{', '.join(_themes.keys())}\n").title()
+        _theme = input(f"{_question}\n{', '.join(themes.keys())}\n").title()
 
-        if _theme in _themes:
-            return _themes[_theme]
+        if _theme in themes:
+            return themes[_theme]
         else:
             print(messages["try_again"])
 
@@ -213,9 +214,14 @@ def get_promt(_scrt_word: str, _promt=None) -> list:
     return _used_ltrs
 
 
-def get_word(_theme: str, _level: str) -> tuple:
+def get_word(_theme: str, _level: str, dropout_word: list) -> tuple:
     """Get random word by key "theme"."""
-    _scrt_word = choice(word_list.get(_theme)).upper()
+    _scrt_word = None
+    while isinstance(_scrt_word, type(None)):
+        _word = choice(word_list.get(_theme))
+        if _word not in dropout_word:
+            _scrt_word = _word.upper()
+
     _closed_ltrs = " * " * len(_scrt_word)
 
     if _level == "low":
@@ -346,6 +352,7 @@ def get_game_stats(
     _lives: str,
     _used_ltrs: list,
     _used_words: list,
+    _theme: str,
     _promt: str,
 ):
     """Display the current state game."""
@@ -353,7 +360,9 @@ def get_game_stats(
 
     _used_ltrs = ", ".join(_used_ltrs)
     _used_words = ", ".join(_used_words)
+    _theme = list(themes.keys())[list(themes.values()).index(_theme)]
 
+    print(messages["theme"], _theme)
     print(f"+{'-' * _len_word}+")
     print(f"|{_closed_ltrs}|   ПОПЫТКИ: {_lives}")
     print(f"+{'-' * _len_word}+")
@@ -365,7 +374,7 @@ def get_game_stats(
         print(messages["promt"], _promt, "(отгадай слово)")
 
 
-def get_play() -> tuple:
+def get_play(dropout_word: list) -> tuple:
     """Play the game.
 
     The main part of the module.
@@ -373,7 +382,9 @@ def get_play() -> tuple:
     _theme = get_theme(messages["select_theme"])
     _level = get_level(messages["select_level"])
     _used_words = []
-    _scrt_word, _closed_ltrs, _used_ltrs, _promt = get_word(_theme, _level)
+    _scrt_word, _closed_ltrs, _used_ltrs, _promt = get_word(
+        _theme, _level, dropout_word
+    )
     _tries = 3 if _level in {"low", "medium"} else 6  # total tries
 
     _case = "попыт" + ("ки", "ок")[_tries == 6]
@@ -381,7 +392,7 @@ def get_play() -> tuple:
 
     while True:
         _lives = get_lives(_tries, _level)
-        get_game_stats(_closed_ltrs, _lives, _used_ltrs, _used_words, _promt)
+        get_game_stats(_closed_ltrs, _lives, _used_ltrs, _used_words, _theme, _promt)
 
         _usr_ans = is_valid_alpha(messages["user_input"]).upper()
 
@@ -405,7 +416,9 @@ def get_play() -> tuple:
             or "".join(_closed_ltrs.split()) == _scrt_word
         ):
             _lives = get_lives(_tries, _level)
-            get_game_stats(_closed_ltrs, _lives, _used_ltrs, _used_words, _promt)
+            get_game_stats(
+                _closed_ltrs, _lives, _used_ltrs, _used_words, _theme, _promt
+            )
             return (True, False)[_tries == 0], _scrt_word  # user win / lose
 
         continue
@@ -420,8 +433,9 @@ def is_game():
 
     print(f"\nПривет {_usr_name.title()}, давай играть в угадайку слов!")
 
+    dropout_word = []  # list dropout word after game
     while True:
-        _bool, _scrt_word = get_play()  # get game result
+        _bool, _scrt_word = get_play(dropout_word)  # get game result
 
         if _bool is True:
             print()
@@ -430,6 +444,8 @@ def is_game():
             print()
             print(messages["user_lose"])
             print(messages["secret_word"], _scrt_word)
+
+        dropout_word.append(_scrt_word)
 
         if is_valid_answer("\nСыграем ещё? (Да/нет):\n") is True:
             continue
