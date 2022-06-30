@@ -399,10 +399,11 @@ def get_play() -> tuple:
                 _scrt_word, _usr_ans, _closed_ltrs, _used_ltrs, _used_words, _tries
             )
 
-        if _tries == 0 or (
-            _usr_ans == _scrt_word or "".join(_closed_ltrs.split()) == _scrt_word
+        if (
+            _tries == 0
+            or _usr_ans == _scrt_word
+            or "".join(_closed_ltrs.split()) == _scrt_word
         ):
-
             _lives = get_lives(_tries, _level)
             get_game_stats(_closed_ltrs, _lives, _used_ltrs, _used_words, _promt)
             return (True, False)[_tries == 0], _scrt_word  # user win / lose
