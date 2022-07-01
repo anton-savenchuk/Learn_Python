@@ -203,6 +203,7 @@ def get_promt(_scrt_word: str, _promt=None) -> list:
             for ltr in choice(_scrt_word)
             if ltr not in _used_ltrs and _scrt_word.count(ltr) == 1
         ]
+
     else:
         while len(_used_ltrs) != 2:
             [
