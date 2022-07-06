@@ -446,7 +446,7 @@ def is_game():
             print(messages["user_lose"])
             print(messages["secret_word"], _scrt_word)
 
-        dropout_word.append(_scrt_word)
+        dropout_word.append(_scrt_word.title())
 
         if is_valid_answer("\nСыграем ещё? (Да/нет):\n") is True:
             continue
