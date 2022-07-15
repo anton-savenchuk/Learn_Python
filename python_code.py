@@ -3647,22 +3647,101 @@
 # Sample Output 3:
 # 1
 
-n = int(input())
+# n = int(input())
 
-fridge_nums: list = []
-AI_name = "anton"
-for num in range(1, n + 1):
-    fridge, index = input(), 0
+# fridge_nums: list = []
+# AI_name = "anton"
+# for num in range(1, n + 1):
+#     fridge, index = input(), 0
 
-    for smbl in fridge:
-        if smbl == AI_name[index]:
-            index += 1
+#     for smbl in fridge:
+#         if smbl == AI_name[index]:
+#             index += 1
 
-        if index == len(AI_name):
-            fridge_nums.append(num)
-            break
+#         if index == len(AI_name):
+#             fridge_nums.append(num)
+#             break
 
-print(*fridge_nums)
+# print(*fridge_nums)
+
+
+####################################
+# Почти палиндром
+
+# Назовем строку текста «почти палиндромом», если найдется такой
+# буквенный символ, при удалении которого строка станет палиндромом.
+# При этом все символы, кроме букв, должны игнорироваться.
+
+# Напишите программу, которая определяет, является ли строка «почти
+# палиндромом».
+
+# Формат входных данных
+# На вход программе подается строка текста, состоящая только из букв
+# латинского алфавита в нижнем регистре, цифр и символов
+# !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~. Длина строки не превышает 300000
+# символов. Гарантируется, что строка содержит как минимум две буквы.
+
+# Формат выходных данных
+# Программа должна вывести True, если введенная строка является «почти
+# палиндромом», или False в противном случае.
+
+# Примечание 1. Палиндром читается одинаково в обоих направлениях,
+# например слово «rotavator».
+
+# Sample Input 1:
+# 1kilg%rli8k
+
+# Sample Output 1:
+# True
+
+# Sample Input 2:
+# kkkkkkkkkee
+
+# Sample Output 2:
+# False
+
+# Sample Input 3:
+# #14&*@(a)!(@14112)!@$)!@*$!*a)$*099
+
+# Sample Output 3:
+# True
+
+# Sample Input 4:
+# ekkkkkkkkkkkkkkkkkkkkkk
+
+# Sample Output 4:
+# True
+
+
+def get_clean(string: str) -> str:
+    """Strip a string of special characters."""
+    spec_chars = "0123456789!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
+
+    for i in range(len(spec_chars) // 2):
+        if string.isalpha():
+            return string
+        string = string.replace(spec_chars[i], "")
+        string = string.replace(spec_chars[-i-1], "")
+
+    return string
+
+
+def is_palindrome(string: str) -> bool:
+    """Check if a string is a palindrome without one character."""
+    for i in range(len(string) // 2 + 1):
+        if string[i] == string[-i-1]:
+            continue
+
+        _string_1 = string[i:-i-1]
+        _string_2 = string[i+1:]
+
+        return _string_1 == _string_1[::-1] or _string_2 == _string_2[::-1]
+
+    return True
+
+
+string = input()
+print(is_palindrome(get_clean(string)))
 
 
 
