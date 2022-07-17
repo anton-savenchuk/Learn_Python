@@ -3713,37 +3713,135 @@
 # True
 
 
-def get_clean(string: str) -> str:
-    """Strip a string of special characters."""
-    spec_chars = "0123456789!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
+# def get_clean(string: str) -> str:
+#     """Strip a string of special characters."""
+#     spec_chars = "0123456789!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
 
-    for i in range(len(spec_chars) // 2):
-        if string.isalpha():
-            return string
-        string = string.replace(spec_chars[i], "")
-        string = string.replace(spec_chars[-i-1], "")
+#     for i in range(len(spec_chars) // 2):
+#         if string.isalpha():
+#             return string
+#         string = string.replace(spec_chars[i], "")
+#         string = string.replace(spec_chars[-i - 1], "")
 
-    return string
-
-
-def is_palindrome(string: str) -> bool:
-    """Check if a string is a palindrome without one character."""
-    for i in range(len(string) // 2 + 1):
-        if string[i] == string[-i-1]:
-            continue
-
-        _string_1 = string[i:-i-1]
-        _string_2 = string[i+1:]
-
-        return _string_1 == _string_1[::-1] or _string_2 == _string_2[::-1]
-
-    return True
+#     return string
 
 
-string = input()
-print(is_palindrome(get_clean(string)))
+# def is_palindrome(string: str) -> bool:
+#     """Check if a string is a palindrome without one character."""
+#     for i in range(len(string) // 2 + 1):
+#         if string[i] == string[-i - 1]:
+#             continue
+
+#         _string_1 = string[i: -i - 1]
+#         _string_2 = string[i + 1:]
+
+#         return _string_1 == _string_1[::-1] or _string_2 == _string_2[::-1]
+
+#     return True
 
 
+# string = input()
+# print(is_palindrome(get_clean(string)))
+
+
+####################################
+# Огородный покер
+
+# Напишите программу, которая будет находить наилучшую покерную
+# комбинацию в данной руке из 5 карт. Валеты, дамы, короли и тузы будут
+# даны как числа 11, 12, 13 и 1 соответственно.
+
+# В любой карточной игре есть место шулерству, поэтому следует проверить
+# руку на возможность ее существования. В руке из пяти карт не может
+# быть более 4 одинаковых карт, если такое произошло – следует вывести
+# слово Шулер.
+
+# Комбинации по убыванию старшинства:
+#     4 одинаковые карты – вывести Каре;
+#     3 одинаковые карты и 2 другие одинаковые карты – вывести Фулл
+#       Хаус;
+#     5 последовательно идущих карт – Стрит;
+#     3 одинаковые карты – Сет;
+#     2 одинаковые карты и 2 другие одинаковые карты – Две пары;
+#     2 одинаковые карты – Пара;
+#     ничего из вышеперечисленного – Старшая карта.
+
+# Формат входных данных
+# На вход программе подается 5 чисел от 1 до 13 через пробел – номера
+# карт в руке.
+
+# Формат выходных данных
+# Вывести наилучшую возможную покерную комбинацию.
+
+# Примечание 1. Старший стрит (десятка, валет, дама, король, туз) не
+# является стритом для упрощения задачи.
+
+# Примечание 2. Посмотреть все тесты к задаче можно по ссылке.
+
+# Sample Input 1:
+# 4 6 5 7 8
+
+# Sample Output 1:
+# Стрит
+
+# Sample Input 2:
+# 10 3 5 6 1
+
+# Sample Output 2:
+# Старшая карта
+
+# Sample Input 3:
+# 5 5 5 5 5
+
+# Sample Output 3:
+# Шулер
+
+# Sample Input 4:
+# 3 2 3 2 2
+
+# Sample Output 4:
+# Фулл Хаус
+
+# Sample Input 5:
+# 10 10 10 10 4
+
+# Sample Output 5:
+# Каре
+
+playing_cards = {
+    1: "Туз",
+    2: "2",
+    3: "3",
+    4: "4",
+    5: "5",
+    6: "6",
+    7: "7",
+    8: "8",
+    9: "9",
+    10: "10",
+    11: "Валет",
+    12: "Дама",
+    13: "Король",
+}
+
+
+def show_cards(_play_hand: list) -> str:
+    """Docstring."""  # TODO
+    game_hand = ""
+
+    cnt = 0
+    for i in _play_hand:
+        if _play_hand.count(i) == 5:
+            game_hand = "Шулер"
+            break
+        elif _play_hand.count(i) == 2:
+            pass
+
+    return game_hand
+
+
+get_hand = list(map(int, input().split()))
+print(show_cards(get_hand))
 
 # print()
 # print(time.perf_counter() - start)
