@@ -3808,40 +3808,153 @@
 # Sample Output 5:
 # Каре
 
-playing_cards = {
-    1: "Туз",
-    2: "2",
-    3: "3",
-    4: "4",
-    5: "5",
-    6: "6",
-    7: "7",
-    8: "8",
-    9: "9",
-    10: "10",
-    11: "Валет",
-    12: "Дама",
-    13: "Король",
-}
+
+def is_card_sharper(play_hand: list) -> tuple:
+    """Check a hand.
+
+    There are five cards of one rank.
+    """
+    is_true, game_hand = False, ""
+
+    if play_hand.count(play_hand[0]) == 5:
+        is_true, game_hand = True, "Шулер"
+        return is_true, game_hand
+
+    return is_true, game_hand
 
 
-def show_cards(_play_hand: list) -> str:
-    """Docstring."""  # TODO
-    game_hand = ""
+def is_quads(play_hand: list) -> tuple:
+    """Check a hand.
 
-    cnt = 0
-    for i in _play_hand:
-        if _play_hand.count(i) == 5:
-            game_hand = "Шулер"
-            break
-        elif _play_hand.count(i) == 2:
-            pass
+    There are four cards of one rank and one card of another rank
+    (kicker).
+    """
+    is_true, game_hand = False, ""
 
-    return game_hand
+    for i in play_hand:
+
+        if play_hand.count(i) == 4:
+            is_true, game_hand = True, "Каре"
+            return is_true, game_hand
+
+    return is_true, game_hand
+
+
+def is_full_house(play_hand: list) -> tuple:
+    """Check a hand.
+
+    There are three cards of one rank and two cards of another rank.
+    """
+    is_true, game_hand = False, ""
+
+    cnt = sum(play_hand.count(i) in {3, 2} for i in play_hand)
+
+    if cnt == 5:
+        is_true, game_hand = True, "Фулл Хаус"
+        return is_true, game_hand
+
+    return is_true, game_hand
+
+
+def is_straight(play_hand: list) -> tuple:
+    """Check a hand.
+
+    There are five cards of sequential rank, not all of the same suit.
+    """
+    is_true, game_hand = False, ""
+
+    cnt = max(play_hand) - min(play_hand)
+    if cnt == 4:
+        is_true, game_hand = True, "Стрит"
+
+    return is_true, game_hand
+
+
+def is_three_of_a_kind(play_hand: list) -> tuple:
+    """Check a hand.
+
+    There are three cards of one rank and two cards of two other ranks
+    (the kickers).
+    """
+    is_true, game_hand = False, ""
+
+    for i in play_hand:
+
+        if play_hand.count(i) == 3:
+            is_true, game_hand = True, "Сет"
+            return is_true, game_hand
+
+    return is_true, game_hand
+
+
+def is_pair(play_hand: list) -> tuple:
+    """Check a hand.
+
+    One pair - there are two cards of one rank and three cards of three
+    other ranks (the kickers).
+
+    Two pair - there are two cards of one rank, two cards of another
+    rank and one card of a third rank (the kicker).
+    """
+    is_true, game_hand = False, ""
+
+    cnt = sum(play_hand.count(i) == 2 for i in play_hand)
+
+    if cnt == 2:
+        is_true, game_hand = True, "Пара"
+    elif cnt == 4:
+        is_true, game_hand = True, "Две пары"
+
+    return is_true, game_hand
+
+
+def is_high_card(play_hand: list) -> tuple:
+    """Check a hand.
+
+    High card, is a hand that does not fall into any other category.
+    """
+    is_true, game_hand = True, "Старшая карта"
+
+    return is_true, game_hand
+
+
+def show_cards(play_hand: list) -> str:
+    """Main function, check hand strength in descending order."""
+    is_true, game_hand = is_card_sharper(play_hand)
+    if is_true:
+        return game_hand
+
+    is_true, game_hand = is_quads(play_hand)
+    if is_true:
+        return game_hand
+
+    is_true, game_hand = is_full_house(play_hand)
+    if is_true:
+        return game_hand
+
+    is_true, game_hand = is_straight(play_hand)
+    if is_true:
+        return game_hand
+
+    is_true, game_hand = is_three_of_a_kind(play_hand)
+    if is_true:
+        return game_hand
+
+    is_true, game_hand = is_pair(play_hand)
+    if is_true:
+        return game_hand
+
+    is_true, game_hand = is_high_card(play_hand)
+    if is_true:
+        return game_hand
 
 
 get_hand = list(map(int, input().split()))
 print(show_cards(get_hand))
+
+
+
+
 
 # print()
 # print(time.perf_counter() - start)
