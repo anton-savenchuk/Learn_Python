@@ -3989,54 +3989,99 @@
 # python-eto-kruto!
 
 
-from functools import wraps
+# from functools import wraps
 
 
-t = {
-    "ё": "yo", "а": "a",  "б": "b",    "в": "v", "г": "g", "д": "d",
-    "е": "e",  "ж": "zh", "з": "z",    "и": "i", "й": "y", "к": "k",
-    "л": "l",  "м": "m",  "н": "n",    "о": "o", "п": "p", "р": "r",
-    "с": "s",  "т": "t",  "у": "u",    "ф": "f", "х": "h", "ц": "c",
-    "ч": "ch", "ш": "sh", "щ": "shch", "ъ": "",  "ы": "y", "ь": "",
-    "э": "e",  "ю": "yu", "я": "ya",
-    }
+# t = {
+#     "ё": "yo", "а": "a",  "б": "b",    "в": "v", "г": "g", "д": "d",
+#     "е": "e",  "ж": "zh", "з": "z",    "и": "i", "й": "y", "к": "k",
+#     "л": "l",  "м": "m",  "н": "n",    "о": "o", "п": "p", "р": "r",
+#     "с": "s",  "т": "t",  "у": "u",    "ф": "f", "х": "h", "ц": "c",
+#     "ч": "ch", "ш": "sh", "щ": "shch", "ъ": "",  "ы": "y", "ь": "",
+#     "э": "e",  "ю": "yu", "я": "ya",
+#     }
 
 
-def get_separator(func):
-    """Decarator.
+# def get_separator(func):
+#     """Decarator.
 
-    Replace the repeating separator with one.
-    """
+#     Replace the repeating separator with one.
+#     """
 
-    @wraps(func)
-    def _wrapper(*args, **kwargs):
-        _str = func(*args, **kwargs)
-        while "--" in _str:
-            _str = _str.replace("--", "-")
+#     @wraps(func)
+#     def _wrapper(*args, **kwargs):
+#         _str = func(*args, **kwargs)
+#         while "--" in _str:
+#             _str = _str.replace("--", "-")
 
-        return _str
+#         return _str
 
-    return _wrapper
+#     return _wrapper
 
 
-@get_separator
-def get_translit(string: str) -> str:
-    """Convert a Cyrillic string to Latin."""
-    _string_out = ""
-    for i in string.lower():
-        if i in t:
-            _string_out += t[i]
-        elif i in ": ;.,_":
-            _string_out += "-"
-        else:
-            _string_out += i
+# @get_separator
+# def get_translit(string: str) -> str:
+#     """Convert a Cyrillic string to Latin."""
+#     _string_out = ""
+#     for i in string.lower():
+#         if i in t:
+#             _string_out += t[i]
+#         elif i in ": ;.,_":
+#             _string_out += "-"
+#         else:
+#             _string_out += i
 
-    return _string_out
+#     return _string_out
+
+
+# s = input()
+
+# print(get_translit(s))
+
+
+####################################
+# Вводится строка целых чисел через пробел. Напишите функцию, которая
+# преобразовывает эту строку в список чисел и возвращает их сумму.
+
+# Определите декоратор для этой функции, который имеет один параметр
+# start - начальное значение суммы.
+# Примените декоратор со значением start=5 к функции и вызовите
+# декорированную функцию для введенной строки s:
+
+# s = input()
+# Результат отобразите на экране.
+
+# Sample Input:
+# 5 6 3 6 -4 6 -1
+
+# Sample Output:
+# 26
+
+def is_start_sum(start=0):
+    """Pass arguments to decorator."""
+
+    def get_sum_with_start(func):
+        """Decotaror.
+
+        Get sum including string value.
+        """
+
+        def _wrapper(_value: int, *args, **kwargs):
+            return start + func(_value, *args, **kwargs)
+
+        return _wrapper
+    return get_sum_with_start
+
+
+@is_start_sum(5)
+def get_sum(digits: str) -> int:
+    """Get the sum of numbers from a string."""
+    return sum(int(i) for i in digits.split())
 
 
 s = input()
+print(get_sum(s))
 
-print(get_translit(s))
 
 # print()
 # print(time.perf_counter() - start)
