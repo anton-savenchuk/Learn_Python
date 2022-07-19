@@ -3809,152 +3809,234 @@
 # Каре
 
 
-def is_card_sharper(play_hand: list) -> tuple:
-    """Check a hand.
+# def is_card_sharper(play_hand: list) -> tuple:
+#     """Check a hand.
 
-    There are five cards of one rank.
+#     There are five cards of one rank.
+#     """
+#     is_true, game_hand = False, ""
+
+#     if play_hand.count(play_hand[0]) == 5:
+#         is_true, game_hand = True, "Шулер"
+#         return is_true, game_hand
+
+#     return is_true, game_hand
+
+
+# def is_quads(play_hand: list) -> tuple:
+#     """Check a hand.
+
+#     There are four cards of one rank and one card of another rank
+#     (kicker).
+#     """
+#     is_true, game_hand = False, ""
+
+#     for i in play_hand:
+
+#         if play_hand.count(i) == 4:
+#             is_true, game_hand = True, "Каре"
+#             return is_true, game_hand
+
+#     return is_true, game_hand
+
+
+# def is_full_house(play_hand: list) -> tuple:
+#     """Check a hand.
+
+#     There are three cards of one rank and two cards of another rank.
+#     """
+#     is_true, game_hand = False, ""
+
+#     cnt = sum(play_hand.count(i) in {3, 2} for i in play_hand)
+
+#     if cnt == 5:
+#         is_true, game_hand = True, "Фулл Хаус"
+#         return is_true, game_hand
+
+#     return is_true, game_hand
+
+
+# def is_straight(play_hand: list) -> tuple:
+#     """Check a hand.
+
+#     There are five cards of sequential rank, not all of the same suit.
+#     """
+#     is_true, game_hand = False, ""
+
+#     cnt = max(play_hand) - min(play_hand)
+#     if cnt == 4:
+#         is_true, game_hand = True, "Стрит"
+
+#     return is_true, game_hand
+
+
+# def is_three_of_a_kind(play_hand: list) -> tuple:
+#     """Check a hand.
+
+#     There are three cards of one rank and two cards of two other ranks
+#     (the kickers).
+#     """
+#     is_true, game_hand = False, ""
+
+#     for i in play_hand:
+
+#         if play_hand.count(i) == 3:
+#             is_true, game_hand = True, "Сет"
+#             return is_true, game_hand
+
+#     return is_true, game_hand
+
+
+# def is_pair(play_hand: list) -> tuple:
+#     """Check a hand.
+
+#     One pair - there are two cards of one rank and three cards of three
+#     other ranks (the kickers).
+
+#     Two pair - there are two cards of one rank, two cards of another
+#     rank and one card of a third rank (the kicker).
+#     """
+#     is_true, game_hand = False, ""
+
+#     cnt = sum(play_hand.count(i) == 2 for i in play_hand)
+
+#     if cnt == 2:
+#         is_true, game_hand = True, "Пара"
+#     elif cnt == 4:
+#         is_true, game_hand = True, "Две пары"
+
+#     return is_true, game_hand
+
+
+# def is_high_card(play_hand: list) -> tuple:
+#     """Check a hand.
+
+#     High card, is a hand that does not fall into any other category.
+#     """
+#     is_true, game_hand = True, "Старшая карта"
+
+#     return is_true, game_hand
+
+
+# def show_cards(play_hand: list) -> str:
+#     """Main function, check hand strength in descending order."""
+#     is_true, game_hand = is_card_sharper(play_hand)
+#     if is_true:
+#         return game_hand
+
+#     is_true, game_hand = is_quads(play_hand)
+#     if is_true:
+#         return game_hand
+
+#     is_true, game_hand = is_full_house(play_hand)
+#     if is_true:
+#         return game_hand
+
+#     is_true, game_hand = is_straight(play_hand)
+#     if is_true:
+#         return game_hand
+
+#     is_true, game_hand = is_three_of_a_kind(play_hand)
+#     if is_true:
+#         return game_hand
+
+#     is_true, game_hand = is_pair(play_hand)
+#     if is_true:
+#         return game_hand
+
+#     is_true, game_hand = is_high_card(play_hand)
+#     if is_true:
+#         return game_hand
+
+
+# get_hand = list(map(int, input().split()))
+# print(show_cards(get_hand))
+
+
+####################################
+# Несколько подряд идущих дефисов
+
+# Объявите функцию, которая принимает строку на кириллице и
+# преобразовывает ее в латиницу, используя следующий словарь для замены
+# русских букв на соответствующее латинское написание:
+
+# t = {'ё': 'yo', 'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ж': 'zh',
+#      'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p',
+#      'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh',
+#      'щ': 'shch', 'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya'}
+
+# Функция должна возвращать преобразованную строку. Замены делать без
+# учета регистра (исходную строку перевести в нижний регистр - малые
+# буквы). Все небуквенные символы ": ;.,_" превращать в символ '-'
+# (дефиса).
+
+# Определите декоратор для этой функции, который несколько подряд идущих
+# дефисов, превращает в один дефис. Полученная строка должна
+# возвращаться при вызове декоратора. (Сам декоратор на экран ничего
+# выводить не должен).
+
+# Примените декоратор к первой функции и вызовите ее для введенной
+# строки s на кириллице:
+
+# s = input()
+
+# Результат работы декорированной функции отобразите на экране.
+
+# Sample Input:
+# Python - это круто!
+
+# Sample Output:
+# python-eto-kruto!
+
+
+from functools import wraps
+
+
+t = {
+    "ё": "yo", "а": "a",  "б": "b",    "в": "v", "г": "g", "д": "d",
+    "е": "e",  "ж": "zh", "з": "z",    "и": "i", "й": "y", "к": "k",
+    "л": "l",  "м": "m",  "н": "n",    "о": "o", "п": "p", "р": "r",
+    "с": "s",  "т": "t",  "у": "u",    "ф": "f", "х": "h", "ц": "c",
+    "ч": "ch", "ш": "sh", "щ": "shch", "ъ": "",  "ы": "y", "ь": "",
+    "э": "e",  "ю": "yu", "я": "ya",
+    }
+
+
+def get_separator(func):
+    """Decarator.
+
+    Replace the repeating separator with one.
     """
-    is_true, game_hand = False, ""
 
-    if play_hand.count(play_hand[0]) == 5:
-        is_true, game_hand = True, "Шулер"
-        return is_true, game_hand
+    @wraps(func)
+    def _wrapper(*args, **kwargs):
+        _str = func(*args, **kwargs)
+        while "--" in _str:
+            _str = _str.replace("--", "-")
 
-    return is_true, game_hand
+        return _str
 
-
-def is_quads(play_hand: list) -> tuple:
-    """Check a hand.
-
-    There are four cards of one rank and one card of another rank
-    (kicker).
-    """
-    is_true, game_hand = False, ""
-
-    for i in play_hand:
-
-        if play_hand.count(i) == 4:
-            is_true, game_hand = True, "Каре"
-            return is_true, game_hand
-
-    return is_true, game_hand
+    return _wrapper
 
 
-def is_full_house(play_hand: list) -> tuple:
-    """Check a hand.
+@get_separator
+def get_translit(string: str) -> str:
+    """Convert a Cyrillic string to Latin."""
+    _string_out = ""
+    for i in string.lower():
+        if i in t:
+            _string_out += t[i]
+        elif i in ": ;.,_":
+            _string_out += "-"
+        else:
+            _string_out += i
 
-    There are three cards of one rank and two cards of another rank.
-    """
-    is_true, game_hand = False, ""
-
-    cnt = sum(play_hand.count(i) in {3, 2} for i in play_hand)
-
-    if cnt == 5:
-        is_true, game_hand = True, "Фулл Хаус"
-        return is_true, game_hand
-
-    return is_true, game_hand
-
-
-def is_straight(play_hand: list) -> tuple:
-    """Check a hand.
-
-    There are five cards of sequential rank, not all of the same suit.
-    """
-    is_true, game_hand = False, ""
-
-    cnt = max(play_hand) - min(play_hand)
-    if cnt == 4:
-        is_true, game_hand = True, "Стрит"
-
-    return is_true, game_hand
+    return _string_out
 
 
-def is_three_of_a_kind(play_hand: list) -> tuple:
-    """Check a hand.
+s = input()
 
-    There are three cards of one rank and two cards of two other ranks
-    (the kickers).
-    """
-    is_true, game_hand = False, ""
-
-    for i in play_hand:
-
-        if play_hand.count(i) == 3:
-            is_true, game_hand = True, "Сет"
-            return is_true, game_hand
-
-    return is_true, game_hand
-
-
-def is_pair(play_hand: list) -> tuple:
-    """Check a hand.
-
-    One pair - there are two cards of one rank and three cards of three
-    other ranks (the kickers).
-
-    Two pair - there are two cards of one rank, two cards of another
-    rank and one card of a third rank (the kicker).
-    """
-    is_true, game_hand = False, ""
-
-    cnt = sum(play_hand.count(i) == 2 for i in play_hand)
-
-    if cnt == 2:
-        is_true, game_hand = True, "Пара"
-    elif cnt == 4:
-        is_true, game_hand = True, "Две пары"
-
-    return is_true, game_hand
-
-
-def is_high_card(play_hand: list) -> tuple:
-    """Check a hand.
-
-    High card, is a hand that does not fall into any other category.
-    """
-    is_true, game_hand = True, "Старшая карта"
-
-    return is_true, game_hand
-
-
-def show_cards(play_hand: list) -> str:
-    """Main function, check hand strength in descending order."""
-    is_true, game_hand = is_card_sharper(play_hand)
-    if is_true:
-        return game_hand
-
-    is_true, game_hand = is_quads(play_hand)
-    if is_true:
-        return game_hand
-
-    is_true, game_hand = is_full_house(play_hand)
-    if is_true:
-        return game_hand
-
-    is_true, game_hand = is_straight(play_hand)
-    if is_true:
-        return game_hand
-
-    is_true, game_hand = is_three_of_a_kind(play_hand)
-    if is_true:
-        return game_hand
-
-    is_true, game_hand = is_pair(play_hand)
-    if is_true:
-        return game_hand
-
-    is_true, game_hand = is_high_card(play_hand)
-    if is_true:
-        return game_hand
-
-
-get_hand = list(map(int, input().split()))
-print(show_cards(get_hand))
-
-
-
-
+print(get_translit(s))
 
 # print()
 # print(time.perf_counter() - start)
