@@ -4057,30 +4057,80 @@
 # Sample Output:
 # 26
 
-def is_start_sum(start=0):
+# def is_start_sum(start=0):
+#     """Pass arguments to decorator."""
+
+#     def get_sum_with_start(func):
+#         """Decotaror.
+
+#         Get sum including starting value.
+#         """
+
+#         def _wrapper(_value: int, *args, **kwargs):
+#             return start + func(_value, *args, **kwargs)
+
+#         return _wrapper
+#     return get_sum_with_start
+
+
+# @is_start_sum(5)
+# def get_sum(digits: str) -> int:
+#     """Get the sum of numbers from a string."""
+#     return sum(int(i) for i in digits.split())
+
+
+# s = input()
+# print(get_sum(s))
+
+
+####################################
+# Объявите функцию, которая возвращает переданную ей строку в нижнем
+# регистре (с малыми буквами).
+# Определите декоратор для этой функции, который имеет один параметр
+# tag, определяющий строку с названием тега и начальным значением "h1".
+# Этот декоратор должен заключать возвращенную функцией строку в тег
+# tag и возвращать результат.
+
+# Пример заключения строки "python" в тег h1: <h1>python</h1>
+
+# Примените декоратор со значением tag="div" к функции и вызовите
+# декорированную функцию для введенной строки s:
+
+# s = input()
+
+# Результат отобразите на экране.
+
+# Sample Input:
+# Декораторы - это классно!
+
+# Sample Output:
+# <div>декораторы - это классно!</div>
+
+
+def get_tag_decorator(tag="h1"):
     """Pass arguments to decorator."""
 
-    def get_sum_with_start(func):
-        """Decotaror.
+    def get_tag(func):
+        """Decorator.
 
-        Get sum including string value.
+        Wrap a string in a tag.
         """
 
-        def _wrapper(_value: int, *args, **kwargs):
-            return start + func(_value, *args, **kwargs)
+        def _wrapper(*args, **kwargs):
+            return f"<{tag}>{func(*args, **kwargs)}</{tag}>"
 
         return _wrapper
-    return get_sum_with_start
+    return get_tag
 
 
-@is_start_sum(5)
-def get_sum(digits: str) -> int:
-    """Get the sum of numbers from a string."""
-    return sum(int(i) for i in digits.split())
+@get_tag_decorator("div")
+def get_lower(string: str) -> str:
+    """Return a string where all characters are lower case."""
+    return string.lower()
 
 
 s = input()
-print(get_sum(s))
+print(get_lower(s))
 
 
 # print()
