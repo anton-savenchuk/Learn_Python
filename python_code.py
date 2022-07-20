@@ -4107,30 +4107,106 @@
 # <div>декораторы - это классно!</div>
 
 
-def get_tag_decorator(tag="h1"):
+# def get_tag_decorator(tag="h1"):
+#     """Pass arguments to decorator."""
+
+#     def get_tag(func):
+#         """Decorator.
+
+#         Wrap a string in a tag.
+#         """
+
+#         def _wrapper(*args, **kwargs):
+#             return f"<{tag}>{func(*args, **kwargs)}</{tag}>"
+
+#         return _wrapper
+#     return get_tag
+
+
+# @get_tag_decorator("div")
+# def get_lower(string: str) -> str:
+#     """Return a string where all characters are lower case."""
+#     return string.lower()
+
+
+# s = input()
+# print(get_lower(s))
+
+
+####################################
+# Объявите функцию, которая принимает строку на кириллице и
+# преобразовывает ее в латиницу, используя следующий словарь для замены
+# русских букв на соответствующее латинское написание:
+
+# t = {'ё': 'yo', 'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ж': 'zh',
+#      'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p',
+#      'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh',
+#      'щ': 'shch', 'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya'}
+
+# Функция должна возвращать преобразованную строку. Замены делать без
+# учета регистра (исходную строку перевести в нижний регистр - малые
+# буквы).
+
+# Определите декоратор с параметром chars и начальным значением " !?",
+# который данные символы преобразует в символ "-" и, кроме того, все
+# подряд идущие дефисы (например, "--" или "---") приводит к одному
+# дефису. Полученный результат должен возвращаться в виде строки.
+
+# Примените декоратор с аргументом chars="?!:;,. " к функции и вызовите
+# декорированную функцию для введенной строки s:
+
+# s = input()
+
+# Результат отобразите на экране.
+
+# Sample Input:
+# Декораторы - это круто!
+
+# Sample Output:
+# dekoratory-eto-kruto-
+from functools import wraps
+
+
+t = {'ё': 'yo', 'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ж': 'zh',
+     'з': 'z', 'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p',
+     'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh',
+     'щ': 'shch', 'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya'}
+
+
+def get_separator_decorator(chars=" !?"):
     """Pass arguments to decorator."""
 
-    def get_tag(func):
-        """Decorator.
+    def get_separator(func):
+        """Decarator.
 
-        Wrap a string in a tag.
+        Replace the repeating separator with one.
         """
 
-        def _wrapper(*args, **kwargs):
-            return f"<{tag}>{func(*args, **kwargs)}</{tag}>"
+        @wraps(func)
+        def _wrapper(*args):
+            _str = func(*args)
+
+            for i in chars:
+                if i in _str:
+                    _str = _str.replace(i, "-")
+
+            while "--" in _str:
+                _str = _str.replace("--", "-")
+
+            return _str
 
         return _wrapper
-    return get_tag
+    return get_separator
 
 
-@get_tag_decorator("div")
-def get_lower(string: str) -> str:
-    """Return a string where all characters are lower case."""
-    return string.lower()
+@get_separator_decorator("?!:;,. ")
+def get_translit(string: str) -> str:
+    """Convert a Cyrillic string to Latin."""
+    return "".join(t[i] if i in t else i for i in string.lower())
 
 
 s = input()
-print(get_lower(s))
+print(get_translit(s))
 
 
 # print()
