@@ -4227,28 +4227,46 @@
 # get_list сохраняла свои локальные свойства: __name__ и __doc__.
 
 # Примените декоратор к функции get_list, но не вызывайте ее.
-from functools import wraps
+# from functools import wraps
 
 
-def get_sum(func):
-    """Decorator.
+# def get_sum(func):
+#     """Decorator.
 
-    Return the sum of the elements of the given iterable.
-    """
+#     Return the sum of the elements of the given iterable.
+#     """
 
-    @wraps(func)
-    def _wrapper(*args, **kwargs):
-        return sum(func(*args, **kwargs))
+#     @wraps(func)
+#     def _wrapper(*args, **kwargs):
+#         return sum(func(*args, **kwargs))
 
-    return _wrapper
-
-
-@get_sum
-def get_list(lst_in: str) -> list:
-    """Функция для формирования списка целых значений."""
-    return [int(i) for i in lst_in.split()]
+#     return _wrapper
 
 
+# @get_sum
+# def get_list(lst_in: str) -> list:
+#     """Функция для формирования списка целых значений."""
+#     return [int(i) for i in lst_in.split()]
+
+
+####################################
+#  В этой задаче вам необходимо скачать файл, в котором записаны
+# натуральные числа. Ваша задача найти
+#     количество трехзначных чисел;
+#     сумму двухзначных чисел
+
+# В качестве ответа укажите найденные два числа через запятую без других
+# знаков и пробелов. Сперва количество, потом сумма
+
+with open("numbers.txt", "r", encoding="utf-8") as file:
+    _cnt, _sum = 0, 0
+    while (num := file.readline().strip()):
+        if len(num) == 3:
+            _cnt += 1
+        elif len(num) == 2:
+            _sum += int(num)
+
+print(_cnt, _sum)
 
 
 # print()
