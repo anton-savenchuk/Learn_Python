@@ -4272,23 +4272,63 @@
 ####################################
 # Восстановление исходной строки
 
-with open("dataset_3363_2.txt", "r", encoding="utf-8") as file:
-    _file = file.readline().strip()
+# with open("dataset_3363_2.txt", "r", encoding="utf-8") as file:
+#     _file = file.readline().strip()
 
-    string_new = ""
-    cnt = 0
-    while cnt < len(_file):
+#     string_new = ""
+#     cnt = 0
+#     while cnt < len(_file):
 
-        lenght = cnt + 1
+#         lenght = cnt + 1
 
-        while lenght < len(_file) and _file[lenght].isdigit():
-            lenght += 1
+#         while lenght < len(_file) and _file[lenght].isdigit():
+#             lenght += 1
 
-        string_new += _file[cnt] * int(_file[cnt + 1:lenght])
-        cnt = lenght
+#         string_new += _file[cnt] * int(_file[cnt + 1:lenght])
+#         cnt = lenght
 
-    with open("dataset_3363_2_encode.txt", "w", encoding="utf-8") as file:
-        _file = file.write(string_new)
+#     with open("dataset_3363_2_encode.txt", "w", encoding="utf-8") as file:
+#         _file = file.write(string_new)
+
+
+####################################
+# Самое частое слово в тексте
+#
+# Недавно мы считали для каждого слова количество его вхождений в
+# строку. Но на все слова может быть не так интересно смотреть, как,
+# например, на наиболее часто используемые.
+
+# Напишите программу, которая считывает текст из файла (в файле может
+# быть больше одной строки) и выводит самое частое слово в этом тексте
+# и через пробел то, сколько раз оно встретилось. Если таких слов
+# несколько, вывести лексикографически первое (можно использовать
+# оператор < для строк).
+
+# В качестве ответа укажите вывод программы, а не саму программу.
+
+# Слова, написанные в разных регистрах, считаются одинаковыми.
+
+# Sample Input:
+# abc a bCd bC AbC BC BCD bcd ABC
+
+# Sample Output:
+# abc 3
+
+with open("dataset_3363_3.txt") as file_in:
+    _file = file_in.read().lower().strip().split()
+    _file.sort()
+
+    max_cnt = 0
+    for _word in _file:
+        cnt = _file.count(_word)
+        if cnt > max_cnt:
+            max_cnt = cnt
+            result_word = _word
+
+with open("often_used_word.txt", "w") as file_out:
+    file_out.write(f"{result_word} {str(max_cnt)}")
+
+
 
 
 
