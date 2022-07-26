@@ -4250,7 +4250,7 @@
 
 
 ####################################
-#  В этой задаче вам необходимо скачать файл, в котором записаны
+# В этой задаче вам необходимо скачать файл, в котором записаны
 # натуральные числа. Ваша задача найти
 #     количество трехзначных чисел;
 #     сумму двухзначных чисел
@@ -4258,15 +4258,38 @@
 # В качестве ответа укажите найденные два числа через запятую без других
 # знаков и пробелов. Сперва количество, потом сумма
 
-with open("numbers.txt", "r", encoding="utf-8") as file:
-    _cnt, _sum = 0, 0
-    while (num := file.readline().strip()):
-        if len(num) == 3:
-            _cnt += 1
-        elif len(num) == 2:
-            _sum += int(num)
+# with open("numbers.txt", "r", encoding="utf-8") as file:
+#     _cnt, _sum = 0, 0
+#     while (num := file.readline().strip()):
+#         if len(num) == 3:
+#             _cnt += 1
+#         elif len(num) == 2:
+#             _sum += int(num)
 
-print(_cnt, _sum)
+# print(_cnt, _sum)
+
+
+####################################
+# Восстановление исходной строки
+
+with open("dataset_3363_2.txt", "r", encoding="utf-8") as file:
+    _file = file.readline().strip()
+
+    string_new = ""
+    cnt = 0
+    while cnt < len(_file):
+
+        lenght = cnt + 1
+
+        while lenght < len(_file) and _file[lenght].isdigit():
+            lenght += 1
+
+        string_new += _file[cnt] * int(_file[cnt + 1:lenght])
+        cnt = lenght
+
+    with open("dataset_3363_2_encode.txt", "w", encoding="utf-8") as file:
+        _file = file.write(string_new)
+
 
 
 # print()
