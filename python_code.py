@@ -4368,32 +4368,52 @@
 # 71.666666667
 # 81.0 84.0 85.666666667
 
-with open("text_files/dataset_3363_4.txt") as file_in, open(
-    "text_files/dataset_3363_4_answer.txt", "a", encoding="utf-8"
-) as file_out:
+# with open("text_files/dataset_3363_4.txt") as file_in, open(
+#     "text_files/dataset_3363_4_answer.txt", "a", encoding="utf-8"
+# ) as file_out:
 
-    total_rating_cntr, students_cntr = [], 0
-    for row in file_in:
+#     total_rating_cntr, students_cntr = [], 0
+#     for row in file_in:
 
-        row = [int(i) if i.isdigit() else i for i in row.strip().split(";")]
-        rating_cntr, courses_cntr = 0, len(row) - 1
+#         row = [int(i) if i.isdigit() else i for i in row.strip().split(";")]
+#         rating_cntr, courses_cntr = 0, len(row) - 1
 
-        for i in range(1, len(row)):
-            rating_cntr += row[i]
+#         for i in range(1, len(row)):
+#             rating_cntr += row[i]
 
-            if len(total_rating_cntr) != courses_cntr:
-                total_rating_cntr.append(row[i])
-            else:
-                total_rating_cntr[i - 1] += row[i]
+#             if len(total_rating_cntr) != courses_cntr:
+#                 total_rating_cntr.append(row[i])
+#             else:
+#                 total_rating_cntr[i - 1] += row[i]
 
-        students_cntr += 1
-        file_out.write(f"{rating_cntr / courses_cntr}\n")
+#         students_cntr += 1
+#         file_out.write(f"{rating_cntr / courses_cntr}\n")
 
-    file_out.write(
-        " ".join([str(num / students_cntr) for num in total_rating_cntr])
-    )
+#     file_out.write(
+#         " ".join([str(num / students_cntr) for num in total_rating_cntr])
+#     )
 
 
+####################################
+# Работаем с JSON
+import json
+
+
+with open(
+    "text_files/manager_sales.json", "r", encoding="utf-8"
+) as file_json_in:
+    data = json.load(file_json_in)
+
+    manager, best_result = "", 0
+    for items in data:
+
+        temp_result = sum(car["price"] for car in items["cars"])
+
+        if temp_result > best_result:
+            manager = " ".join([*items['manager'].values()])
+            best_result = temp_result
+
+print(manager, best_result)
 
 # print()
 # print(time.perf_counter() - start)
