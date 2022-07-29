@@ -4427,30 +4427,54 @@
 # после 1977 года. В качестве ответа необходимо указать через пробел
 # идентификатор найденной группы и сколько в ней было женщин, рожденных
 # после 1977 года.
+# import json
+
+
+# with open("text_files/group_people.json", "r", encoding="utf-8") as json_in:
+#     data = json.load(json_in)
+
+#     id_group, women_cntr = 0, 0
+#     temp_women_cntr = 0
+#     for items in data:
+
+#         temp_women_cntr = sum(
+#             people["year"] > 1977
+#             for people in items["people"]
+#             if people["gender"] == "Female"
+#         )
+
+#         if temp_women_cntr > women_cntr:
+#             id_group = items["id_group"]
+#             women_cntr = temp_women_cntr
+
+# print(id_group, women_cntr)
+
+
+# ####################################
+# Раскодируем текст в текстовом файле
+
+
+# В этой задаче вам необходимо раскодировать текст, находящийся в данном
+# текстовом файле(Abracadabra.txt). Ключ для декодирования располагается
+# в json-файле(Alphabet.json). В качестве ответа нужно просто отправить
+# получившийся текст. И обратите внимание, что раскодировать нужно
+# только лишь буквы, все остальные символы(цифры, знаки пунктуации и
+# т.д.) необходимо выводить как есть.
 import json
 
 
-with open("text_files/group_people.json", "r", encoding="utf-8") as json_in:
-    data = json.load(json_in)
+with open("text_files/Abracadabra.txt", "r", encoding="utf-8") as file_in, open(
+    "text_files/Alphabet.json", "r", encoding="utf-8"
+) as json_in:
 
-    id_group, women_cntr = 0, 0
-    temp_women_cntr = 0
-    for items in data:
+    alphabet = json.load(json_in)
 
-        temp_women_cntr = sum(
-            people["year"] > 1977
-            for people in items["people"]
-            if people["gender"] == "Female"
+    for row in file_in:
+        string_out = "".join(
+            alphabet[smbl] if smbl in alphabet else smbl
+            for smbl in row if row != "\n"
         )
-
-        if temp_women_cntr > women_cntr:
-            id_group = items["id_group"]
-            women_cntr = temp_women_cntr
-
-print(id_group, women_cntr)
-
-
-
+        print(string_out, end="")
 
 
 
