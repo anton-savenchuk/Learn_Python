@@ -3,5 +3,6 @@ __pycache__
 .vscode/
 .vim/
 venv/
+temp_python_code.py
 mypy.old
 setup.cfg

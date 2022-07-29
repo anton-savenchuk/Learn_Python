@@ -4396,24 +4396,63 @@
 
 ####################################
 # Работаем с JSON
+# import json
+
+
+# with open(
+#     "text_files/manager_sales.json", "r", encoding="utf-8"
+# ) as file_json_in:
+#     data = json.load(file_json_in)
+
+#     manager, best_result = "", 0
+#     for items in data:
+
+#         temp_result = sum(car["price"] for car in items["cars"])
+
+#         if temp_result > best_result:
+#             manager = " ".join([*items['manager'].values()])
+#             best_result = temp_result
+
+# print(manager, best_result)
+
+
+####################################
+# Парсинг JSON
+
+# В json-файле(group_people.json) содержится информация о нескольких
+# групп людей, при этом у каждой группы есть свой идентификатор.
+
+# Ваша задача скачать файлик и самостоятельно найти идентификатор
+# группы, в которой находится самое большое количество женщин, рожденных
+# после 1977 года. В качестве ответа необходимо указать через пробел
+# идентификатор найденной группы и сколько в ней было женщин, рожденных
+# после 1977 года.
 import json
 
 
-with open(
-    "text_files/manager_sales.json", "r", encoding="utf-8"
-) as file_json_in:
-    data = json.load(file_json_in)
+with open("text_files/group_people.json", "r", encoding="utf-8") as json_in:
+    data = json.load(json_in)
 
-    manager, best_result = "", 0
+    id_group, women_cntr = 0, 0
+    temp_women_cntr = 0
     for items in data:
 
-        temp_result = sum(car["price"] for car in items["cars"])
+        temp_women_cntr = sum(
+            people["year"] > 1977
+            for people in items["people"]
+            if people["gender"] == "Female"
+        )
 
-        if temp_result > best_result:
-            manager = " ".join([*items['manager'].values()])
-            best_result = temp_result
+        if temp_women_cntr > women_cntr:
+            id_group = items["id_group"]
+            women_cntr = temp_women_cntr
 
-print(manager, best_result)
+print(id_group, women_cntr)
+
+
+
+
+
 
 # print()
 # print(time.perf_counter() - start)
