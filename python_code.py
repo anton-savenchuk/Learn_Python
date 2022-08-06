@@ -4687,26 +4687,28 @@
 # 4?DSDC6Lc1
 # mxLpQ@2@yM
 
-# import random
-# from string import ascii_lowercase, ascii_uppercase
+import random
+from string import ascii_lowercase, ascii_uppercase
 
-# # установка зерна датчика случайных чисел (не менять)
-# random.seed(1)
+# установка зерна датчика случайных чисел (не менять)
+random.seed(1)
 
-# # здесь продолжайте программу
-# chars = ascii_lowercase + ascii_uppercase + "0123456789!?@#$*"
-# lenght = int(input())
-
-
-# def get_password(n: int) -> str:
-#     """Generate a password."""
-#     for _ in range(n):
-#         indx = random.randint(0, len(chars) - 1)
-#         yield chars[indx]
+# здесь продолжайте программу
+chars = ascii_lowercase + ascii_uppercase + "0123456789!?@#$*"
+lenght = int(input())
 
 
-# for _ in range(5):
-#     print("".join(get_password(lenght)))
+def get_password(n: int) -> str:
+    """Generate a password."""
+    pswd = ""
+    for _ in range(n):
+        indx = random.randint(0, len(chars) - 1)
+        pswd += "".join(chars[indx])
+    yield pswd
+
+
+for _ in range(5):
+    print(*get_password(lenght))
 
 
 # ####################################
@@ -4742,29 +4744,29 @@
 # ubbbPIay@mail.ru
 
 
-import random
-from string import ascii_lowercase, ascii_uppercase
+# import random
+# from string import ascii_lowercase, ascii_uppercase
 
-# установка зерна датчика случайных чисел (не менять)
-random.seed(1)
+# # установка зерна датчика случайных чисел (не менять)
+# random.seed(1)
 
-# здесь продолжайте программу
-chars = ascii_lowercase + ascii_uppercase
-lenght = int(input())
-
-
-def get_email(lenght: int) -> str:
-    """Generate a email address."""
-    email_name = ""
-    for _ in range(lenght):
-        indx = random.randint(0, len(chars) - 1)
-        email_name += chars[indx]
-
-    yield f"{email_name}@mail.ru"
+# # здесь продолжайте программу
+# chars = ascii_lowercase + ascii_uppercase
+# lenght = int(input())
 
 
-for _ in range(5):
-    print(*get_email(lenght))
+# def get_email(lenght: int) -> str:
+#     """Generate a email address."""
+#     email_name = ""
+#     for _ in range(lenght):
+#         indx = random.randint(0, len(chars) - 1)
+#         email_name += chars[indx]
+
+#     yield f"{email_name}@mail.ru"
+
+
+# for _ in range(5):
+#     print(*get_email(lenght))
 
 
 
