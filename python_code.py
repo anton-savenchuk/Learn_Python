@@ -4687,6 +4687,61 @@
 # 4?DSDC6Lc1
 # mxLpQ@2@yM
 
+# import random
+# from string import ascii_lowercase, ascii_uppercase
+
+# # установка зерна датчика случайных чисел (не менять)
+# random.seed(1)
+
+# # здесь продолжайте программу
+# chars = ascii_lowercase + ascii_uppercase + "0123456789!?@#$*"
+# lenght = int(input())
+
+
+# def get_password(n: int) -> str:
+#     """Generate a password."""
+#     for _ in range(n):
+#         indx = random.randint(0, len(chars) - 1)
+#         yield chars[indx]
+
+
+# for _ in range(5):
+#     print("".join(get_password(lenght)))
+
+
+# ####################################
+# Вводится натуральное число N. Используя строки из латинских букв
+# ascii_lowercase и ascii_uppercase:
+
+# from string import ascii_lowercase, ascii_uppercase
+# chars = ascii_lowercase + ascii_uppercase
+
+# задайте функцию-генератор, которая бы возвращала случайно
+# сформированные email-адреса с доменом mail.ru и длиной в N символов.
+# Например, при N=6, получим адрес: SCrUZo@mail.ru
+
+# Для формирования случайного индекса для строки chars используйте
+# функцию randint модуля random:
+
+# import random
+# random.seed(1)
+# indx = random.randint(0, len(chars)-1)
+
+# Функция-генератор должна возвращать бесконечное число таких адресов,
+# то есть, генерировать постоянно. Выведите первые пять сгенерированных
+# email и выведите их в столбик (каждый с новой строки).
+
+# Sample Input:
+# 8
+
+# Sample Output:
+# iKZWeqhF@mail.ru
+# WCEPyYng@mail.ru
+# FbyBMWXa@mail.ru
+# SCrUZoLg@mail.ru
+# ubbbPIay@mail.ru
+
+
 import random
 from string import ascii_lowercase, ascii_uppercase
 
@@ -4694,19 +4749,22 @@ from string import ascii_lowercase, ascii_uppercase
 random.seed(1)
 
 # здесь продолжайте программу
-chars = ascii_lowercase + ascii_uppercase + "0123456789!?@#$*"
+chars = ascii_lowercase + ascii_uppercase
 lenght = int(input())
 
 
-def get_password(n: int) -> str:
-    """Generate a password."""
-    for _ in range(n):
+def get_email(lenght: int) -> str:
+    """Generate a email address."""
+    email_name = ""
+    for _ in range(lenght):
         indx = random.randint(0, len(chars) - 1)
-        yield chars[indx]
+        email_name += chars[indx]
+
+    yield f"{email_name}@mail.ru"
 
 
 for _ in range(5):
-    print("".join(get_password(lenght)))
+    print(*get_email(lenght))
 
 
 
