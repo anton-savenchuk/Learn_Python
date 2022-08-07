@@ -4769,6 +4769,24 @@ for _ in range(5):
 #     print(*get_email(lenght))
 
 
+# ####################################
+# Определите функцию-генератор, которая бы возвращала простые числа.
+# (Простое число - это натуральное число, которое делится только на себя
+# и на 1). Выведите с помощью этой функции первые 20 простых чисел
+# (начиная с 2) в одну строчку через пробел.
+
+def get_prime(n: int):
+    """Get N prime numbers."""
+    cnt, prime = 0, 0
+    while cnt < n:
+        if len([i for i in range(1, prime + 1) if prime % i == 0]) == 2:
+            yield prime
+            cnt += 1
+        prime += 1
+
+
+print(*get_prime(10))
+
 
 # print()
 # print(time.perf_counter() - start)
