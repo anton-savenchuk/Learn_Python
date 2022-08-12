@@ -4687,28 +4687,28 @@
 # 4?DSDC6Lc1
 # mxLpQ@2@yM
 
-import random
-from string import ascii_lowercase, ascii_uppercase
+# import random
+# from string import ascii_lowercase, ascii_uppercase
 
-# установка зерна датчика случайных чисел (не менять)
-random.seed(1)
+# # установка зерна датчика случайных чисел (не менять)
+# random.seed(1)
 
-# здесь продолжайте программу
-chars = ascii_lowercase + ascii_uppercase + "0123456789!?@#$*"
-lenght = int(input())
-
-
-def get_password(n: int) -> str:
-    """Generate a password."""
-    pswd = ""
-    for _ in range(n):
-        indx = random.randint(0, len(chars) - 1)
-        pswd += "".join(chars[indx])
-    yield pswd
+# # здесь продолжайте программу
+# chars = ascii_lowercase + ascii_uppercase + "0123456789!?@#$*"
+# lenght = int(input())
 
 
-for _ in range(5):
-    print(*get_password(lenght))
+# def get_password(n: int) -> str:
+#     """Generate a password."""
+#     pswd = ""
+#     for _ in range(n):
+#         indx = random.randint(0, len(chars) - 1)
+#         pswd += "".join(chars[indx])
+#     yield pswd
+
+
+# for _ in range(5):
+#     print(*get_password(lenght))
 
 
 # ####################################
@@ -4821,25 +4821,64 @@ for _ in range(5):
 # [['g'], ['i'], ['v'], ['e'], ['t'], ['h', 'h'], ['i', 'i'], ['s'], ['m'], ['a', 'a', 'a'], ['n'], ['a'], ['g'], ['u', 'u'], ['n']]
 
 
-string_in = "g i v e t h h i i s m a a a n a g u u n".replace(" ", "")
+# # string_in = input().replace(" ", "")
 
-lst = []
-id_lst = 0
+# # lst = []
+# # id_lst = 0
 
-for i in range(len(string_in)):
+# # for i in range(len(string_in)):
 
-    if len(lst) == 0:
-        lst.append([string_in[i]])
+# #     if len(lst) == 0:
+# #         lst.append([string_in[i]])
 
-    elif string_in[i - 1] == string_in[i]:
-        lst[id_lst].append(string_in[i])
+# #     elif string_in[i - 1] == string_in[i]:
+# #         lst[id_lst].append(string_in[i])
 
-    else:
-        lst.append([string_in[i]])
-        id_lst += 1
+# #     else:
+# #         lst.append([string_in[i]])
+# #         id_lst += 1
 
-print(lst)
+# # print(lst)
 
+# string_in = input().split()
+# lst = []
+# for i in string_in:
+#     if lst and i in lst[-1]:
+#         lst[-1].append(i)
+#     else:
+#         lst.append([i])
+
+# print(lst)
+
+
+# ####################################
+# Вводится неравномерная таблица целых чисел. С помощью функции zip
+# выровнить эту таблицу, приведя ее к прямоугольному виду, отбросив
+# выходящие элементы. Вывести результат на экран в виде такой же таблицы
+# чисел.
+
+# P. S. Для считывания списка целиком в программе уже записаны начальные
+# строчки.
+
+# Sample Input:
+# 1 2 3 4 5 6
+# 3 4 5 6
+# 7 8 9
+# 9 7 5 3 2
+
+# Sample Output:
+# 1 2 3
+# 3 4 5
+# 7 8 9
+# 9 7 5
+
+lst_in = ['1 2 3 4 5 6', '3 4 5 6', '7 8 9', '9 7 5 3 2']
+
+temp = zip(*(x.split() for x in lst_in))
+result = zip(*temp)
+
+for i in result:
+    print(*i)
 
 
 # print()
