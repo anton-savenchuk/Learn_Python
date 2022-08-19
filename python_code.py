@@ -5139,34 +5139,96 @@
 # Нет данных
 # Карл Саша
 
-frnds_brthdy = {
-    "янв": [],
-    "фев": [],
-    "мар": [],
-    "апр": [],
-    "май": [],
-    "июн": [],
-    "июл": [],
-    "авг": [],
-    "сен": [],
-    "окт": [],
-    "ноя": [],
-    "дек": [],
-}
+# frnds_brthdy = {
+#     "янв": [],
+#     "фев": [],
+#     "мар": [],
+#     "апр": [],
+#     "май": [],
+#     "июн": [],
+#     "июл": [],
+#     "авг": [],
+#     "сен": [],
+#     "окт": [],
+#     "ноя": [],
+#     "дек": [],
+# }
 
-n = int(input())
-for _ in range(n):
-    name, day, month = input().split()
-    frnds_brthdy[month] = frnds_brthdy.get(month, []) + [[name, int(day)]]
+# n = int(input())
+# for _ in range(n):
+#     name, day, month = input().split()
+#     frnds_brthdy[month] = frnds_brthdy.get(month, []) + [[name, int(day)]]
 
-m = int(input())
-for _ in range(m):
-    month = input()
-    print(
-        "Нет данных"
-        if len(frnds_brthdy[month]) == 0
-        else " ".join(sorted(name[0] for name in frnds_brthdy[month]))
-    )
+# m = int(input())
+# for _ in range(m):
+#     month = input()
+#     print(
+#         "Нет данных"
+#         if len(frnds_brthdy[month]) == 0
+#         else " ".join(sorted(name[0] for name in frnds_brthdy[month]))
+#     )
+
+
+# ####################################
+# Рейтинг таксистов
+
+# Руководитель таксопарка хочет увидеть отчет по всем таксистам, где
+# нужно указать имя таксиста и его среднюю оценку. Информацию в отчете
+# нужно расположить по убыванию средней оценки таксиста.
+
+# После каждого успешно выполненного заказа, клиент выставляет таксисту
+# оценку - целое число от 1 до 5.
+
+# Входные данные
+# Программа будет принимать строки, в которых сперва указывается имя
+# таксиста, а затем через запятую с пробелом его оценка за заказ.
+
+# Строка "конец" является последней строкой и означает окончание ввода
+
+# Выходные данные
+# Нужно расположить таксистов в порядке убывания их средней оценке и
+# вывести имя каждого таксиста и его среднюю оценку в отдельной строке.
+# В случае совпадения средних оценок расположить таксистов нужно
+# отсортировать имена таксистов по алфавиту.
+
+# Sample Input 1:
+# Джек, 2
+# Джек, 3
+# Билл, 5
+# Билл, 4
+# Билл, 4
+# Билл, 3
+# конец
+
+# Sample Output 1:
+# Билл 4.0
+# Джек 2.5
+
+# Sample Input 2:
+# Зина, 5
+# Зина, 3
+# Гермиона, 4
+# Гермиона, 4
+# конец
+
+# Sample Output 2:
+# Гермиона 4.0
+# Зина 4.0
+
+taxi_drivers = {}
+
+string_in = input()
+while string_in != "конец":
+    name, grade = string_in.split(", ")
+    taxi_drivers[name] = taxi_drivers.get(name, []) + [int(grade)]
+    string_in = input()
+
+for pair in sorted(
+    taxi_drivers.items(),
+    key=lambda pair: (-(sum(pair[1]) / len(pair[1])), pair[0])
+):
+    name, grade = pair
+    print(name, sum(grade) / len(grade))
 
 
 
