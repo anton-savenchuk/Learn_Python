@@ -5215,21 +5215,45 @@
 # Гермиона 4.0
 # Зина 4.0
 
-taxi_drivers = {}
+# taxi_drivers = {}
 
-string_in = input()
-while string_in != "конец":
-    name, grade = string_in.split(", ")
-    taxi_drivers[name] = taxi_drivers.get(name, []) + [int(grade)]
-    string_in = input()
+# string_in = input()
+# while string_in != "конец":
+#     name, grade = string_in.split(", ")
+#     taxi_drivers[name] = taxi_drivers.get(name, []) + [int(grade)]
+#     string_in = input()
 
-for pair in sorted(
-    taxi_drivers.items(),
-    key=lambda pair: (-(sum(pair[1]) / len(pair[1])), pair[0])
-):
-    name, grade = pair
-    print(name, sum(grade) / len(grade))
+# for pair in sorted(
+#     taxi_drivers.items(),
+#     key=lambda pair: (-(sum(pair[1]) / len(pair[1])), pair[0])
+# ):
+#     name, grade = pair
+#     print(name, sum(grade) / len(grade))
 
+
+####################################
+# Определите функцию с именем get_add, которая складывает или два числа
+# или две строки (но не число со строкой) и возвращает полученный
+# результат. Если сложение не может быть выполнено, то функция
+# возвращает значение None. Сигнатура функции должна быть, следующей:
+
+# def get_add(a, b): ...
+
+# Вызывать функцию не нужно, только определить. Также ничего не нужно
+# выводить на экран.
+
+# P. S. Не забудьте про необходимость различения булевых значений
+# (False, True) от целочисленных.
+
+def get_add(a, b):
+    """Get sum two numbers or two strings."""
+    try:
+        return None if type(a) is bool or type(b) is bool else a + b
+    except Exception:
+        return None
+
+
+print(get_add("1", "9.5"))
 
 
 # print()
