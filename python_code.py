@@ -5245,15 +5245,83 @@
 # P. S. Не забудьте про необходимость различения булевых значений
 # (False, True) от целочисленных.
 
-def get_add(a, b):
-    """Get sum two numbers or two strings."""
-    try:
-        return None if type(a) is bool or type(b) is bool else a + b
-    except Exception:
-        return None
+# def get_add(a, b):
+#     """Get sum two numbers or two strings."""
+#     try:
+#         return None if type(a) is bool or type(b) is bool else a + b
+#     except Exception:
+#         return None
 
 
-print(get_add("1", "9.5"))
+# print(get_add("1", "9.5"))
+
+
+####################################
+# Напишите программу, которая принимает на стандартный вход список игр
+# футбольных команд с результатом матча и выводит на стандартный вывод
+# сводную таблицу результатов всех матчей.
+
+# За победу команде начисляется 3 очка, за поражение — 0, за ничью — 1.
+
+# Формат ввода следующий:
+# В первой строке указано целое число n — количество завершенных игр.
+# После этого идет n строк, в которых записаны результаты игры в
+# следующем формате:
+# Первая_команда;Забито_первой_командой;Вторая_команда;Забито_второй_командой
+
+# Вывод программы необходимо оформить следующим образом:
+# Команда:Всего_игр Побед Ничьих Поражений Всего_очков
+
+# Конкретный пример ввода-вывода приведён ниже.
+
+# Порядок вывода команд произвольный.
+
+# Sample Input:
+# 3
+# Спартак;9;Зенит;10
+# Локомотив;12;Зенит;3
+# Спартак;8;Локомотив;15
+
+# Sample Output:
+# Спартак:2 0 0 2 0
+# Зенит:2 1 0 1 3
+# Локомотив:2 2 0 0 6
+
+games_cntr = 3  # games_cntr = int(input())
+
+# {"Team": [total_games: int, victories: int, draw: int, defeats: int, rating: int]}
+games_results = {}
+
+for _ in range(games_cntr):
+    team_a, goals_a, team_b, goals_b = (
+        int(i) if i.isdigit() else i for i in input().split(";")
+    )
+
+    games_results[team_a] = games_results.get(team_a, [0, 0, 0, 0, 0])
+    games_results[team_b] = games_results.get(team_b, [0, 0, 0, 0, 0])
+
+    games_results[team_a][0] += 1  # total_games
+    games_results[team_b][0] += 1  # total_games
+
+    if goals_a > goals_b:
+        games_results[team_a][1] += 1  # victories
+        games_results[team_a][4] += 3  # rating
+        games_results[team_b][3] += 1  # defeats
+
+    elif goals_a < goals_b:
+        games_results[team_b][1] += 1  # victories
+        games_results[team_b][4] += 3  # rating
+        games_results[team_a][3] += 1  # defeats
+
+    else:
+        games_results[team_a][2] += 1  # draw
+        games_results[team_a][4] += 1  # rating
+        games_results[team_b][2] += 1  # draw
+        games_results[team_b][4] += 1  # rating
+
+
+for team, stats in games_results.items():
+    print(f"{team}:{' '.join(str(i) for i in stats)}")
 
 
 # print()
