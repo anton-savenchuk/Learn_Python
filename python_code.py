@@ -5287,41 +5287,81 @@
 # Зенит:2 1 0 1 3
 # Локомотив:2 2 0 0 6
 
-games_cntr = 3  # games_cntr = int(input())
+# games_cntr = 3  # games_cntr = int(input())
 
-# {"Team": [total_games: int, victories: int, draw: int, defeats: int, rating: int]}
-games_results = {}
+# # {"Team": [total_games: int, victories: int, draw: int, defeats: int, rating: int]}
+# games_results = {}
 
-for _ in range(games_cntr):
-    team_a, goals_a, team_b, goals_b = (
-        int(i) if i.isdigit() else i for i in input().split(";")
-    )
+# for _ in range(games_cntr):
+#     team_a, goals_a, team_b, goals_b = (
+#         int(i) if i.isdigit() else i for i in input().split(";")
+#     )
 
-    games_results[team_a] = games_results.get(team_a, [0, 0, 0, 0, 0])
-    games_results[team_b] = games_results.get(team_b, [0, 0, 0, 0, 0])
+#     games_results[team_a] = games_results.get(team_a, [0, 0, 0, 0, 0])
+#     games_results[team_b] = games_results.get(team_b, [0, 0, 0, 0, 0])
 
-    games_results[team_a][0] += 1  # total_games
-    games_results[team_b][0] += 1  # total_games
+#     games_results[team_a][0] += 1  # total_games
+#     games_results[team_b][0] += 1  # total_games
 
-    if goals_a > goals_b:
-        games_results[team_a][1] += 1  # victories
-        games_results[team_a][4] += 3  # rating
-        games_results[team_b][3] += 1  # defeats
+#     if goals_a > goals_b:
+#         games_results[team_a][1] += 1  # victories
+#         games_results[team_a][4] += 3  # rating
+#         games_results[team_b][3] += 1  # defeats
 
-    elif goals_a < goals_b:
-        games_results[team_b][1] += 1  # victories
-        games_results[team_b][4] += 3  # rating
-        games_results[team_a][3] += 1  # defeats
+#     elif goals_a < goals_b:
+#         games_results[team_b][1] += 1  # victories
+#         games_results[team_b][4] += 3  # rating
+#         games_results[team_a][3] += 1  # defeats
 
-    else:
-        games_results[team_a][2] += 1  # draw
-        games_results[team_a][4] += 1  # rating
-        games_results[team_b][2] += 1  # draw
-        games_results[team_b][4] += 1  # rating
+#     else:
+#         games_results[team_a][2] += 1  # draw
+#         games_results[team_a][4] += 1  # rating
+#         games_results[team_b][2] += 1  # draw
+#         games_results[team_b][4] += 1  # rating
 
 
-for team, stats in games_results.items():
-    print(f"{team}:{' '.join(str(i) for i in stats)}")
+# for team, stats in games_results.items():
+#     print(f"{team}:{' '.join(str(i) for i in stats)}")
+
+
+# ####################################
+# Вывести матрицу 2
+#
+# На вход программе подаются два натуральных числа n и m, каждое на
+# отдельной строке — количество строк и столбцов в матрице. Далее
+# вводятся сами элементы матрицы — слова, каждое на отдельной строке;
+# подряд идут элементы сначала первой строки, затем второй, и т.д.
+
+# Напишите программу, которая считывает элементы матрицы один за другим,
+# выводит их в виде матрицы, выводит пустую строку, и снова ту же
+# матрицу, но уже поменяв местами строки со столбцами: первая строка
+# выводится как первый столбец, и так далее.
+
+# Формат входных данных
+# На вход программе подаются два числа n и m — количество строк и
+# столбцов в матрице, далее идут n×m слов, каждое на отдельной строке.
+
+# Формат выходных данных
+# Программа должна вывести считанную матрицу, за ней пустую строку, и ту
+# же матрицу, но поменяв местами строки со столбцами. Элементы матрицы
+# разделять одним пробелом.
+
+n, m = int(input()), int(input())
+
+matrix = []
+for i in range(n):
+    matrix.append([])
+    for j in range(m):
+        element = input()
+        matrix[i].append(element)
+
+for i in matrix:
+    print(*i)
+
+for i in range(m):
+    print()
+    for j in range(n):
+        print(matrix[j][i], end=" ")
 
 
 # print()
