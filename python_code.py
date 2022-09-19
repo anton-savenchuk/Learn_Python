@@ -5477,30 +5477,92 @@
 # foo
 
 
-def get_namespace(namespace: str, parent: str) -> str:
-    """Get the namespace of a variable."""
-    if namespace == "global" and parent not in namespaces[namespace][1]:
-        return None
-    elif parent in namespaces[namespace][1]:
-        return namespace
-    else:
-        return get_namespace(namespaces[namespace][0], parent)
+# def get_namespace(namespace: str, parent: str) -> str:
+#     """Get the namespace of a variable."""
+#     if namespace == "global" and parent not in namespaces[namespace][1]:
+#         return None
+#     elif parent in namespaces[namespace][1]:
+#         return namespace
+#     else:
+#         return get_namespace(namespaces[namespace][0], parent)
 
+
+# n = int(input())
+# namespaces = {"global": (None, set())}
+
+# for _ in range(n):
+#     action, namespace, parent = input().split()
+#     if action == "get":
+#         print(get_namespace(namespace, parent))
+#         continue
+
+#     if parent in namespaces:
+#         namespaces[parent][1].add(namespace)
+#         namespaces[namespace] = namespaces.get(namespace, (parent, set()))
+#     elif namespace in namespaces:
+#         namespaces[namespace][1].add(parent)
+
+
+# ####################################
+# Больше среднего
+
+# Напишите программу, которая выводит количество элементов квадратной
+# матрицы в каждой строке, больших среднего арифметического элементов
+# данной строки.
+
+# Формат входных данных
+# На вход программе подаётся натуральное число n — количество строк и
+# столбцов в матрице, затем элементы матрицы (целые числа) построчно
+# через пробел.
+
+# Формат выходных данных
+# Программа должна вывести n чисел — для каждой строки количество
+# элементов матрицы, больших среднего арифметического элементов данной
+# строки.
+
+# Sample Input 1:
+# 4
+# 1 2 3 4
+# 5 6 3 15
+# 0 2 3 1
+# 5 2 8 5
+
+# Sample Output 1:
+# 2
+# 1
+# 2
+# 1
+
+# Sample Input 2:
+# 2
+# 5 6
+# 99 5
+
+# Sample Output 2:
+# 1
+# 1
+
+# Sample Input 3:
+# 3
+# 666 666 666
+# 777 777 777
+# 100 100 100
+
+# Sample Output 3:
+# 0
+# 0
+# 0
 
 n = int(input())
-namespaces = {"global": (None, set())}
-
+matrix = []
+means = []
 for _ in range(n):
-    action, namespace, parent = input().split()
-    if action == "get":
-        print(get_namespace(namespace, parent))
-        continue
+    row = list(map(int, input().split()))
+    matrix.append(row)
+    means.append(sum(row) / n)
 
-    if parent in namespaces:
-        namespaces[parent][1].add(namespace)
-        namespaces[namespace] = namespaces.get(namespace, (parent, set()))
-    elif namespace in namespaces:
-        namespaces[namespace][1].add(parent)
+for i in range(n):
+    print(sum(map(lambda x: x > means[i], matrix[i])))
 
 
 # print()
