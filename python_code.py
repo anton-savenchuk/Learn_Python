@@ -5889,17 +5889,83 @@
 # Sample Output 4:
 # 0 4
 
-n, m =  int(input()), int(input())
+# n, m =  int(input()), int(input())
+
+# matrix = [list(map(int, input().split())) for _ in range(n)]
+# row, col = 0, 0
+
+# for i in range(n):
+#     for j in range(m):
+#         if matrix[i][j] > matrix[row][col]:
+#             row, col = i, j
+
+# print(row, col)
+
+
+# ####################################
+# Обмен столбцов
+
+# Напишите программу, которая меняет местами столбцы в матрице.
+
+# Формат входных данных
+# На вход программе на разных строках подаются два натуральных числа n и
+# m — количество строк и столбцов в матрице, затем элементы матрицы
+# построчно через пробел, затем числа i и j — номера столбцов,
+# подлежащих обмену.
+
+# Формат выходных данных
+# Программа должна вывести указанную таблицу с замененными столбцами.
+
+# Sample Input 1:
+# 3
+# 4
+# 11 12 13 14
+# 21 22 23 24
+# 31 32 33 34
+# 0 1
+
+# Sample Output 1:
+# 12 11 13 14
+# 22 21 23 24
+# 32 31 33 34
+
+# Sample Input 2:
+# 3
+# 3
+# 11 12 13
+# 21 22 23
+# 31 32 33
+# 2 1
+
+# Sample Output 2:
+# 11 13 12 
+# 21 23 22 
+# 31 33 32 
+
+# Sample Input 3:
+# 3
+# 5
+# 12 14 11 13 24
+# 22 24 21 23 14
+# 32 34 31 33 34
+# 0 2
+
+# Sample Output 3:
+# 11 14 12 13 24
+# 21 24 22 23 14
+# 31 34 32 33 34
+
+
+n, m = int(input()), int(input())
 
 matrix = [list(map(int, input().split())) for _ in range(n)]
-row, col = 0, 0
+col_1, col_2 = map(int, input().split())
 
 for i in range(n):
-    for j in range(m):
-        if matrix[i][j] > matrix[row][col]:
-            row, col = i, j
+    matrix[i][col_1], matrix[i][col_2] = matrix[i][col_2], matrix[i][col_1]
 
-print(row, col)
+for row in matrix:
+    print(*row)
 
 
 # print()
