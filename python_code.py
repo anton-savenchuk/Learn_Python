@@ -5956,16 +5956,69 @@
 # 31 34 32 33 34
 
 
-n, m = int(input()), int(input())
+# n, m = int(input()), int(input())
+
+# matrix = [list(map(int, input().split())) for _ in range(n)]
+# col_1, col_2 = map(int, input().split())
+
+# for i in range(n):
+#     matrix[i][col_1], matrix[i][col_2] = matrix[i][col_2], matrix[i][col_1]
+
+# for row in matrix:
+#     print(*row)
+
+
+# ####################################
+# Симметричная матрица
+
+# Напишите программу, которая проверяет симметричность квадратной
+# матрицы относительно главной диагонали.
+
+# Формат входных данных
+# На вход программе подаётся натуральное число n — количество строк и
+# столбцов в матрице, затем элементы матрицы построчно через пробел.
+
+# Формат выходных данных
+# Программа должна вывести YES, если матрица симметрична относительно
+# главной диагонали, и слово NO в противном случае.
+
+# Sample Input 1:
+# 3
+# 0 1 2
+# 1 2 3
+# 2 3 4
+
+# Sample Output 1:
+# YES
+
+# Sample Input 2:
+# 3
+# 0 1 2
+# 1 2 7
+# 2 3 4
+
+# Sample Output 2:
+# NO
+
+# Sample Input 3:
+# 2
+# 1 2
+# 3 4
+
+# Sample Output 3:
+# NO
+
+n = int(input())
 
 matrix = [list(map(int, input().split())) for _ in range(n)]
-col_1, col_2 = map(int, input().split())
-
+flag = "YES"
 for i in range(n):
-    matrix[i][col_1], matrix[i][col_2] = matrix[i][col_2], matrix[i][col_1]
+    for j in range(i + 1, n):
+        if matrix[i][j] != matrix[j][i]:
+            flag = "NO"
+            break
 
-for row in matrix:
-    print(*row)
+print(flag)
 
 
 # print()
