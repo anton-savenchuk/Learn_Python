@@ -6132,15 +6132,84 @@
 # 1 1
 
 
+# n = int(input())
+# matrix = [list(map(int, input().split())) for _ in range(n)]
+
+# for i in range(n // 2):
+#     for j in range(n):
+#         matrix[i][j], matrix[-(i + 1)][j] = matrix[-(i + 1)][j], matrix[i][j]
+
+# for row in matrix:
+#     print(*row)
+
+
+# ####################################
+# Поворот матрицы
+
+# Напишите программу, которая поворачивает квадратную матрицу чисел на
+# 90∘ по часовой стрелке.
+
+# Формат входных данных
+# На вход программе подаётся натуральное число n — количество строк и
+# столбцов в матрице, затем элементы матрицы построчно через пробел.
+
+# Формат выходных данных
+# Программа должна вывести результат на экран, числа должны быть
+# разделены одним пробелом.
+
+# Sample Input 1:
+# 3
+# 1 2 3
+# 4 5 6
+# 7 8 9
+
+# Sample Output 1:
+# 7 4 1 
+# 8 5 2 
+# 9 6 3 
+
+# Sample Input 2:
+# 4
+# 1 9 4 2
+# 3 8 1 5
+# 6 7 4 6
+# 1 9 7 8
+
+# Sample Output 2:
+# 1 6 3 1
+# 9 7 8 9
+# 7 4 1 4
+# 8 6 5 2
+
+# Sample Input 3:
+# 2
+# 1 2
+# 3 4
+
+# Sample Output 3:
+# 3 1
+# 4 2
+
+
+
+# Sample Input 1:
+# 3
+# 1 2 3
+# 4 5 6
+# 7 8 9
+
+# Sample Output 1:
+# 7 4 1 
+# 8 5 2 
+# 9 6 3 
+
 n = int(input())
 matrix = [list(map(int, input().split())) for _ in range(n)]
 
-for i in range(n // 2):
-    for j in range(n):
-        matrix[i][j], matrix[-(i + 1)][j] = matrix[-(i + 1)][j], matrix[i][j]
-
-for row in matrix:
-    print(*row)
+for i in range(n):
+    for j in range(n - 1, -1, -1):
+        print(matrix[j][i], end=" ")
+    print()
 
 
 # print()
