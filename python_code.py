@@ -6074,11 +6074,70 @@
 # 2 2 3 1 3
 
 
+# n = int(input())
+# matrix = [list(map(int, input().split())) for _ in range(n)]
+
+# for i in range(n):
+#     matrix[i][i], matrix[-(i + 1)][i] = matrix[-(i + 1)][i], matrix[i][i]
+
+# for row in matrix:
+#     print(*row)
+
+
+# ####################################
+# Зеркальное отображение
+
+# Дана квадратная матрица чисел. Напишите программу, которая зеркально
+# отображает её элементы относительно горизонтальной оси симметрии.
+
+# Формат входных данных
+# На вход программе подаётся натуральное число nnn — количество строк и
+# столбцов в матрице, затем элементы матрицы построчно через пробел.
+
+# Формат выходных данных
+# Программа должна вывести матрицу в которой зеркально отображены
+# элементы относительно горизонтальной оси симметрии.
+
+# Sample Input 1:
+# 4
+# 1 2 3 4
+# 5 6 7 8
+# 8 6 4 2
+# 3 4 5 6
+
+# Sample Output 1:
+# 3 4 5 6
+# 8 6 4 2
+# 5 6 7 8
+# 1 2 3 4
+
+# Sample Input 2:
+# 3
+# 1 2 3
+# 4 5 6
+# 7 8 9
+
+# Sample Output 2:
+# 7 8 9
+# 4 5 6
+# 1 2 3
+
+# Sample Input 3:
+# 2
+# 1 1
+# 1 1
+
+# Sample Output 3:
+# 1 1
+# 1 1
+
+
 n = int(input())
 matrix = [list(map(int, input().split())) for _ in range(n)]
 
-for i in range(n):
-    matrix[i][i], matrix[-(i + 1)][i] = matrix[-(i + 1)][i], matrix[i][i]
+for i in range(n // 2):
+    for j in range(n):
+        matrix[i][j], matrix[-(i + 1)][j] = matrix[-(i + 1)][j], matrix[i][j]
 
 for row in matrix:
     print(*row)
