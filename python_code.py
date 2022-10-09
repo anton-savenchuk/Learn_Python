@@ -6191,25 +6191,95 @@
 # 4 2
 
 
+# n = int(input())
+# matrix = [list(map(int, input().split())) for _ in range(n)]
 
-# Sample Input 1:
-# 3
-# 1 2 3
-# 4 5 6
-# 7 8 9
+# for i in range(n):
+#     for j in range(n - 1, -1, -1):
+#         print(matrix[j][i], end=" ")
+#     print()
 
-# Sample Output 1:
-# 7 4 1 
-# 8 5 2 
-# 9 6 3 
 
-n = int(input())
-matrix = [list(map(int, input().split())) for _ in range(n)]
+# ####################################
+# Объявите класс с именем Translator (для перевода с английского на
+# русский) со следующими методами:
 
-for i in range(n):
-    for j in range(n - 1, -1, -1):
-        print(matrix[j][i], end=" ")
-    print()
+# add(self, eng, rus) - для добавления новой связки английского и
+# русского слова (если английское слово уже существует, то новое русское
+# слово добавляется как синоним для перевода, например, go - идти,
+# ходить, ехать); если связка eng-rus уже существует, то второй раз ее
+# добавлять не нужно, например:  add('go', 'идти'), add('go', 'идти');
+# remove(self, eng) - для удаления связки по указанному английскому
+# слову;
+# translate(self, eng) - для перевода с английского на русский (метод
+# должен возвращать список из русских слов, соответствующих переводу
+# английского слова, даже если в списке всего одно слово).
+
+# Все добавления и удаления связок должны выполняться внутри каждого
+# конкретного объекта класса Translator, т.е. связки хранить локально
+# внутри экземпляров классов класса Translator.
+
+# Создайте экземпляр tr класса Translator и вызовите метод add для
+# следующих связок:
+
+# tree - дерево
+# car - машина
+# car - автомобиль
+# leaf - лист
+# river - река
+# go - идти
+# go - ехать
+# go - ходить
+# milk - молоко
+
+# Затем методом remove() удалите связку для английского слова car. С
+# помощью метода translate() переведите слово go. Результат выведите на
+# экран в виде строки из всех русских слов, связанных со словом go:
+
+# Вывод в формате: идти ехать ходить
+
+
+class Translator:
+    def __init__(self):
+        self.translate_dict = {}
+
+    def add(self, eng, rus):
+        """Add a new bundle of English and Russian word."""
+        if rus not in self.translate_dict.get(eng, []):
+            self.translate_dict[eng] = self.translate_dict.get(eng, []) + [rus]
+
+    def remove(self, eng):
+        """Delete a link in an english word."""
+        self.translate_dict.pop(eng, False)
+
+    def translate(self, eng):
+        """Translate from English into Russian.
+
+        Return a list of Russian words.
+        """
+        return self.translate_dict[eng]
+
+
+eng_rus = [
+    ["tree", "дерево"],
+    ["tree", "дерево"],
+    ["car", "машина"],
+    ["car", "автомобиль"],
+    ["leaf", "лист"],
+    ["river", "река"],
+    ["go", "идти"],
+    ["go", "ехать"],
+    ["go", "ходить"],
+    ["milk", "молоко"],
+]
+
+tr = Translator()
+
+for i in range(len(eng_rus)):
+    tr.add(eng_rus[i][0], eng_rus[i][1])
+
+tr.remove("car")
+print(*tr.translate("go"))
 
 
 # print()
