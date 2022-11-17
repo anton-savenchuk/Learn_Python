@@ -6329,64 +6329,121 @@
 # числом мин M = 12.
 
 # P.S. На экран в программе ничего выводить не нужно.
-from random import randint
+# from random import randint
 
 
-class Cell:
-    def __init__(self, around_mines: int = 0, mine: bool = False):
-        self.around_mines = around_mines
-        self.mine = mine
-        self.fl_open: bool = False
+# class Cell:
+#     def __init__(self, around_mines: int = 0, mine: bool = False):
+#         self.around_mines = around_mines
+#         self.mine = mine
+#         self.fl_open: bool = False
 
 
-class GamePole:
-    def __init__(self, N: int, M: int):
-        self.N = N
-        self.M = M
-        self.pole = [[Cell() for _ in range(self.N)] for _ in range(self.N)]
-        self.init()
+# class GamePole:
+#     def __init__(self, N: int, M: int):
+#         self.N = N
+#         self.M = M
+#         self.pole = [[Cell() for _ in range(self.N)] for _ in range(self.N)]
+#         self.init()
 
-    def init(self):
-        while self.M:
-            i = randint(0, self.N - 1)
-            j = randint(0, self.N - 1)
+#     def init(self):
+#         while self.M:
+#             i = randint(0, self.N - 1)
+#             j = randint(0, self.N - 1)
 
-            if self.pole[i][j].mine:
-                continue
+#             if self.pole[i][j].mine:
+#                 continue
 
-            self.pole[i][j].mine = True
-            self.M -= 1
+#             self.pole[i][j].mine = True
+#             self.M -= 1
 
-        indx = (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)
+#         indx = (-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)
 
-        for x in range(self.N):
-            for y in range(self.N):
-                if not self.pole[x][y].mine:
-                    mines = sum(
-                        (
-                            self.pole[x + i][y + j].mine
-                            for i, j in indx
-                            if 0 <= x + i < self.N and 0 <= y + j < self.N
-                        )
-                    )
-                    self.pole[x][y].around_mines = mines
+#         for x in range(self.N):
+#             for y in range(self.N):
+#                 if not self.pole[x][y].mine:
+#                     mines = sum(
+#                         (
+#                             self.pole[x + i][y + j].mine
+#                             for i, j in indx
+#                             if 0 <= x + i < self.N and 0 <= y + j < self.N
+#                         )
+#                     )
+#                     self.pole[x][y].around_mines = mines
 
-    def show(self):
-        for row in self.pole:
-            print(
-                *map(
-                    lambda x: "#"
-                    if not x.fl_open
-                    else x.around_mines
-                    if not x.mine
-                    else "*",
-                    row,
-                )
-            )
+#     def show(self):
+#         for row in self.pole:
+#             print(
+#                 *map(
+#                     lambda x: "#"
+#                     if not x.fl_open
+#                     else x.around_mines
+#                     if not x.mine
+#                     else "*",
+#                     row,
+#                 )
+#             )
 
 
-pole_game = GamePole(10, 12)
+# pole_game = GamePole(10, 12)
 
+
+# ####################################
+# Магический квадрат 🌶️
+
+# Магическим квадратом порядка n называется квадратная таблица размера
+# n×n, составленная из всех чисел 1,2,3,…,n**2 так, что суммы по каждому
+# столбцу, каждой строке и каждой из двух диагоналей равны между собой.
+# Напишите программу, которая проверяет, является ли заданная квадратная
+# матрица магическим квадратом.
+
+# Формат входных данных
+# На вход программе подаётся натуральное число n — количество строк и
+# столбцов в матрице, затем элементы матрицы: n строк, по n чисел в
+# каждой, разделённые пробелами.
+
+# Формат выходных данных
+# Программа должна вывести слово YES, если матрица является магическим
+# квадратом, и слово NO в противном случае.
+
+n = int(input())
+
+matrix = [list(map(int, input().split())) for _ in range(n)]
+
+temp_sum = sum(matrix[0])
+
+nums_matrix = []
+for row in matrix:
+    nums_matrix.extend(row)
+
+
+def check_magic():
+    _sums = []
+
+    for num in range(1, (n**2) + 1):
+        if num not in nums_matrix:
+            return "NO"
+
+    d_main = d_second = 0
+    for i in range(n):
+        d_main += matrix[i][i]
+        d_second += matrix[i][-i - 1]
+
+    if d_main != d_second:
+        return "NO"
+
+    for _column in range(n):
+        column = row = 0
+        for _row in range(n):
+            row += matrix[_column][_row]
+            column += matrix[_row][_column]
+
+        _sums.extend((row, column))
+
+    return "YES" if all(map(lambda x: x == temp_sum, _sums)) else "NO"
+
+
+print(check_magic())
 
 # print()
 # print(time.perf_counter() - start)
