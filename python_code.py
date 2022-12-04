@@ -6406,44 +6406,83 @@
 # Программа должна вывести слово YES, если матрица является магическим
 # квадратом, и слово NO в противном случае.
 
-n = int(input())
+# n = int(input())
 
-matrix = [list(map(int, input().split())) for _ in range(n)]
+# matrix = [list(map(int, input().split())) for _ in range(n)]
 
-temp_sum = sum(matrix[0])
+# temp_sum = sum(matrix[0])
 
-nums_matrix = []
+# nums_matrix = []
+# for row in matrix:
+#     nums_matrix.extend(row)
+
+
+# def check_magic():
+#     _sums = []
+
+#     for num in range(1, (n**2) + 1):
+#         if num not in nums_matrix:
+#             return "NO"
+
+#     d_main = d_second = 0
+#     for i in range(n):
+#         d_main += matrix[i][i]
+#         d_second += matrix[i][-i - 1]
+
+#     if d_main != d_second:
+#         return "NO"
+
+#     for _column in range(n):
+#         column = row = 0
+#         for _row in range(n):
+#             row += matrix[_column][_row]
+#             column += matrix[_row][_column]
+
+#         _sums.extend((row, column))
+
+#     return "YES" if all(map(lambda x: x == temp_sum, _sums)) else "NO"
+
+
+# print(check_magic())
+
+
+# ####################################
+# Шахматная доска
+
+# На вход программе подаются два натуральных числа nn и mm. Напишите
+# программу для создания матрицы размером n×m, заполнив её символами
+# "." и "*" в шахматном порядке. В левом верхнем углу должна стоять
+# точка. Выведите полученную матрицу на экран, разделяя элементы
+# пробелами.
+
+# Формат входных данных
+# На вход программе на одной строке подаются два натуральных числа n и m
+# — количество строк и столбцов в матрице.
+
+# Формат выходных данных
+# Программа должна вывести матрицу, описанную в условии задачи.
+
+# Sample Input 1:
+# 3 4
+
+# Sample Output 1:
+# . * . *
+# * . * .
+# . * . *
+
+n, m = map(int, input().split())
+matrix = []
+
+for i in range(n):
+    matrix.append([])
+    for j in range(m):
+        if (i % 2 == 0 and j % 2 == 0) or (i % 2 != 0 and j % 2 != 0):
+            matrix[i].append(".")
+        else:
+            matrix[i].append("*")
+
 for row in matrix:
-    nums_matrix.extend(row)
-
-
-def check_magic():
-    _sums = []
-
-    for num in range(1, (n**2) + 1):
-        if num not in nums_matrix:
-            return "NO"
-
-    d_main = d_second = 0
-    for i in range(n):
-        d_main += matrix[i][i]
-        d_second += matrix[i][-i - 1]
-
-    if d_main != d_second:
-        return "NO"
-
-    for _column in range(n):
-        column = row = 0
-        for _row in range(n):
-            row += matrix[_column][_row]
-            column += matrix[_row][_column]
-
-        _sums.extend((row, column))
-
-    return "YES" if all(map(lambda x: x == temp_sum, _sums)) else "NO"
-
-
-print(check_magic())
+    print(*row)
 
 # print()
 # print(time.perf_counter() - start)
