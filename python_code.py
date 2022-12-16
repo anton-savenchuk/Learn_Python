@@ -6708,31 +6708,78 @@
 # 4 4 4 6
 # 6 9 8 4
 
+# import itertools
+
+
+# n, m = map(int, input().split())
+
+# matrix_A = []
+# matrix_B = []
+
+# for _ in range(n):
+#     matrix_A.extend([int(i) for i in row.split()] for row in input().splitlines())
+
+# input_line_break = input()
+
+# for _ in range(n):
+#     matrix_B.extend([int(i) for i in row.split()] for row in input().splitlines())
+
+# matrix_C = [[0] * m for _ in range(n)]
+# for i, j in itertools.product(range(n), range(m)):
+#     matrix_C[i][j] = matrix_A[i][j] + matrix_B[i][j]
+
+# for item in matrix_C:
+#     for j in range(m):
+#         print(str(item[j]).ljust(3), end="")
+#     print()
+
+
+# ####################################
+# Умножение матриц 🌶️
+
+# Напишите программу, которая перемножает две матрицы.
+
+# Формат входных данных
+# На вход программе подаются два натуральных числа n и m — количество
+# строк и столбцов в первой матрице, затем элементы первой матрицы,
+# затем пустая строка. Далее следуют числа m и k — количество строк и
+# столбцов второй матрицы затем элементы второй матрицы.
+
+# Формат выходных данных
+# Программа должна вывести результирующую матрицу, разделяя элементы
+# символом пробела.
+
+# Sample Input 1:
+# 2 2
+# 1 2
+# 3 2
+
+# 2 2
+# 3 2
+# 1 1
+
+# Sample Output 1:
+# 5 4
+# 11 8
+
 import itertools
 
 
 n, m = map(int, input().split())
 
-matrix_A = []
-matrix_B = []
+matrix_A = [[int(i) for i in input().split()] for _ in range(n)]
+input()
+m, k = map(int, input().split())
+matrix_B = [[int(i) for i in input().split()] for _ in range(m)]
+matrix_C = [[0] * k for _ in range(n)]
 
-for _ in range(n):
-    matrix_A.extend([int(i) for i in row.split()] for row in input().splitlines())
-
-input_line_break = input()
-
-for _ in range(n):
-    matrix_B.extend([int(i) for i in row.split()] for row in input().splitlines())
-
-matrix_C = [[0] * m for _ in range(n)]
-for i, j in itertools.product(range(n), range(m)):
-    matrix_C[i][j] = matrix_A[i][j] + matrix_B[i][j]
+for l, i, j in itertools.product(range(n), range(k), range(m)):
+    matrix_C[l][i] += matrix_A[l][j] * matrix_B[j][i]
 
 for item in matrix_C:
-    for j in range(m):
-        print(str(item[j]).ljust(3), end="")
+    for j in range(n):
+        print(str(item[j]).ljust(4), end="")
     print()
-
 
 
 # print()
