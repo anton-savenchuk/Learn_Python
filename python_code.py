@@ -6807,38 +6807,67 @@
 # 66 81 96
 # 102 126 150
 
-import itertools
+# import itertools
 
 
-def get_multiply(matrix_A: list, matrix_B: list, degree: int = 1) -> list:
-    if degree == 1:
-        return matrix_A
+# def get_multiply(matrix_A: list, matrix_B: list, degree: int = 1) -> list:
+#     if degree == 1:
+#         return matrix_A
 
-    n, m = len(matrix_A), len(matrix_A[0])
-    m, k = len(matrix_B), len(matrix_B[0])
-    temp_matrix = [[0] * k for _ in range(n)]
+#     n, m = len(matrix_A), len(matrix_A[0])
+#     m, k = len(matrix_B), len(matrix_B[0])
+#     temp_matrix = [[0] * k for _ in range(n)]
 
-    for l, i, j in itertools.product(range(n), range(k), range(m)):
-        temp_matrix[l][i] += matrix_A[l][j] * matrix_B[j][i]
+#     for l, i, j in itertools.product(range(n), range(k), range(m)):
+#         temp_matrix[l][i] += matrix_A[l][j] * matrix_B[j][i]
 
-    degree -= 1
-    if degree == 1:
-        return temp_matrix
+#     degree -= 1
+#     if degree == 1:
+#         return temp_matrix
 
-    return get_multiply(matrix_A, temp_matrix, degree)
+#     return get_multiply(matrix_A, temp_matrix, degree)
 
 
+# n = int(input())
+# matrix_A = [[int(i) for i in input().split()] for _ in range(n)]
+# m = int(input())
+# matrix_B = [i[:] for i in matrix_A]
+
+# matrix_C = get_multiply(matrix_A, matrix_B, degree=m)
+
+# for item in matrix_C:
+#     for j in range(n):
+#         print(str(item[j]).ljust(6), end="")
+#     print()
+
+
+# ####################################
+# Каждый n-ый элемент
+
+# На вход программе подается строка текста, содержащая символы и число n.
+# Из данной строки формируется список. Напишите программу, которая
+# разделяет список на вложенные подсписки так, что n последовательных
+# элементов принадлежат разным подспискам.
+
+# Формат входных данных
+# На вход программе подается строка текста, содержащая символы,
+# отделенные символом пробела и число n на отдельной строке.
+
+# Формат выходных данных
+# Программа должна вывести указанный вложенный список.
+
+# Sample Input 1:
+# a b c d e f g h i j k l m n
+# 3
+
+# Sample Output 1:
+# [['a', 'd', 'g', 'j', 'm'], ['b', 'e', 'h', 'k', 'n'], ['c', 'f', 'i', 'l']]
+
+smbl_list = input().split()
 n = int(input())
-matrix_A = [[int(i) for i in input().split()] for _ in range(n)]
-m = int(input())
-matrix_B = [i[:] for i in matrix_A]
 
-matrix_C = get_multiply(matrix_A, matrix_B, degree=m)
-
-for item in matrix_C:
-    for j in range(n):
-        print(str(item[j]).ljust(6), end="")
-    print()
+lists = [smbl_list[i::n] for i in range(n)]
+print(lists)
 
 
 # print()
