@@ -7102,27 +7102,67 @@
 # . . * . . * . .
 
 
-import itertools
-from string import ascii_lowercase
+# import itertools
+# from string import ascii_lowercase
 
 
-n = 8
-matrix = [["."] * n for _ in range(n)]
-letters = {v: k for k, v in enumerate(ascii_lowercase[:n])}
+# n = 8
+# matrix = [["."] * n for _ in range(n)]
+# letters = {v: k for k, v in enumerate(ascii_lowercase[:n])}
 
-position = input()
-column, row = int(letters[position[0]]), n - int(position[1])
-matrix[row][column] = "Q"
+# position = input()
+# column, row = int(letters[position[0]]), n - int(position[1])
+# matrix[row][column] = "Q"
 
-for _row, _column in itertools.product(range(n), range(n)):
-    if _column == column and _row != row or _column != column and _row == row:
-        matrix[_row][_column] = "*"
+# for _row, _column in itertools.product(range(n), range(n)):
+#     if _column == column and _row != row or _column != column and _row == row:
+#         matrix[_row][_column] = "*"
 
-    if abs(row - _row) == abs(column - _column) and (
-        _column != column or _row != row
-    ):
-        matrix[_row][_column] = "*"
+#     if abs(row - _row) == abs(column - _column) and (
+#         _column != column or _row != row
+#     ):
+#         matrix[_row][_column] = "*"
 
+
+# for row in matrix:
+#     print(*row)
+
+
+# ####################################
+# Диагонали параллельные главной
+
+# На вход программе подается натуральное число n. Напишите программу,
+# которая создает матрицу размером n×n и заполняет её по следующему правилу:
+
+#     на главной диагонали на месте каждого элемента должно стоять число 0;
+#     на двух диагоналях, прилегающих к главной, число 1;
+#     на следующих двух диагоналях число 2, и т.д.
+
+# Формат входных данных
+# На вход программе подается натуральное число n — количество строк и
+# столбцов в матрице.
+
+# Формат выходных данных
+# Программа должна вывести матрицу в соответствии с условием задачи.
+
+# Sample Input 1:
+# 5
+
+# Sample Output 1:
+# 0 1 2 3 4
+# 1 0 1 2 3
+# 2 1 0 1 2
+# 3 2 1 0 1
+# 4 3 2 1 0
+
+n = int(input())
+
+matrix = [[0] * n for _ in range(n)]
+
+for i in range(1, n):
+    for j in range(i + 1):
+        matrix[i][j] = abs(i - j)
+        matrix[j][i] = abs(i - j)
 
 for row in matrix:
     print(*row)
