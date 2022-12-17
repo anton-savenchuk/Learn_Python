@@ -7055,19 +7055,77 @@
 # Sample Output 1:
 # YES
 
-n = int(input())
-matrix = [list(map(int, input().split())) for _ in range(n)]
-numbers = list(range(1, n + 1))
+# n = int(input())
+# matrix = [list(map(int, input().split())) for _ in range(n)]
+# numbers = list(range(1, n + 1))
 
-flag = "YES"
-for i in range(n):
-    row_nums = sorted(matrix[i])
-    col_nums = sorted([matrix[j][i] for j in range(n)])
-    if row_nums != numbers or col_nums != numbers:
-        flag = "NO"
-        break
+# flag = "YES"
+# for i in range(n):
+#     row_nums = sorted(matrix[i])
+#     col_nums = sorted([matrix[j][i] for j in range(n)])
+#     if row_nums != numbers or col_nums != numbers:
+#         flag = "NO"
+#         break
         
-print(flag)
+# print(flag)
+
+
+# ####################################
+# Ходы ферзя
+
+# На шахматной доске 8×8 стоит ферзь. Отметьте положение ферзя на доске
+# и все клетки, которые бьет ферзь. Клетку, где стоит ферзь, отметьте
+# буквой Q, клетки, которые бьет ферзь, отметьте символами "*"", остальные
+# клетки заполните точками.
+
+# Формат входных данных
+# На вход программе подаются координаты ферзя на шахматной доске в
+# шахматной нотации (то есть в виде e4, где сначала записывается номер
+# столбца (буква от a до h, слева направо), затем номер строки (цифра от
+# 1 до 8, снизу вверх)).
+
+# Формат выходных данных
+# Программа должна вывести на экран изображение доски, разделяя элементы
+# пробелами.
+
+# Sample Input 1:
+# c4
+
+# Sample Output 1:
+# . . * . . . * .
+# . . * . . * . .
+# * . * . * . . .
+# . * * * . . . .
+# * * Q * * * * *
+# . * * * . . . .
+# * . * . * . . .
+# . . * . . * . .
+
+
+import itertools
+from string import ascii_lowercase
+
+
+n = 8
+matrix = [["."] * n for _ in range(n)]
+letters = {v: k for k, v in enumerate(ascii_lowercase[:n])}
+
+position = input()
+column, row = int(letters[position[0]]), n - int(position[1])
+matrix[row][column] = "Q"
+
+for _row, _column in itertools.product(range(n), range(n)):
+    if _column == column and _row != row or _column != column and _row == row:
+        matrix[_row][_column] = "*"
+
+    if abs(row - _row) == abs(column - _column) and (
+        _column != column or _row != row
+    ):
+        matrix[_row][_column] = "*"
+
+
+for row in matrix:
+    print(*row)
 
 
 # print()
