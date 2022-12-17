@@ -6899,17 +6899,53 @@
 # Sample Output 1:
 # 8
 
+# n = int(input())
+# matrix = [list(map(int, input().split())) for _ in range(n)]
+
+# maximum = matrix[0][0]
+# for i in range(n):
+#     for j in range(i + 1):
+#         if matrix[i][n-j-1] > maximum:
+#             maximum = matrix[i][n-j-1]
+
+# print(maximum)
+
+
+# ####################################
+# Транспонирование матрицы
+
+# Напишите программу, которая транспонирует квадратную матрицу.
+
+# Формат входных данных
+# На вход программе подаётся натуральное число n — количество строк и
+# столбцов в матрице, затем элементы матрицы.
+
+# Формат выходных данных
+# Программа должна вывести транспонированную матрицу.
+
+# Примечание 1. Транспонированная матрица — матрица, полученная из
+# исходной матрицы заменой строк на столбцы.
+
+# Примечание 2. Задачу можно решить без использования вспомогательного
+# списка. 
+
+# Sample Input 1:
+# 3
+# 1 2 3
+# 4 5 6
+# 7 8 9
+
+# Sample Output 1:
+# 1 4 7
+# 2 5 8
+# 3 6 9
+
 n = int(input())
-matrix = [list(map(int, input().split())) for _ in range(n)]
+matrix = [[int(i) for i in input().split()] for _ in range(n)]
+transpose_matrix = [[row[i] for row in matrix] for i in range(len(matrix[0]))]
 
-maximum = matrix[0][0]
-for i in range(n):
-    for j in range(i + 1):
-        if matrix[i][n-j-1] > maximum:
-            maximum = matrix[i][n-j-1]
-
-print(maximum)
-
+for row in transpose_matrix:
+    print(*row)
 
 # print()
 # print(time.perf_counter() - start)
