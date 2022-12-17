@@ -6976,19 +6976,56 @@
 # . * * * .
 # * . * . *
 
-import itertools
+# import itertools
+
+# n = int(input())
+# matrix = [["."] * n for _ in range(n)]
+
+# for i, j in itertools.product(range(n), range(n)):
+#     matrix[i][i] = "*"
+#     matrix[i][n-i-1] = "*"
+#     if j == len(matrix) // 2 or i == n // 2:
+#         matrix[i][j] = "*"
+
+# for row in matrix:
+#     print(*row)
+
+
+# ####################################
+# Симметричная матрица
+
+# Напишите программу проверки симметричности квадратной матрицы
+# относительно побочной диагонали.
+
+# Формат входных данных
+# На вход программе подаётся натуральное число n — количество строк и
+# столбцов в матрице, затем элементы матрицы.
+
+# Формат выходных данных
+# Программа должна вывести YES, если матрица симметрична, и слово NO
+# в противном случае.
+
+# Sample Input 1:
+# 3
+# 0 3 10
+# 4 9 3
+# 7 4 0
+
+# Sample Output 1:
+# YES
 
 n = int(input())
-matrix = [["."] * n for _ in range(n)]
 
-for i, j in itertools.product(range(n), range(n)):
-    matrix[i][i] = "*"
-    matrix[i][n-i-1] = "*"
-    if j == len(matrix) // 2 or i == n // 2:
-        matrix[i][j] = "*"
+matrix = [list(map(int, input().split())) for _ in range(n)]
 
-for row in matrix:
-    print(*row)
+flag = "YES"
+for i in range(n):
+    for j in range(i + 1, n):
+        if matrix[i][n-j-1] != matrix[j][n-i-1]:
+            flag = "NO"
+            break
+
+print(flag)
 
 
 # print()
