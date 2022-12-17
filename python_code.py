@@ -6863,11 +6863,52 @@
 # Sample Output 1:
 # [['a', 'd', 'g', 'j', 'm'], ['b', 'e', 'h', 'k', 'n'], ['c', 'f', 'i', 'l']]
 
-smbl_list = input().split()
-n = int(input())
+# smbl_list = input().split()
+# n = int(input())
 
-lists = [smbl_list[i::n] for i in range(n)]
-print(lists)
+# lists = [smbl_list[i::n] for i in range(n)]
+# print(lists)
+
+
+# ####################################
+# Максимальный в области 2
+
+# Напишите программу, которая выводит максимальный элемент в
+# заштрихованной области квадратной матрицы.
+
+# . . *
+# . * *
+# * * *
+
+# Формат входных данных
+# На вход программе подаётся натуральное число n — количество строк и
+# столбцов в матрице, затем элементы матрицы.
+
+# Формат выходных данных
+# Программа должна вывести одно число — максимальный элемент в
+# заштрихованной области квадратной матрицы.
+
+# Примечание. Элементы побочной диагонали также учитываются.
+
+# Sample Input 1:
+# 3
+# 1 4 5
+# 6 7 8
+# 1 1 6
+
+# Sample Output 1:
+# 8
+
+n = int(input())
+matrix = [list(map(int, input().split())) for _ in range(n)]
+
+maximum = matrix[0][0]
+for i in range(n):
+    for j in range(i + 1):
+        if matrix[i][n-j-1] > maximum:
+            maximum = matrix[i][n-j-1]
+
+print(maximum)
 
 
 # print()
