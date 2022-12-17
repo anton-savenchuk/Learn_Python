@@ -6940,12 +6940,56 @@
 # 2 5 8
 # 3 6 9
 
-n = int(input())
-matrix = [[int(i) for i in input().split()] for _ in range(n)]
-transpose_matrix = [[row[i] for row in matrix] for i in range(len(matrix[0]))]
+# n = int(input())
+# matrix = [[int(i) for i in input().split()] for _ in range(n)]
+# transpose_matrix = [[row[i] for row in matrix] for i in range(len(matrix[0]))]
 
-for row in transpose_matrix:
+# for row in transpose_matrix:
+#     print(*row)
+
+
+# ####################################
+# Снежинка
+
+# На вход программе подается нечетное натуральное число n. Напишите
+# программу, которая создает матрицу размером n×n заполнив её символами
+# ".". Затем заполните символами "*" среднюю строку и столбец матрицы,
+# главную и побочную диагональ матрицы. Выведите полученную матрицу на
+# экран, разделяя элементы пробелами.
+
+# Формат входных данных
+# На вход программе подается нечетное натуральное число n, (n≥3) —
+# количество строк и столбцов в матрице.
+
+# Формат выходных данных
+# Программа должна вывести матрицу в соответствии с условием задачи.
+
+# Sample Input 1:
+
+# 5
+
+# Sample Output 1:
+
+# * . * . *
+# . * * * .
+# * * * * *
+# . * * * .
+# * . * . *
+
+import itertools
+
+n = int(input())
+matrix = [["."] * n for _ in range(n)]
+
+for i, j in itertools.product(range(n), range(n)):
+    matrix[i][i] = "*"
+    matrix[i][n-i-1] = "*"
+    if j == len(matrix) // 2 or i == n // 2:
+        matrix[i][j] = "*"
+
+for row in matrix:
     print(*row)
+
 
 # print()
 # print(time.perf_counter() - start)
