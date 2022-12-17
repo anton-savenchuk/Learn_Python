@@ -6762,23 +6762,82 @@
 # 5 4
 # 11 8
 
+# import itertools
+
+
+# n, m = map(int, input().split())
+
+# matrix_A = [[int(i) for i in input().split()] for _ in range(n)]
+# input()
+# m, k = map(int, input().split())
+# matrix_B = [[int(i) for i in input().split()] for _ in range(m)]
+# matrix_C = [[0] * k for _ in range(n)]
+
+# for l, i, j in itertools.product(range(n), range(k), range(m)):
+#     matrix_C[l][i] += matrix_A[l][j] * matrix_B[j][i]
+
+# for item in matrix_C:
+#     for j in range(n):
+#         print(str(item[j]).ljust(4), end="")
+#     print()
+
+
+# ####################################
+# Возведение матрицы в степень 🌶️
+
+# Напишите программу, которая возводит квадратную матрицу в m-ую степень.
+
+# Формат входных данных
+# На вход программе подаётся натуральное число n — количество строк и
+# столбцов в матрице, затем элементы матрицы, затем натуральное число m.
+
+# Формат выходных данных
+# Программа должна вывести результирующую матрицу, разделяя элементы
+# символом пробела.
+
+# Sample Input 1:
+# 3
+# 1 2 3
+# 4 5 6
+# 7 8 9
+# 2
+
+# Sample Output 1:
+# 30 36 42
+# 66 81 96
+# 102 126 150
+
 import itertools
 
 
-n, m = map(int, input().split())
+def get_multiply(matrix_A: list, matrix_B: list, degree: int = 1) -> list:
+    if degree == 1:
+        return matrix_A
 
+    n, m = len(matrix_A), len(matrix_A[0])
+    m, k = len(matrix_B), len(matrix_B[0])
+    temp_matrix = [[0] * k for _ in range(n)]
+
+    for l, i, j in itertools.product(range(n), range(k), range(m)):
+        temp_matrix[l][i] += matrix_A[l][j] * matrix_B[j][i]
+
+    degree -= 1
+    if degree == 1:
+        return temp_matrix
+
+    return get_multiply(matrix_A, temp_matrix, degree)
+
+
+n = int(input())
 matrix_A = [[int(i) for i in input().split()] for _ in range(n)]
-input()
-m, k = map(int, input().split())
-matrix_B = [[int(i) for i in input().split()] for _ in range(m)]
-matrix_C = [[0] * k for _ in range(n)]
+m = int(input())
+matrix_B = [i[:] for i in matrix_A]
 
-for l, i, j in itertools.product(range(n), range(k), range(m)):
-    matrix_C[l][i] += matrix_A[l][j] * matrix_B[j][i]
+matrix_C = get_multiply(matrix_A, matrix_B, degree=m)
 
 for item in matrix_C:
     for j in range(n):
-        print(str(item[j]).ljust(4), end="")
+        print(str(item[j]).ljust(6), end="")
     print()
 
 
