@@ -7305,6 +7305,76 @@
 # hy7UMVs
 # JzKPyBw
 
+# from string import ascii_letters as letters
+# from string import digits
+# from random import sample
+
+
+# VALID = "".join((set(letters) | set(digits)) - set("lI1oO0"))
+
+
+# def generate_password(length: int) -> str:
+#     return "".join(sample(VALID, length))
+
+
+# def generate_passwords(count: int, length: int) -> list:
+#     return [generate_password(length) for _ in range(count)]
+
+
+# n, m = int(input()), int(input())
+# print(*generate_passwords(n, m), sep="\n")
+
+
+# ####################################
+# Генератор паролей 2 🌶️
+
+# Напишите программу, которая с помощью модуля random генерирует n
+# паролей длиной m символов, состоящих из строчных и прописных
+# английских букв и цифр, кроме тех, которые легко перепутать между собой:
+
+#     «l» (L маленькое);
+#     «I» (i большое);
+#     «1» (цифра);
+#     «o» и «O» (большая и маленькая буквы);
+#     «0» (цифра).
+
+# Дополнительное условие: в каждом пароле обязательно должна
+# присутствовать хотя бы одна цифра и как минимум по одной букве в
+# верхнем и нижнем регистре.
+
+# Формат входных данных
+# На вход программе подаются два числа n и m, каждое на отдельной строке.
+
+# Формат выходных данных
+# Программа должна вывести n паролей длиной mm символов в соответствии
+# с условием задачи, каждый на отдельной строке.
+
+# Примечание 1. Считать, что числа n и m всегда таковы, что требуемые
+# пароли сгенерировать возможно.
+
+# Примечание 2. Решение задачи удобно оформить в виде двух
+# вспомогательных функций:
+
+#     функция generate_password(length) – возвращает случайный пароль
+# длиной length символов;
+#     функция generate_passwords(count, length) – возвращает список,
+# состоящий из count случайных паролей длиной length символов.
+
+# Sample Input 1:
+# 9
+# 7
+
+# Sample Output 1:
+# iHnPg7q
+# Njj9m3N
+# tQ9v5ut
+# 6qPZ3tV
+# 6gVScya
+# kU8ncAY
+# 5CKX9Da
+# UTQRve4
+# FyRe8NN
+
 from string import ascii_letters as letters
 from string import digits
 from random import sample
@@ -7313,8 +7383,26 @@ from random import sample
 VALID = "".join((set(letters) | set(digits)) - set("lI1oO0"))
 
 
+def check_password(pswd: str) -> bool:
+    cnt_lower = cnt_upper = cnt_digit = 0
+    for ltr in pswd:
+        if ltr.islower():
+            cnt_lower += 1
+        if ltr.isupper():
+            cnt_upper += 1
+        if ltr.isdigit():
+            cnt_digit += 1
+
+    return cnt_lower >= 1 and cnt_upper >= 1 and cnt_digit >= 1
+
+
 def generate_password(length: int) -> str:
-    return "".join(sample(VALID, length))
+    pswd = "".join(sample(VALID, length))
+
+    while check_password(pswd) is False:
+        pswd = "".join(sample(VALID, length))
+
+    return pswd
 
 
 def generate_passwords(count: int, length: int) -> list:
