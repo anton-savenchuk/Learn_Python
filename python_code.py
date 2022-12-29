@@ -7235,24 +7235,94 @@
 # Аркадий Белых - Светлана Зуева
 # Борис Боков - Аркадий Белых
 
-from random import randrange
+# from random import randrange
 
 
-def sattoloCycle(items):
-    i = len(items)
-    while i > 1:
-        i -= 1
-        j = randrange(i)  # 0 <= j <= i-1
-        items[j], items[i] = items[i], items[j]
-    return items
+# def sattoloCycle(items):
+#     i = len(items)
+#     while i > 1:
+#         i -= 1
+#         j = randrange(i)  # 0 <= j <= i-1
+#         items[j], items[i] = items[i], items[j]
+#     return items
 
-n = int(input())
-students = [input() for _ in range(n)]
-friends = sattoloCycle(students[::])
+# n = int(input())
+# students = [input() for _ in range(n)]
+# friends = sattoloCycle(students[::])
 
 
-for pare in zip(students, friends):
-    print(" - ".join(pare))
+# for pare in zip(students, friends):
+#     print(" - ".join(pare))
+
+
+# ####################################
+# Генератор паролей 1
+
+# Напишите программу, которая с помощью модуля random генерирует n
+# паролей длиной m символов, состоящих из строчных и прописных
+# английских букв и цифр, кроме тех, которые легко перепутать между
+# собой:
+
+#     «l» (L маленькое);
+#     «I» (i большое);
+#     «1» (цифра);
+#     «o» и «O» (большая и маленькая буквы);
+#     «0» (цифра).
+
+# Формат входных данных
+# На вход программе подаются два числа n и m, каждое на отдельной строке.
+
+# Формат выходных данных
+# Программа должна вывести n паролей длиной mm символов в соответствии с
+# условием задачи, каждый на отдельной строке.
+
+# Примечание 1. Считать, что числа n и m всегда таковы, что требуемые
+# пароли сгенерировать возможно.
+
+# Примечание 2. В каждом пароле необязательно должна присутствовать
+# хотя бы одна цифра и буква в верхнем и нижнем регистре.
+
+# Примечание 3. Решение задачи удобно оформить в виде двух
+# вспомогательных функций:
+
+#     функция generate_password(length) – возвращает случайный пароль
+# длиной length символов;
+#     функция generate_passwords(count, length) – возвращает список,
+# состоящий из count случайных паролей длиной length символов.
+
+# Sample Input 1:
+# 9
+# 7
+
+# Sample Output 1:
+# YbykdW8
+# heEWSyL
+# MDxYCzf
+# syWRujr
+# mFGBYNJ
+# bhmg5ip
+# 2XmPgsx
+# hy7UMVs
+# JzKPyBw
+
+from string import ascii_letters as letters
+from string import digits
+from random import sample
+
+
+VALID = "".join((set(letters) | set(digits)) - set("lI1oO0"))
+
+
+def generate_password(length: int) -> str:
+    return "".join(sample(VALID, length))
+
+
+def generate_passwords(count: int, length: int) -> list:
+    return [generate_password(length) for _ in range(count)]
+
+
+n, m = int(input()), int(input())
+print(*generate_passwords(n, m), sep="\n")
 
 
 # print()
