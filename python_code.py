@@ -7471,63 +7471,206 @@
 # «Корзина пуста»
 
 
-class File:
-    def __init__(self, name: str):
+# class File:
+#     def __init__(self, name: str):
+#         self.name = name
+#         self.in_trash = False
+#         self.is_deleted = False
+
+#     def restore_from_trash(self) -> None:
+#         print(f"Файл {self.name} восстановлен из корзины")
+#         self.in_trash = False
+
+#     def remove(self) -> None:
+#         print(f"Файл {self.name} был удален")
+#         self.is_deleted = True
+
+#     def read(self) -> str:
+#         if self.is_deleted:
+#             print(f"ErrorReadFileDeleted({self.name})")
+#             return
+#         if self.in_trash:
+#             print(f"ErrorReadFileTrashed({self.name})")
+#             return
+#         print(f"Прочитали все содержимое файла {self.name}")
+
+#     def write(self, content) -> str:
+#         if self.is_deleted:
+#             print(f"ErrorWriteFileDeleted({self.name})")
+#             return
+#         if self.in_trash:
+#             print(f"ErrorWriteFileTrashed({self.name})")
+#             return
+#         print(f"Записали значение {content} в файл {self.name}")
+
+
+# class Trash:
+#     content = []
+
+#     @staticmethod
+#     def add(file_name: File) -> None:
+#         if not isinstance(file_name, File):
+#             return print("В корзину добавлять можно только файл")
+
+#         Trash.content.append(file_name)
+#         file_name.in_trash = True
+
+#     @staticmethod
+#     def clear() -> None:
+#         print("Очищаем корзину")
+#         while Trash.content:
+#             Trash.content.pop(0).remove()
+#         print("Корзина пуста")
+
+#     @staticmethod
+#     def restore() -> None:
+#         print("Восстанавливаем файлы из корзины")
+#         while Trash.content:
+#             Trash.content.pop(0).restore_from_trash()
+#         print("Корзина пуста")
+
+
+# ####################################
+# Задача «Оформление заказа»
+
+# Часть 1
+# Для этого нам понадобится реализовать несколько классов и связать их
+# между собой. Первый класс, который мы реализуем, будет Product. Это
+# класс, описывающий товар. В нем должно быть реализовано:
+
+# 1. метод __init__, принимающий на вход имя товара и его стоимость.
+# Эти значения необходимо сохранить в атрибутах name и price
+
+# Часть 2
+# Далее для оформления заказа нам нужен пользователь. Для этого создадим
+# класс User, который содержит:
+
+# 1. метод __init__, принимающий на вход логин пользователя и
+# необязательный аргумент баланс его счета(по умолчанию 0). Логин
+# необходимо сохранить в атрибуте login , а баланс необходимо присвоить
+# сеттеру  balance (см. пункт 4)
+# 2. метод __str__, возвращающий строку вида «Пользователь {login},
+# баланс - {balance}»
+# 3. Cвойство геттер balance, которое возвращает значение self.__balance;
+# 4. Свойство сеттер balance, принимает новое значение баланса и
+# устанавливает его в атрибут self.__balance;.
+# 5. метод deposit принимает числовое значение и прибавляет его к
+# атрибуту self.__balance;.
+# 6. метод payment принимает числовое значение, которое должно
+# списаться с баланса пользователя. Если на счете у пользователя не
+# хватает средств, то необходимо вывести фразу «Не хватает средств на
+# балансе. Пополните счет» и вернуть False. Если средств хватает,
+# списываем с баланса у пользователя указанную сумму и возвращаем True
+
+# Часть 3
+# Последний штрих - создание класса корзины, куда наш пользователь будет
+# складывать товары. Для этого нам понадобятся ранее созданные классы
+# ser и Product
+
+# И так, создаем класс Cart, который содержит:
+
+# 1. метод __init__, принимающий на вход экземпляр класса User. Его
+# необходимо сохранить в атрибуте user. Помимо этого метод должен
+# создать атрибут goods - пустой словарь (лучше использовать defaultdict).
+# Он нужен будет для хранения наших товаров и их количества
+# (ключ словаря - товар, значение - количество). И еще нам понадобится
+# создать защищенный атрибут .__total со значением 0. В нем будет
+# хранится итоговая сумма заказа
+# 2. метод add принимает на вход экземпляр класса Product и
+# необязательный аргумент количество товаров (по умолчанию 1). Метод add
+# должен увеличить в корзине (атрибут goods) количество указанного товара
+# на переданное значение количество и пересчитать атрибут self.__total
+# 3. метод remove принимает на вход экземпляр класса Product и
+# необязательный аргумент количество товаров (по умолчанию 1). Метод
+# remove должен уменьшить в корзине (атрибут goods) количество
+# указанного товара на переданное значение количество и пересчитать
+# атрибут self.__total. Обратите внимание на то, что количество товара в
+# корзине не может стать отрицательным как и итоговая сумма
+# 4. Cвойство геттер total , которое возвращает значение self.__total;
+# 5. метод order должен использовать метод payment из класса User и
+# передать в него итоговую сумму корзины. В случае, если средств
+# пользователю хватило, вывести сообщение «Заказ оплачен», в противном
+# случае - «Проблема с оплатой»;
+# 6. метод print_check печатающий на экран чек. Он должен начинаться со
+# строки:
+
+# ---Your check---
+# ! Затем выводится состав корзины в алфавитном порядке по названию товара в виде !
+# {Имя товара} {Цена товара} {Количество товара} {Сумма}
+# И заканчивается чек строкой
+# ---Total: {self.total}---
+
+
+class Product:
+    def __init__(self, name: str, price: int):
         self.name = name
-        self.in_trash = False
-        self.is_deleted = False
-
-    def restore_from_trash(self) -> None:
-        print(f"Файл {self.name} восстановлен из корзины")
-        self.in_trash = False
-
-    def remove(self) -> None:
-        print(f"Файл {self.name} был удален")
-        self.is_deleted = True
-
-    def read(self) -> str:
-        if self.is_deleted:
-            print(f"ErrorReadFileDeleted({self.name})")
-            return
-        if self.in_trash:
-            print(f"ErrorReadFileTrashed({self.name})")
-            return
-        print(f"Прочитали все содержимое файла {self.name}")
-
-    def write(self, content) -> str:
-        if self.is_deleted:
-            print(f"ErrorWriteFileDeleted({self.name})")
-            return
-        if self.in_trash:
-            print(f"ErrorWriteFileTrashed({self.name})")
-            return
-        print(f"Записали значение {content} в файл {self.name}")
+        self.price = price
 
 
-class Trash:
-    content = []
+class User:
+    def __init__(self, login: str, balance: int = 0):
+        self.login = login
+        self.balance = balance
 
-    @staticmethod
-    def add(file_name: File) -> None:
-        if not isinstance(file_name, File):
-            return print("В корзину добавлять можно только файл")
+    @property
+    def balance(self) -> int:
+        return self.__balance
 
-        Trash.content.append(file_name)
-        file_name.in_trash = True
+    @balance.setter
+    def balance(self, value: int) -> None:
+        self.__balance = value
 
-    @staticmethod
-    def clear() -> None:
-        print("Очищаем корзину")
-        while Trash.content:
-            Trash.content.pop(0).remove()
-        print("Корзина пуста")
+    def __str__(self) -> str:
+        return f"Пользователь {self.login}, баланс - {self.balance}"
 
-    @staticmethod
-    def restore() -> None:
-        print("Восстанавливаем файлы из корзины")
-        while Trash.content:
-            Trash.content.pop(0).restore_from_trash()
-        print("Корзина пуста")
+    def deposit(self, value: int) -> None:
+        self.balance += value
+
+    def payment(self, value: int) -> None:
+        if value > self.balance:
+            print("Не хватает средств на балансе. Пополните счет")
+            return False
+
+        self.balance -= value
+        return True
+
+
+class Cart:
+    def __init__(self, user: User):
+        self.user = user
+        self.goods = {}
+        self.__total = 0
+
+    def add(self, item: Product, count: int = 1) -> None:
+        self.goods[item] = self.goods.get(item, 0) + count
+
+        self.__total += item.price * count
+
+    def remove(self, item: Product, count: int = 1) -> None:
+        if count > self.goods[item]:
+            self.goods.pop(item)
+        else:
+            self.goods[item] -= count
+
+        self.__total = sum(_key.price * _value for _key, _value in self.goods.items())
+
+    @property
+    def total(self):
+        return self.__total
+
+    def order(self):
+        print(
+            "Заказ оплачен" if self.user.payment(self.total) else "Проблема с оплатой"
+        )
+
+    def print_check(self):
+        print("---Your check---")
+
+        for _item in sorted(self.goods, key=lambda item: item.name):
+            _value = self.goods[_item]
+            print(f"{_item.name} {_item.price} {_value} {_value * _item.price}")
+
+        print(f"---Total: {self.total}---")
 
 
 # print()
