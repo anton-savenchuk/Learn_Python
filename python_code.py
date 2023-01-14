@@ -7375,42 +7375,159 @@
 # UTQRve4
 # FyRe8NN
 
-from string import ascii_letters as letters
-from string import digits
-from random import sample
+# from string import ascii_letters as letters
+# from string import digits
+# from random import sample
 
 
-VALID = "".join((set(letters) | set(digits)) - set("lI1oO0"))
+# VALID = "".join((set(letters) | set(digits)) - set("lI1oO0"))
 
 
-def check_password(pswd: str) -> bool:
-    cnt_lower = cnt_upper = cnt_digit = 0
-    for ltr in pswd:
-        if ltr.islower():
-            cnt_lower += 1
-        if ltr.isupper():
-            cnt_upper += 1
-        if ltr.isdigit():
-            cnt_digit += 1
+# def check_password(pswd: str) -> bool:
+#     cnt_lower = cnt_upper = cnt_digit = 0
+#     for ltr in pswd:
+#         if ltr.islower():
+#             cnt_lower += 1
+#         if ltr.isupper():
+#             cnt_upper += 1
+#         if ltr.isdigit():
+#             cnt_digit += 1
 
-    return cnt_lower >= 1 and cnt_upper >= 1 and cnt_digit >= 1
-
-
-def generate_password(length: int) -> str:
-    pswd = "".join(sample(VALID, length))
-
-    while check_password(pswd) is False:
-        pswd = "".join(sample(VALID, length))
-
-    return pswd
+#     return cnt_lower >= 1 and cnt_upper >= 1 and cnt_digit >= 1
 
 
-def generate_passwords(count: int, length: int) -> list:
-    return [generate_password(length) for _ in range(count)]
+# def generate_password(length: int) -> str:
+#     pswd = "".join(sample(VALID, length))
+
+#     while check_password(pswd) is False:
+#         pswd = "".join(sample(VALID, length))
+
+#     return pswd
 
 
-n, m = int(input()), int(input())
-print(*generate_passwords(n, m), sep="\n")
+# def generate_passwords(count: int, length: int) -> list:
+#     return [generate_password(length) for _ in range(count)]
+
+
+# n, m = int(input()), int(input())
+# print(*generate_passwords(n, m), sep="\n")
+
+
+# ####################################
+# Задача Корзина
+
+# Часть 1
+# Создайте класс File, у которого есть:
+# 1. метод __init__, который должен принимать на вход имя файла и
+# записывать его в атрибут name. Также необходимо создать атрибуты
+# in_trash , is_deleted и записать в них значение False
+# 2. метод restore_from_trash, который печатает фразу «Файл {name}
+# восстановлен из корзины» и проставляет атрибут in_trash в значение False
+# 3. метод remove, который печатает фразу «Файл {name} был удален» и
+# проставляет атрибут is_deleted в значение True
+# 4. метод read, который
+#  - печатает фразу «ErrorReadFileDeleted({name})», если атрибут
+#   is_deleted истин, и выходит из метода
+#  - печатает фразу «ErrorReadFileTrashed({name})», если атрибут
+#   in_trash истин, и выходит из метода
+#  - печатает фразу «Прочитали все содержимое файла {self.name}» если
+#   файл не удален и не в корзине
+# 5. метод write, который принимает значение content для записи и
+#  - печатает фразу «ErrorWriteFileDeleted({name})», если атрибут
+#   is_deleted истин, и выходит из метода
+#  - печатает фразу «ErrorWriteFileTrashed({name})», если атрибут
+#   in_trash истин, и выходит из метода
+#  - печатает фразу «Записали значение {content} в файл {self.name}»,
+#   если файл не удален и не в корзине
+
+
+# Часть 2
+# 1. метод __init__
+# 2. метод restore_from_trash
+# 3. метод remove
+# 4. метод read
+# 5. метод write
+
+# Далее создайте класс Trash у которого есть:
+
+# 1. атрибут класса content изначально равный пустому списку
+# 2. статик-метод add, который принимает файл и сохраняет его в корзину:
+# для этого нужно добавить его в атрибут content и проставить файлу
+# атрибут in_trash значение True. Если в метод add передается не
+# экземпляр класса File, необходимо вывести сообщение «В корзину
+# добавлять можно только файл»
+# 3. статик-метод clear, который запускает процесс очистки файлов в
+# корзине. Необходимо для всех файлов, хранящийся в атрибуте content ,
+# в порядке их добавления в корзину вызвать метод файла remove. Атрибут
+# content после очистки должен стать пустым списком. Сама процедура
+# очистки должна начинаться фразой «Очищаем корзину» и заканчиваться
+# фразой «Корзина пуста»
+# 4. статик-метод restore, который запускает процесс восстановления
+# файлов из корзины. Необходимо для всех файлов, хранящийся в атрибуте
+# content , в порядке их добавления в корзину вызвать метод файла
+# restore_from_trash. Атрибут content после очистки должен стать пустым
+# списком. Сама процедура восстановления должна начинаться фразой
+# «Восстанавливаем файлы из корзины» и заканчиваться фразой
+# «Корзина пуста»
+
+
+class File:
+    def __init__(self, name: str):
+        self.name = name
+        self.in_trash = False
+        self.is_deleted = False
+
+    def restore_from_trash(self) -> None:
+        print(f"Файл {self.name} восстановлен из корзины")
+        self.in_trash = False
+
+    def remove(self) -> None:
+        print(f"Файл {self.name} был удален")
+        self.is_deleted = True
+
+    def read(self) -> str:
+        if self.is_deleted:
+            print(f"ErrorReadFileDeleted({self.name})")
+            return
+        if self.in_trash:
+            print(f"ErrorReadFileTrashed({self.name})")
+            return
+        print(f"Прочитали все содержимое файла {self.name}")
+
+    def write(self, content) -> str:
+        if self.is_deleted:
+            print(f"ErrorWriteFileDeleted({self.name})")
+            return
+        if self.in_trash:
+            print(f"ErrorWriteFileTrashed({self.name})")
+            return
+        print(f"Записали значение {content} в файл {self.name}")
+
+
+class Trash:
+    content = []
+
+    @staticmethod
+    def add(file_name: File) -> None:
+        if not isinstance(file_name, File):
+            return print("В корзину добавлять можно только файл")
+
+        Trash.content.append(file_name)
+        file_name.in_trash = True
+
+    @staticmethod
+    def clear() -> None:
+        print("Очищаем корзину")
+        while Trash.content:
+            Trash.content.pop(0).remove()
+        print("Корзина пуста")
+
+    @staticmethod
+    def restore() -> None:
+        print("Восстанавливаем файлы из корзины")
+        while Trash.content:
+            Trash.content.pop(0).restore_from_trash()
+        print("Корзина пуста")
 
 
 # print()
